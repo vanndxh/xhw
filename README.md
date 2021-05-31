@@ -1,24 +1,12 @@
-# vanndxh
+# xhw
+A personal website for beginners
 
-## Project setup
+### About Author
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+qq          1025196468
+email       1025196468@qq.com
+weibo       https://weibo.com/u/6864286293
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Welcome to make suggestions~  
+Want your stars~

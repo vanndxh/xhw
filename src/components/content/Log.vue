@@ -4,6 +4,18 @@
     <el-timeline>
       <br>
 
+      <el-timeline-item timestamp="2021/5/28" placement="top" align="left" color="green"
+                        :icon="iconImportant"
+                        size="large">
+        <el-card align="left">
+          <h4>v0.1.0</h4>
+          <ul>
+            <li>修改README.md</li>
+            <li>正式push到github！</li>
+          </ul>
+        </el-card>
+      </el-timeline-item>
+
       <el-timeline-item timestamp="2021/5/28" placement="top" align="left">
         <el-card align="left">
           <h4>v0.0.8</h4>
