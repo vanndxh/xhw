@@ -303,8 +303,8 @@ export default {
     }
   },
   mounted() {
-    // this.getCarts()
-    // this.getComments()
+    this.getCarts()
+    this.getComments()
   },
   methods: {
     resetForm(formName) {

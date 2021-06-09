@@ -8,7 +8,7 @@
         <el-card align="left">
           <h4>v0.1.1</h4>
           <ul>
-            <li>完善大仙板块</li>
+            <li>完善大仙分区</li>
             <li>修复小猫动画bug</li>
             <li>使用axios联调后端接口</li>
           </ul>

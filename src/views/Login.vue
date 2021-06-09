@@ -63,7 +63,7 @@ export default {
     tabBar, bottom
   },
   data() {
-    var username = (rule, value, callback) => {
+    const username = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入用户名'));
       } else {

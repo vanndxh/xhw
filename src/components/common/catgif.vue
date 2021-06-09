@@ -14,7 +14,6 @@
               <img src="../../assets/cat.gif" alt="catgif" style="width: 150px; height: 150px; outline: none">
             </template>
           </el-popover>
-
         </el-affix>
       </el-col>
     </el-row>
@@ -26,7 +25,7 @@ export default {
   name: "catgif",
   data() {
     return {
-
+      fix: 1
     }
   },
   methods: {
