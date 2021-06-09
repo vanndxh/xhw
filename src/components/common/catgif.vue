@@ -1,14 +1,14 @@
 <template>
   <div align="left">
     <el-row>
-      <el-col :span="12">
+      <el-col :span="1">
         <el-affix position="bottom" :offset="20">
           <el-popover
-              placement="top"
+              placement="top-start"
               :width="200"
               trigger="click"
               content="别摸我了，给小黑打个赏吧~"
-              auto-close="2500"
+              :auto-close="2500"
           >
             <template #reference>
               <img src="../../assets/cat.gif" alt="catgif" style="width: 150px; height: 150px; outline: none">

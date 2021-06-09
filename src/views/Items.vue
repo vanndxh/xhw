@@ -1,11 +1,7 @@
 <template>
   <el-backtop target=""></el-backtop>
   <tabBar></tabBar>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <br><br><br><br><br>
   <div>
     <el-row :gutter="100">
       <el-col :span="4"></el-col>
@@ -22,58 +18,67 @@
       </el-col>
       <el-col :span="12">
         <!--这里是书本属性详情页面-->
-        <el-descriptions class="margin-top" title="商品详情" :column="1" :size="''" border>
+        <el-descriptions class="margin-top" title="商品详情" :column="2" :size="''" border>
           <el-descriptions-item>
             <template #label>
               <i class="el-icon-s-management"></i>
               书本名称
             </template>
-            {{ name }}
+            {{ info.name }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template #label>
               <i class="el-icon-s-custom"></i>
               书本作者
             </template>
-            小黑
+            {{ info.Author }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template #label>
               <i class="el-icon-shopping-cart-2"></i>
               书本售价
             </template>
-            ￥88.88
+            ￥{{ info.Price }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template #label>
               <i class="el-icon-office-building"></i>
-              书本简介
+              评分
             </template>
-            去关于作者界面，点击支持小黑即可
+            <el-rate
+                v-model="getStar"
+                disabled
+                show-score
+                text-color="#ff9900" />
           </el-descriptions-item>
           <el-descriptions-item>
             <template #label>
               <i class="el-icon-tickets"></i>
-              备注
+              购买人数
             </template>
-            事实上暂时并没有备注
+            {{ info.PayNumber }}
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template #label>
+              <i class="el-icon-tickets"></i>
+              分类
+            </template>
+            {{ info.Category }}
           </el-descriptions-item>
         </el-descriptions>
-        <br>
-        <br>
-        <br>
+        <br><br><br>
         <!--操作按钮-->
         <el-row>
-          <el-col :span="6">
+          <el-col :span="6" v-if="!have">
             <el-button type="primary" plain @click="addTrolley" v-if="!inCart">加入购物车</el-button>
-            <el-button type="primary" plain @click="removeTrolley" v-else>移除购物车</el-button>
+            <el-button type="danger" plain @click="removeTrolley" v-else>移除购物车</el-button>
           </el-col>
           <el-col :span="6">
             <el-button type="danger" plain @click="buy" v-if="!have">购买书本</el-button>
             <el-button type="success" plain @click="read" v-else>阅读书本</el-button>
           </el-col>
           <el-col :span="6">
-            <el-button type="danger" plain>删除</el-button>
+            <el-button type="danger" plain @click="removeBook">删除</el-button>
           </el-col>
         </el-row>
       </el-col>
@@ -83,29 +88,14 @@
       <el-col :span="16" :push="4">
         <br>
         <el-card class="b">
-          <h4 align="center">试读书本</h4>
+          <h4 align="center">阅读书本</h4>
           <p align="left" class="c">
-            双向链表也叫双链表，是链表的一种，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，
-            都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。
+            {{ bookContent }}
           </p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
         </el-card>
       </el-col>
     </el-row>
-    <br>
-    <br>
-    <br>
+    <br><br><br>
     <!--左边评论区，右边排行榜-->
     <el-row :gutter="100">
       <el-col :span="12" :push="4">
@@ -118,37 +108,32 @@
     <el-row :gutter="100">
       <el-col :span="12" :push="4">
         <!--评论区-->
-        <el-card shadow="hover" class="item" v-for="item in comments" :key="item" align="left">
+        <el-card shadow="hover" class="item" v-for="(comment,index) in comments" :key="comment" align="left">
           <el-row>
             <el-col :span="1">
               <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
                          size="small"></el-avatar>
             </el-col>
             <el-col :span="4" style="margin-top: 6px">
-              <h4 style="margin-top: 2px">{{ item.username }}</h4>
+              <h4 style="margin-top: 2px">{{ comment.UserID }}</h4>
             </el-col>
             <el-col :span="8" style="margin-top: 6px">
               <el-rate
-                  v-model="item.score"
+                  v-model="comment.Star"
                   disabled
                   show-score
                   text-color="#ff9900">
               </el-rate>
             </el-col>
           </el-row>
-          <p class="c">{{ item.content }}</p>
+          <p class="c">{{ comment.Content }}</p>
           <div align="right">
-            <el-button v-if="info.username === 'vanndxh'" size="mini" type="danger" plain>删除</el-button>
+            <el-button size="mini" type="danger" plain @click="deleteComments(index)">删除</el-button>
           </div>
         </el-card>
-        <!--分页-->
-        <br>
-        <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="10">
-        </el-pagination>
+
         <!--评论输入框-->
+        <br>
         <el-row>
           <el-col :span="20">
             <el-rate v-model="value_choose" align="left" id="rate"></el-rate>
@@ -169,142 +154,26 @@
         </el-row>
 
       </el-col>
-      <el-col :span="5" :push="4">
+      <el-col :span="7" :push="3">
         <!--排行榜-->
-        <el-scrollbar height="400px">
-          <el-card>
+        <el-card>
+          <div v-for="(item,index) in Rankings" :key="item">
             <el-row>
               <el-col class="num-box" :span="4">
-                <span class="num1">1</span>
+                <span class="num">{{ index + 1 }}</span>
               </el-col>
               <el-col class="name-box" :span="16">
                 <div align="left">
-                  《test》
+                  {{ item.Name }}
                 </div>
               </el-col>
               <el-col :span="4">
-                <i class="score">4.9</i>
+                <i class="score">{{ item.Star / 2 }}</i>
               </el-col>
             </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num2">2</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.8</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num3">3</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">4</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <div class="score">4.7</div>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">5</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">6</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">7</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">8</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">9</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col class="num-box" :span="4">
-                <span class="num4">10</span>
-              </el-col>
-              <el-col class="name-box" :span="16">
-                <div align="left">
-                  《test》
-                </div>
-              </el-col>
-              <el-col :span="4">
-                <i class="score">4.7</i>
-              </el-col>
-            </el-row>
-          </el-card>
-        </el-scrollbar>
+            <br>
+          </div>
+        </el-card>
       </el-col>
     </el-row>
     <br>
@@ -316,6 +185,7 @@
 import tabBar from "@/components/common/tabBar";
 import bottom from "@/components/common/bottom";
 import {defineComponent, ref} from 'vue'
+import { ElMessage } from 'element-plus';
 
 export default {
   name: "Items",
@@ -323,86 +193,182 @@ export default {
     // eslint-disable-next-line vue/no-unused-components
     tabBar, bottom, defineComponent
   },
+  setup() {
+    // 从url截取id
+    let id = 60
+    return {
+      id,
+      text: ref(''),
+      textarea: ref('')
+    }
+  },
+  computed:{
+    getStar(){
+      return this.info.Star / 2
+    }
+  },
   data() {
     return {
-      info: {
-        username: 'vanndxh',
-        password: '123456',
-        name: 'van能的小黑',
-        email: '1025196468@qq.com',
-        urlPortrait: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2178438322,2539713157&fm=26&gp=0.jpg",
-      },
-      name: '《论如何给小黑钱》',
-      inCart: true,
-      have: true,
+      info: {},
+      comments: [],
+      Rankings: {},
+      bookContent: '',
+      value_choose: null,
+      inCart: false,
+      have: false,
       picUrl: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1017432341,1254182363&fm=224&gp=0.jpg',
       bigPicUrl: [
         'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
         'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
       ],
-      showText: false,
-      comments: [{
-        username: "wyz",
-        score: 3,
-        content: "this is long long long long long long long long long long long long long long long long " +
-            "long long long long long long long long long long long long long long long long long long long long long long content 1"
-      },
-        {
-          username: "wyz",
-          score: 4,
-          content: "this is content 2"
-        },
-        {
-          username: "wyz",
-          score: 4,
-          content: "this is content 3"
-        },
-        {
-          username: "wyz",
-          score: 4,
-          content: "this is content 4"
-        },
-        {
-          username: "wyz",
-          score: 4,
-          content: "this is content 5"
-        }
-      ],
-      value: null,
-      value_choose: null
+      showText: false
     }
   },
-  setup() {
-    return {
-      text: ref(''),
-      textarea: ref('')
-    }
+  mounted() {
+    this.getInfo()
+    this.getComments()
+    this.getRanking()
+    this.getHave()
+    this.getInCart()
   },
   methods: {
+    getInfo() {
+      this.$store.state.axios({
+        url: '/go/book/' + this.id,
+        method: 'get',
+      }).then(r => {
+        this.info = r.data.data
+      })
+    },
+    getComments() {
+      this.$store.state.axios({
+        url: '/go/comments/',
+        method: 'get',
+        params: {book: this.id},
+      }).then(r => {
+        this.comments = r.data.data
+      })
+    },
+    getRanking() {
+      this.$store.state.axios({
+        url: '/go/book/',
+        method: 'get',
+        params: {
+          category: this.info.cateID,
+          hot: 1
+        },
+      }).then(r => {
+        this.Rankings = r.data.data
+      })
+    },
+    getHave() {
+      this.$store.state.axios({
+        url: '/go/purchased/' + this.id,
+        method: 'get',
+      }).then(r => {
+        if(r.data.status === 200)
+          this.have = true
+      }).catch(() => {
+        this.have = false
+      })
+    },
+    getInCart() {
+      this.$store.state.axios({
+        url: '/go/carts/',
+        method: 'get',
+      }).then(r => {
+        r.data.data.forEach(i => {
+          if(i.id === this.id) {
+            this.inCart = true
+          }
+        })
+      })
+    },
+    removeBook() {
+      this.$store.state.axios({
+        url: '/go/book/' + this.id,
+        method: 'delete',
+      }).then(r => {
+        console.log(r.data.status);
+        if (r.data.status === 200){
+          ElMessage.success({
+            message: '恭喜你，已经成功删除!',
+            type: 'success'
+          });
+        }
+      })
+      location.href = "/"
+    },
     addTrolley() {
-      this.$alert('功能未实装~', '提示', {
-        confirmButtonText: '确定',
-        center: false
+      this.$store.state.axios({
+        url: '/go/carts/',
+        method: 'post',
+        data: {
+          BookID: this.id
+        },
+      }).then(r => {
+        if (r.data.status === 200) {
+          ElMessage.success({
+            message: '恭喜你，已经成功添加到购物车!',
+            type: 'success'
+          })
+          this.inCart = true;
+        }
       })
     },
     removeTrolley() {
-      this.$alert('功能未实装~', '提示', {
-        confirmButtonText: '确定',
-        center: false
+      this.$store.state.axios({
+        url: '/go/carts/' + this.id,
+        method: 'delete',
+      }).then(r => {
+        if (r.data.status === 200) {
+          ElMessage.success({
+            message: '恭喜你，已经成功从购物车删除!',
+            type: 'success'
+          })
+          this.inCart = false
+        }
+      })
+    },
+    deleteComments(index) {
+      this.$store.state.axios({
+        url: '/go/comments/' + this.comments[index].ID,
+        method: 'delete',
+        // eslint-disable-next-line no-unused-vars
+      }).then(r => {
+        ElMessage.success({
+          message: '恭喜你，评论已删除!',
+          type: 'success'
+        })
+        this.getComments()
       })
     },
     buy() {
-      this.$alert('功能未实装~', '提示', {
-        confirmButtonText: '确定',
-        center: false
-      })
+      this.$store.state.axios({
+        url: '/go/purchased/' + this.id,
+        method: 'post',
+      }).then(r => {
+        if (r.data.status === 200){
+          ElMessage.success({
+            message: '恭喜你，已经成功购买!',
+            type: 'success'
+          });
+          this.have = true;
+        }
+      });
     },
     read() {
+      this.$store.state.axios({
+        url: '/go/purchased/' + this.id,
+        method: 'get',
+      }).then(r => {
+        this.bookContent = r.data.data.content;
+      });
       if (!this.showText) {
         this.showText = true;
         this.$notify.info({
           title: '提示',
-          message: '再次点击按钮关闭试读',
+          message: '再次点击按钮关闭窗口',
           duration: 2500
         });
       } else {
@@ -410,12 +376,33 @@ export default {
       }
     },
     submit() {
-      document.getElementById("comment").value = "";
-      this.value_choose = null
-      this.$alert('提交成功，审核中~', '提示', {
-        confirmButtonText: '确定',
-        center: false
-      })
+      if (document.getElementById("comment").value === ""
+      || this.value_choose == null){
+        this.$alert('内容和评分不能为空~', '提示', {
+          confirmButtonText: '确定',
+          center: false
+        })
+      } else {
+        this.$store.state.axios({
+          url: '/go/comments/',
+          method: 'post',
+          data: {
+            BookID: this.id,
+            Star: this.value_choose,
+            Content: document.getElementById("comment").value
+          },
+        }).then(r => {
+          if (r.data.status === 200) {
+            ElMessage.success({
+              message: '恭喜你，评论成功!',
+              type: 'success'
+            })
+            this.getComments()
+            document.getElementById("comment").value = "";
+            this.value_choose = null
+          }
+        });
+      }
     }
   }
 }
@@ -436,7 +423,6 @@ export default {
 }
 
 .item {
-  /*background: rgb(237, 246, 255);*/
   word-wrap: break-word;
   font-size: 14px;
 }
@@ -457,22 +443,7 @@ export default {
   line-height: 18px;
 }
 
-.num1 {
-  color: #FFFFFF;
-  background: darkred;
-}
-
-.num2 {
-  color: #fff;
-  background: #e67225;
-}
-
-.num3 {
-  color: #FFFFFF;
-  background: #e6bf25;
-}
-
-.num4 {
+.num {
   color: #FFFFFF;
   background: #C0C4CC;
 }

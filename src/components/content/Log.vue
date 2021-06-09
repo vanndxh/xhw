@@ -4,6 +4,17 @@
     <el-timeline>
       <br>
 
+      <el-timeline-item timestamp="2021/6/9" placement="top" align="left">
+        <el-card align="left">
+          <h4>v0.1.1</h4>
+          <ul>
+            <li>完善大仙板块</li>
+            <li>修复小猫动画bug</li>
+            <li>使用axios联调后端接口</li>
+          </ul>
+        </el-card>
+      </el-timeline-item>
+
       <el-timeline-item timestamp="2021/5/31" placement="top" align="left" color="green"
                         :icon="iconImportant"
                         size="large">

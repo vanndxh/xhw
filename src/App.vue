@@ -2,6 +2,14 @@
   <router-view/>
 </template>
 
+<script>
+export default {
+  mounted() {
+    this.$store.state.axios.defaults.headers['Authorization'] = "Bearer " + this.$store.state.token
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -11,9 +19,3 @@
   color: #2c3e50;
 }
 </style>
-
-<script>
-export default {
-
-}
-</script>
