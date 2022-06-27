@@ -31,7 +31,6 @@
     "./src/**/*",
     "./src/**/*.ts",
     "./src/**/*.tsx",
-    "./config/routes.ts",
     "./mock/*",
     "./config/define.d.ts"
   ],
