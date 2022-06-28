@@ -1,6 +1,7 @@
 import { TabBar } from "antd-mobile";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppOutline, UserOutline } from "antd-mobile-icons";
+import styles from "./index.less";
 
 const BottomBar = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const BottomBar = () => {
   };
   const tabs = [
     {
-      key: "/home",
+      key: "/",
       title: "首页",
       icon: <AppOutline />,
     },
@@ -23,14 +24,16 @@ const BottomBar = () => {
   ];
 
   return (
-    <TabBar
-      safeArea={true}
-      activeKey={location.pathname}
-      onChange={(value) => setRouteActive(value)}>
-      {tabs.map((item) => (
-        <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
-      ))}
-    </TabBar>
+    <div className={styles["bottom-bar-box"]}>
+      <TabBar
+        safeArea={true}
+        activeKey={location.pathname}
+        onChange={(value) => setRouteActive(value)}>
+        {tabs.map((item) => (
+          <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
+        ))}
+      </TabBar>
+    </div>
   );
 };
 

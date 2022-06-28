@@ -1,5 +1,5 @@
-import { SafeArea } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
+import BottomBar from "../../components/BottomBar";
 import styles from "./index.less";
 
 function Home() {
@@ -11,7 +11,7 @@ function Home() {
     <>
       <div className={styles.text}>index</div>
       <button onClick={handleClick}>jump to mine page</button>
-      <SafeArea position="bottom" />
+      <BottomBar />
     </>
   );
 }
