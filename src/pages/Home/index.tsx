@@ -12,6 +12,7 @@ function Home() {
       </div>
 
       <div className={styles["home-content"]}>
+        <div className={styles["home-content-web"]}>实用网站推荐</div>
         <Grid columns={2} gap={20}>
           {webData.gameWeb.map((i) => {
             return (

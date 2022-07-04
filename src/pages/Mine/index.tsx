@@ -27,7 +27,7 @@ function Mine() {
         <div className={styles["mine-show-box"]}>
           <NavBar back={null}>个人中心</NavBar>
           <br />
-          <List>
+          <List mode="card">
             <List.Item prefix={<UserSetOutline />} onClick={() => {}} disabled>
               个人信息
             </List.Item>

@@ -12,10 +12,18 @@
   &-content {
     margin: 45px 0 60px 0;
     padding: 20px;
-    min-height: calc(100vh - 115px);
+    min-height: calc(100vh - 155px);
     background: url("https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF");
-    // background-repeat: no-repeat;
-    // background-size: 100% 100%;
+    background-size: contain;
+
+    &-web {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      height: 40px;
+      background: linear-gradient(to bottom right, red, yellow);
+    }
 
     .web-card {
       &-title {
