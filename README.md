@@ -7,22 +7,43 @@
 - UI库：antd.mobile
 - 系统环境：mac
 - 开发平台：vscode
+- 请求工具：axios
 
 [项目开发笔记](https://www.yuque.com/vanndxh/coderv/xhwpro)
 
-## Dev
+
+
+## 快速开始
+
+后端 `yarn api`
+
+前端 `yarn start`
+
+
+
+## 开发环境
 
 - `react` ^18.2.0
+
 - `react-router-dom` ^6.3.0
+
 - `typescript` ^4.7.4
+
 - `antd-mobile` ^5.16.1
 
-## About Author
+  
+
+## 联系作者
 
 - qq 1025196468
+
 - email [1025196468@qq.com](mailto:1025196468@qq.com)
+
 - weibo https://weibo.com/u/6864286293
+
 - yuque https://www.yuque.com/vanndxh
+
+  
 
 ## License
 
