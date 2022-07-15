@@ -1,4 +1,6 @@
-// const express = require('express');
+/**
+ * @file 接口的封装以及请求配置
+ */
 import express from 'express';
 const app = express();
 
