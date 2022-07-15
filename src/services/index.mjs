@@ -5,6 +5,7 @@ import express from 'express';
 const app = express();
 
 import * as Home from './api/Home.mjs';
+import * as Mine from './api/Mine.mjs';
 
 /** 解决跨域问题 */
 app.use((req, res, next) => {
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 /** 接口的路径封装 */
 app.get('/home/test', Home.getHomeTest);
+app.get('/mine/setting/likeAmount', Mine.getLikeAmount);
 
 const server = app.listen(8088, function () {
   const host = server.address().address;

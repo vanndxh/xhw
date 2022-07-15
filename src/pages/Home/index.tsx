@@ -1,13 +1,10 @@
 import { Grid, NavBar } from "antd-mobile";
-import axios from "axios";
 import BottomBar from "@/components/BottomBar";
 import TransparentCard from "@/components/TransparentCard";
 import { webData } from "./constants";
 import styles from "./index.less";
 
 function Home() {
-  axios.get("/home/test").then((res) => console.log(res));
-
   return (
     <div className={styles["home"]}>
       <div className={styles["home-top"]}>
