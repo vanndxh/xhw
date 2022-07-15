@@ -1,6 +1,10 @@
 import fs from 'fs';
 
-/** GET /mine/setting/likeAmount 获取点赞数 */
+/** 
+ * @file 获取点赞数
+ * @type GET
+ * @path /mine/setting/likeAmount 
+ */
 export const getLikeAmount = (req, res) => {
   const likeData = JSON.parse(fs.readFileSync("./src/services/database/like.json"));
   const newLikeData = {
