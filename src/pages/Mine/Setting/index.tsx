@@ -1,7 +1,7 @@
 import { getLikeAmount } from "@/services/api/api";
 import { IsToday } from "@/utils/IsToday";
 import { List, NavBar, Toast } from "antd-mobile";
-import { LikeOutline } from "antd-mobile-icons";
+import { LikeOutline, DeleteOutline, UserOutline } from "antd-mobile-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ function Setting() {
   const [lastLikeTime, setLastLikeTime] = useState(
     localStorage.getItem("lastLikeTime") || ""
   );
+
   useEffect(() => {
     getLikeAmount().then((res) => {
       setLikeAmount(res.data.data.amount);
@@ -55,9 +56,36 @@ function Setting() {
         }}>
         设置
       </NavBar>
+
       <List mode="card">
+        <Item
+          prefix={<UserOutline />}
+          disabled
+          onClick={() => {
+            navigate("/mine/author");
+          }}>
+          关于作者
+        </Item>
         <Item prefix={<LikeOutline />} onClick={handleClickLike}>
           支持作者
+        </Item>
+        <Item
+          prefix={<DeleteOutline />}
+          clickable={false}
+          onClick={() => {
+            Toast.show({
+              icon: "loading",
+              content: "清除缓存中...",
+            });
+            setTimeout(() => {
+              Toast.show({
+                icon: "success",
+                content: "清除缓存成功",
+                duration: 800,
+              });
+            }, 1000);
+          }}>
+          清除缓存
         </Item>
       </List>
     </div>
