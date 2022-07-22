@@ -1,0 +1,60 @@
+.genshin {
+  width: 100%;
+
+  &-header {
+    background: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  &-body {
+    margin: 45px 0 60px 0;
+    padding: 0 20px;
+    height: calc(100vh - 105px);
+    overflow: scroll;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &-input {
+      width: 80%;
+      height: 30px;
+      padding: 5px 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &-footer {
+    margin-top: 20px;
+    width: 80%;
+
+    &-show {
+      &-item {
+        height: 20px;
+        padding: 10px;
+        border-radius: 12px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    &-tip {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 10px;
+
+      &-title {
+        margin: 0;
+      }
+      &-desc {
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
