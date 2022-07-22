@@ -1,6 +1,6 @@
 import { TabBar } from "antd-mobile";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AppOutline, UserOutline } from "antd-mobile-icons";
+import { AppOutline, UserOutline, PieOutline } from "antd-mobile-icons";
 import styles from "./index.less";
 
 const BottomBar = () => {
@@ -15,6 +15,11 @@ const BottomBar = () => {
       key: "/",
       title: "首页",
       icon: <AppOutline />,
+    },
+    {
+      key: "/genshin",
+      title: "原神",
+      icon: <PieOutline />,
     },
     {
       key: "/mine",

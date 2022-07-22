@@ -1,8 +1,9 @@
 import { Divider, NavBar, Image } from "antd-mobile";
 import BottomBar from "@/components/BottomBar";
 import { webData } from "./constants";
-import styles from "./index.less";
 import ItemInfo from "@/components/ItemInfo";
+import cat from "@/assets/cat.gif";
+import styles from "./index.less";
 
 function Home() {
   return (
@@ -18,13 +19,9 @@ function Home() {
             <div
               onClick={() => {
                 window.open(i.url);
-              }}>
-              <ItemInfo
-                icon={i.icon}
-                title={i.title}
-                desc={i.desc}
-                key={index}
-              />
+              }}
+              key={index}>
+              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );
         })}
@@ -35,13 +32,9 @@ function Home() {
             <div
               onClick={() => {
                 window.open(i.url);
-              }}>
-              <ItemInfo
-                icon={i.icon}
-                title={i.title}
-                desc={i.desc}
-                key={index}
-              />
+              }}
+              key={index}>
+              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );
         })}
@@ -52,25 +45,16 @@ function Home() {
             <div
               onClick={() => {
                 window.open(i.url);
-              }}>
-              <ItemInfo
-                icon={i.icon}
-                title={i.title}
-                desc={i.desc}
-                key={index}
-              />
+              }}
+              key={index}>
+              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );
         })}
 
         <Divider>我也是有底线的～</Divider>
         <div className={styles["home-footer"]}>
-          <Image
-            src={"../../assets/cat.gif"}
-            width={100}
-            height={100}
-            fit="contain"
-          />
+          <Image src={cat} width={100} height={100} fit="contain" />
         </div>
       </div>
 

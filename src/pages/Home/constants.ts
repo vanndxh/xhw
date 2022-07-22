@@ -5,13 +5,15 @@ export const webData = {
       title: "paimon.moe",
       url: "http://paimon.moe",
       desc: "genshin攻略网站",
-      icon: 'https://paimon.moe/paimon-og.png'
+      // icon: 'https://paimon.moe/paimon-og.png'
+      icon: ''
     },
     {
       title: "steamDB",
       url: "http://paimon.moe",
       desc: "steam数据库，包含打折信息",
-      icon: 'https://steamdb.info/static/img/applogo.svg'
+      // icon: 'https://steamdb.info/static/img/applogo.svg'
+      icon: ''
     },
     {
       title: "原神大地图",
