@@ -17,7 +17,7 @@ function Genshin() {
   const normalPoolRole = ["七七", "莫娜", "迪卢克", "琴", "刻晴"];
 
   /** 获取抽卡数据相关参数 */
-  const getGachaUrl = "/genshin/event/gacha_info/api/getGachaLog?";
+  const getGachaUrl = "/api/mihoyo/event/gacha_info/api/getGachaLog?";
   let endId = "0";
   let currentPage = 1;
   const tempData: any = [];
@@ -28,6 +28,7 @@ function Genshin() {
     const tempData = [];
     let count = 0;
     let preName = "已垫";
+    // eslint-disable-next-line
     gachaData?.map((i) => {
       if (i.rank_type === "5") {
         tempData.push({
@@ -63,7 +64,7 @@ function Genshin() {
   const fetchData = async () => {
     Toast.show({
       icon: "loading",
-      content: "获取中，别tm乱点！后果自负！",
+      content: "获取数据中，不要乱点啊喂！",
       duration: 3000,
     });
     const res = await axios.get(
@@ -81,6 +82,7 @@ function Genshin() {
         handleFinish();
       }
       endId = res?.data?.data?.list[5]?.id || "";
+      // eslint-disable-next-line
       res?.data?.data?.list?.map((i: any) => {
         tempData.push(i);
       });
@@ -124,7 +126,6 @@ function Genshin() {
           clearable
           value={inputValue}
           onChange={(e) => setInputValue(e)}
-          autoFocus
           className={styles["genshin-body-input"]}
         />
         <Button color="primary" fill="outline" onClick={getGachaData}>
@@ -151,14 +152,31 @@ function Genshin() {
               })}
             </div>
           ) : (
-            <div className={styles["genshin-footer-tip"]}>
-              <p className={styles["genshin-footer-tip-title"]}>
-                <InformationCircleOutline fontSize={18} />
-                <span style={{ marginLeft: 5 }}>怎么获取导出链接？</span>
-              </p>
-              <p className={styles["genshin-footer-tip-desc"]}>
-                打开游戏，进入抽卡历史记录页面，断开所有网络连接，点击右上角刷新，当页面报错时，复制全部文本，粘贴至上方输入框
-              </p>
+            <div>
+              <div className={styles["genshin-footer-tip"]}>
+                <p className={styles["genshin-footer-tip-title"]}>
+                  <InformationCircleOutline fontSize={18} />
+                  <span style={{ marginLeft: 5 }}>怎么获取导出链接？</span>
+                </p>
+                <p className={styles["genshin-footer-tip-desc"]}>
+                  打开游戏，进入抽卡历史记录页面，断开所有网络连接，点击右上角刷新，当页面报错时，复制全部文本，粘贴至上方输入框
+                </p>
+              </div>
+              <div className={styles["genshin-footer-tip"]}>
+                <p className={styles["genshin-footer-tip-title"]}>
+                  <InformationCircleOutline fontSize={18} />
+                  <span style={{ marginLeft: 5 }}>使用tip</span>
+                </p>
+                <p className={styles["genshin-footer-tip-desc"]}>
+                  1、尽量按正常逻辑使用，没有测试过异常情况，有bug可以微博反馈我，谢谢啦
+                </p>
+                <p className={styles["genshin-footer-tip-desc"]}>
+                  2、目前只有限定角色池子，明天写其他池子
+                </p>
+                <p className={styles["genshin-footer-tip-desc"]}>
+                  3、样式也明天再优化一下，加个“每限定原石数之类的”
+                </p>
+              </div>
             </div>
           )}
         </div>

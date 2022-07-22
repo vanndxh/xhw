@@ -101,11 +101,11 @@ module.exports = function (proxy, allowedHost) {
     },
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
     proxy: {
-      "/genshin": {
+      "/api/mihoyo": {
         target: "https://hk4e-api.mihoyo.com",
         changeOrigin: true,
         pathRewrite: {
-          '^/genshin': ''
+          '^/api/mihoyo': ''
         }
       }
     },

@@ -9,17 +9,24 @@ export const webData = {
       icon: ''
     },
     {
+      title: "原神大地图",
+      url: "https://webstatic.mihoyo.com/ys/app/interactive-map/",
+      desc: "标注各种资源的信息",
+      icon: 'https://webstatic.mihoyo.com/ys/app/interactive-map/mapicon.png'
+    },
+
+    {
+      title: "原神成就合集",
+      url: "https://www.yuque.com/vanndxh/others/gub2p6",
+      desc: "以及卡池记录，碟片合集，食谱合集",
+      icon: ''
+    },
+    {
       title: "steamDB",
       url: "http://paimon.moe",
       desc: "steam数据库，包含打折信息",
       // icon: 'https://steamdb.info/static/img/applogo.svg'
       icon: ''
-    },
-    {
-      title: "原神大地图",
-      url: "https://webstatic.mihoyo.com/ys/app/interactive-map/",
-      desc: "标注各种资源的信息",
-      icon: 'https://webstatic.mihoyo.com/ys/app/interactive-map/mapicon.png'
     },
   ],
   programWeb: [
@@ -35,6 +42,14 @@ export const webData = {
       desc: "屏幕帧率测试网站",
       icon: 'https://www.testufo.com/images/blurbustersUFOborder.png'
     },
+    {
+      title: "代码格式转换",
+      url: "https://transform.tools/",
+      desc: "例如json转ts",
+      icon: ''
+    },
+
+
   ],
   universalWeb: [
     {
