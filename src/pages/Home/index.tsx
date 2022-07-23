@@ -13,7 +13,7 @@ function Home() {
       </div>
 
       <div className={styles["home-body"]}>
-        <h3>🔨通用</h3>
+        <h3>🔨 通用</h3>
         {webData.universalWeb.map((i, index) => {
           return (
             <div
@@ -26,7 +26,7 @@ function Home() {
           );
         })}
 
-        <h3>🎮游戏</h3>
+        <h3>🎮 游戏</h3>
         {webData.gameWeb.map((i, index) => {
           return (
             <div
@@ -39,8 +39,21 @@ function Home() {
           );
         })}
 
-        <h3>💻程序猿</h3>
+        <h3>💻 程序猿</h3>
         {webData.programWeb.map((i, index) => {
+          return (
+            <div
+              onClick={() => {
+                window.open(i.url);
+              }}
+              key={index}>
+              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
+            </div>
+          );
+        })}
+
+        <h3>📡 关于本网站</h3>
+        {webData.xhwWeb.map((i, index) => {
           return (
             <div
               onClick={() => {
