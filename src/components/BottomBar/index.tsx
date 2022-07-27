@@ -3,13 +3,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AppOutline, UserOutline, PieOutline } from "antd-mobile-icons";
 import styles from "./index.less";
 
-const BottomBar = () => {
+interface Props {
+  onChange?: () => void;
+}
+
+const BottomBar = (props: Props) => {
+  const { onChange } = props;
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const setRouteActive = (value: string) => {
-    navigate(value);
-  };
   const tabs = [
     {
       key: "/",
@@ -33,7 +36,10 @@ const BottomBar = () => {
       <TabBar
         safeArea={true}
         activeKey={location.pathname}
-        onChange={(value) => setRouteActive(value)}>
+        onChange={(value) => {
+          navigate(value);
+          onChange?.();
+        }}>
         {tabs.map((item) => (
           <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
         ))}

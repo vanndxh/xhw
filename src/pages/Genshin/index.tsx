@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import BottomBar from "@/components/BottomBar";
 import axios from "axios";
-import { Button, Input, NavBar, Tabs, Toast } from "antd-mobile";
+import { Button, Input, Mask, NavBar, Tabs, Toast } from "antd-mobile";
 import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
 import { GachaDataShowItem, GACHA_TYPE, GACHA_TYPE_KEY } from "./types";
 import { getGachaUrl, tabItems } from "./constants";
@@ -12,17 +12,42 @@ import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
 
 function Genshin() {
-  const [inputValue, setInputValue] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState(""); // 输入框
+  const [loading, setLoading] = useState(false); // 控制查询状态
   const [gachaRoleData, setGachaRoleData] = useState<GachaDataShowItem[]>();
   const [gachaWeaponData, setGachaWeaponData] = useState<GachaDataShowItem[]>();
   const [gachaNormalData, setGachaNormalData] = useState<GachaDataShowItem[]>();
   const [statisticsData, setStatisticsData] = useState<any>();
   const [activeIndex, setActiveIndex] = useState(0);
+
   const swiperRef = useRef<SwiperRef>(null);
 
+  /** 获取localStorage存储的上次记录 */
   useEffect(() => {
-    if (gachaRoleData && gachaWeaponData && gachaNormalData) {
+    const gachaRoleData = localStorage.getItem("gachaRoleData");
+    const gachaWeaponData = localStorage.getItem("gachaWeaponData");
+    const gachaNormalData = localStorage.getItem("gachaNormalData");
+    if (gachaRoleData) {
+      setGachaRoleData(JSON.parse(gachaRoleData));
+    }
+    if (gachaWeaponData) {
+      setGachaWeaponData(JSON.parse(gachaWeaponData));
+    }
+    if (gachaNormalData) {
+      setGachaNormalData(JSON.parse(gachaNormalData));
+    }
+    if (gachaRoleData || gachaWeaponData || gachaNormalData) {
+      Toast.show({
+        icon: "success",
+        content: "获取上次查询记录成功！",
+        duration: 1000,
+      });
+    }
+  }, []);
+
+  /** 当数据改变时，更新统计 */
+  useEffect(() => {
+    if (gachaRoleData || gachaWeaponData || gachaNormalData) {
       setStatisticsData(
         calculateStatistics({
           gachaRoleData,
@@ -47,15 +72,27 @@ function Genshin() {
       endId = "0";
       currentPage = 1;
       setGachaRoleData(hanedleRawData({ rawData: gachaData }));
+      localStorage.setItem(
+        "gachaRoleData",
+        JSON.stringify(hanedleRawData({ rawData: gachaData }))
+      );
       gachaData = [];
     } else if (gachaType === GACHA_TYPE_KEY.weapon.code) {
       gachaType = GACHA_TYPE_KEY.normal.code;
       endId = "0";
       currentPage = 1;
       setGachaWeaponData(hanedleRawData({ rawData: gachaData }));
+      localStorage.setItem(
+        "gachaWeaponData",
+        JSON.stringify(hanedleRawData({ rawData: gachaData }))
+      );
       gachaData = [];
     } else {
       setGachaNormalData(hanedleRawData({ rawData: gachaData }));
+      localStorage.setItem(
+        "gachaNormalData",
+        JSON.stringify(hanedleRawData({ rawData: gachaData }))
+      );
       clearInterval(timer);
       setLoading(false);
       Toast.show({
@@ -77,7 +114,7 @@ function Genshin() {
     const res = await axios.get(
       getGachaUrl +
         inputValue?.split("?")?.[1].split("#")?.[0] +
-        `&gacha_type=${gachaType}&page=${currentPage}&size=6&end_id=${endId}`,
+        `&gacha_type=${gachaType}&page=${currentPage}&size=20&end_id=${endId}`,
       {
         baseURL: "",
       }
@@ -85,10 +122,10 @@ function Genshin() {
     if (!res.data.data.list) {
       handleFinish();
     } else {
-      if (res.data.data.list.length < 6) {
+      if (res.data.data.list.length < 20) {
         handleFinish();
       }
-      endId = res?.data?.data?.list[5]?.id || "";
+      endId = res?.data?.data?.list[19]?.id || "";
       // eslint-disable-next-line
       res?.data?.data?.list?.map((i: any) => {
         gachaData.push(i);
@@ -99,8 +136,6 @@ function Genshin() {
 
   /** 获取原始数据（setInterval） */
   const getGachaData = () => {
-    setLoading(true);
-    gachaType = GACHA_TYPE_KEY.role.code;
     if (!inputValue) {
       Toast.show({
         icon: "fail",
@@ -115,6 +150,8 @@ function Genshin() {
         content: "导出链接解析失败",
       });
     } else {
+      setLoading(true);
+      gachaType = GACHA_TYPE_KEY.role.code;
       if (timer === undefined) {
         timer = setInterval(() => {
           fetchData();
@@ -191,7 +228,14 @@ function Genshin() {
         </div>
       </div>
 
-      <BottomBar />
+      <BottomBar
+        onChange={() => {
+          clearInterval(timer);
+          setLoading(false);
+        }}
+      />
+
+      <Mask visible={loading} color="white" />
     </div>
   );
 }
