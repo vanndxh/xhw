@@ -3,8 +3,8 @@ import BottomBar from "@/components/BottomBar";
 import axios from "axios";
 import { Button, Input, NavBar, Tabs, Toast } from "antd-mobile";
 import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
-import { GachaDataShowItem, gachaTypeEnum } from "./types";
-import { getGachaUrl, normalPoolRole, tabItems } from "./constants";
+import { GachaDataShowItem, GACHA_TYPE, GACHA_TYPE_KEY } from "./types";
+import { getGachaUrl, tabItems } from "./constants";
 import { calculateStatistics, hanedleRawData } from "./utils";
 import styles from "./index.less";
 import GachaShowTabItem from "./components/GachaShowTabItem";
@@ -38,18 +38,18 @@ function Genshin() {
   let currentPage = 1;
   let gachaData: any[] = [];
   let timer: any;
-  let gachaType: string = "301"; // 301-role 302-weapon 200-normal 100-new 0-end
+  let gachaType: string = GACHA_TYPE_KEY.role.code; // 301-role 302-weapon 200-normal 100-new 0-end
 
   /** 请求结束后操作 */
   const handleFinish = () => {
-    if (gachaType === "301") {
-      gachaType = "302";
+    if (gachaType === GACHA_TYPE_KEY.role.code) {
+      gachaType = GACHA_TYPE_KEY.weapon.code;
       endId = "0";
       currentPage = 1;
       setGachaRoleData(hanedleRawData({ rawData: gachaData }));
       gachaData = [];
-    } else if (gachaType === "302") {
-      gachaType = "200";
+    } else if (gachaType === GACHA_TYPE_KEY.weapon.code) {
+      gachaType = GACHA_TYPE_KEY.normal.code;
       endId = "0";
       currentPage = 1;
       setGachaWeaponData(hanedleRawData({ rawData: gachaData }));
@@ -70,7 +70,7 @@ function Genshin() {
   const fetchData = async () => {
     Toast.show({
       icon: "loading",
-      content: `获取${gachaTypeEnum[gachaType]}池第${currentPage}页中，不要乱点啊喂！`,
+      content: `获取${GACHA_TYPE[gachaType]}池第${currentPage}页中，不要乱点啊喂！`,
       duration: 3000,
     });
 
@@ -100,6 +100,7 @@ function Genshin() {
   /** 获取原始数据（setInterval） */
   const getGachaData = () => {
     setLoading(true);
+    gachaType = GACHA_TYPE_KEY.role.code;
     if (!inputValue) {
       Toast.show({
         icon: "fail",

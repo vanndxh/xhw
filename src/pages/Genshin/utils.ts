@@ -26,6 +26,7 @@ export const calculateStatistics = (props: CalculateStatisticsProps) => {
       limitGoldNumber++;
     }
   });
+  limitGoldNumber--;
   const pullsPerLimitRole = limitGoldNumber
     ? String((rolePullNumber / limitGoldNumber) * 1.0).slice(0, 4)
     : "-";
