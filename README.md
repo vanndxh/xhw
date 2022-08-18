@@ -7,9 +7,9 @@ http://vanndxh.ltd
 - 前端：react.js
 - 后端：node.js
 - UI库：antd.mobile
-- 系统环境：mac
-- 开发平台：vscode
 - 请求工具：axios
+- 服务器：腾讯云
+- 服务器代理：宝塔面板
 
 [项目开发笔记](https://www.yuque.com/vanndxh/coderv/xhwpro)
 
@@ -32,6 +32,8 @@ http://vanndxh.ltd
 - `typescript` ^4.7.4
 
 - `antd-mobile` ^5.16.1
+
+- `axios`^0.27.2
 
   
 
