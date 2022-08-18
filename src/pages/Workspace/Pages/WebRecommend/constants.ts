@@ -19,7 +19,7 @@ export const webData = {
       title: "原神成就合集",
       url: "https://www.yuque.com/vanndxh/others/gub2p6",
       desc: "以及卡池记录，碟片合集，食谱合集",
-      icon: ''
+      icon: 'https://gw.alipayobjects.com/zos/bmw-prod/735cefc9-f976-4c87-8b48-85f713f5b713.svg'
     },
     {
       title: "steamDB",
@@ -48,8 +48,6 @@ export const webData = {
       desc: "例如json转ts",
       icon: ''
     },
-
-
   ],
   universalWeb: [
     {
@@ -63,6 +61,20 @@ export const webData = {
       url: "https://www.1ppt.com/",
       desc: "ppt模板",
       icon: 'https://js.1ppt.com/logo.gif'
+    },
+  ],
+  xhwWeb: [
+    {
+      title: "网站开发笔记",
+      url: "https://www.yuque.com/vanndxh/coderv/xhwpro",
+      desc: "记录开发网站踩坑点",
+      icon: 'https://gw.alipayobjects.com/zos/bmw-prod/735cefc9-f976-4c87-8b48-85f713f5b713.svg'
+    },
+    {
+      title: "原神抽卡程序笔记",
+      url: "https://www.yuque.com/vanndxh/coderv/ttb0bq",
+      desc: "本网站重点功能开发笔记，欢迎指正",
+      icon: 'https://gw.alipayobjects.com/zos/bmw-prod/735cefc9-f976-4c87-8b48-85f713f5b713.svg'
     },
   ]
 };
