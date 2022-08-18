@@ -1,11 +1,13 @@
-import { Divider, NavBar, Image } from "antd-mobile";
+import { useNavigate } from "react-router-dom";
+import { NavBar, Image, Button } from "antd-mobile";
+
 import BottomBar from "@/components/BottomBar";
-import { webData } from "./constants";
-import ItemInfo from "@/components/ItemInfo";
-import cat from "@/assets/cat.gif";
+import xhw from "@/assets/xhw.jpeg";
 import styles from "./index.less";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles["home"]}>
       <div className={styles["home-header"]}>
@@ -13,61 +15,16 @@ function Home() {
       </div>
 
       <div className={styles["home-body"]}>
-        <h3>🔨 通用</h3>
-        {webData.universalWeb.map((i, index) => {
-          return (
-            <div
-              onClick={() => {
-                window.open(i.url);
-              }}
-              key={index}>
-              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
-            </div>
-          );
-        })}
-
-        <h3>🎮 游戏</h3>
-        {webData.gameWeb.map((i, index) => {
-          return (
-            <div
-              onClick={() => {
-                window.open(i.url);
-              }}
-              key={index}>
-              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
-            </div>
-          );
-        })}
-
-        <h3>💻 程序猿</h3>
-        {webData.programWeb.map((i, index) => {
-          return (
-            <div
-              onClick={() => {
-                window.open(i.url);
-              }}
-              key={index}>
-              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
-            </div>
-          );
-        })}
-
-        <h3>📡 关于本网站</h3>
-        {webData.xhwWeb.map((i, index) => {
-          return (
-            <div
-              onClick={() => {
-                window.open(i.url);
-              }}
-              key={index}>
-              <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
-            </div>
-          );
-        })}
-
-        <Divider>我也是有底线的～</Divider>
-        <div className={styles["home-footer"]}>
-          <Image src={cat} width={100} height={100} fit="contain" />
+        <div className={styles["home-body-content"]}>
+          <Image src={xhw} width={300} height={150} fit="contain" />
+          <Button
+            fill="outline"
+            onClick={() => {
+              navigate("/workspace");
+            }}>
+            这破网站能
+            <span className={styles["home-body-content-gan"]}>干</span>嘛 ➡️
+          </Button>
         </div>
       </div>
 

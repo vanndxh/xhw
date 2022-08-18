@@ -49,3 +49,30 @@ export const rolePicUrl = {
   七七: "https://patchwiki.biligame.com/images/ys/8/8b/049fpv6jcr66mln0nmbbfgigfrkgrzo.png",
   琴: "https://patchwiki.biligame.com/images/ys/1/1a/g3cl4mrxow8af265n2ajqtnuf99pkfa.png",
 } as Record<string, string>;
+
+/** 抽卡数据展示项 */
+export interface GachaDataShowItem {
+  name: string;
+  count: number;
+}
+
+/** 池子名-code对应 */
+export const GACHA_TYPE: any = {
+  "301": "角色",
+  "302": "武器",
+  "200": "常驻",
+};
+export const GACHA_TYPE_KEY = {
+  role: {
+    code: "301",
+    name: "角色",
+  },
+  weapon: {
+    code: "302",
+    name: "武器",
+  },
+  normal: {
+    code: "200",
+    name: "常驻",
+  },
+};

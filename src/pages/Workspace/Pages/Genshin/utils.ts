@@ -1,11 +1,10 @@
-import { normalPoolRole } from "./constants";
-import { GachaDataShowItem } from "./types";
+import { GachaDataShowItem, normalPoolRole } from "./constants";
 
-/** 
+/**
  * @file 计算抽卡统计数据
- * @param gachaRoleData 
- * @param gachaWeaponData 
- * @param gachaNormalData 
+ * @param gachaRoleData
+ * @param gachaWeaponData
+ * @param gachaNormalData
  */
 
 interface CalculateStatisticsProps {
@@ -68,7 +67,6 @@ export const calculateStatistics = (props: CalculateStatisticsProps) => {
   };
   return data;
 };
-
 
 /**
  * @file 处理原始数据至可展示数据

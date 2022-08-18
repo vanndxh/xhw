@@ -1,10 +1,17 @@
+/**
+ * @file 左icon，右两行，经典信息展示组件
+ * @author vanndxh
+ */
 import React from "react";
 import { Image } from "antd-mobile";
 import styles from "./index.less";
 
 interface Props {
+  /** icon链接 */
   icon: string;
+  /** 标题 */
   title: string;
+  /** 内容 */
   desc: string;
 }
 

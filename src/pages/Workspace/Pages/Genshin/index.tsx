@@ -1,15 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import BottomBar from "@/components/BottomBar";
-import axios from "axios";
 import { Button, Input, Mask, NavBar, Tabs, Toast } from "antd-mobile";
 import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
-import { GachaDataShowItem, GACHA_TYPE, GACHA_TYPE_KEY } from "./types";
-import { getGachaUrl, tabItems } from "./constants";
+import axios from "axios";
+import BottomBar from "@/components/BottomBar";
+import {
+  GachaDataShowItem,
+  GACHA_TYPE,
+  GACHA_TYPE_KEY,
+  getGachaUrl,
+  tabItems,
+} from "./constants";
 import { calculateStatistics, hanedleRawData } from "./utils";
-import styles from "./index.less";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
+import styles from "./index.less";
 
 function Genshin() {
   const [inputValue, setInputValue] = useState(""); // 输入框

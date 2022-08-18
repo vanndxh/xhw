@@ -20,8 +20,8 @@ const BottomBar = (props: Props) => {
       icon: <AppOutline />,
     },
     {
-      key: "/genshin",
-      title: "原神",
+      key: "/workspace",
+      title: "工作台",
       icon: <PieOutline />,
     },
     {
