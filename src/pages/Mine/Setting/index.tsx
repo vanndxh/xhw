@@ -1,9 +1,9 @@
-import { getLikeAmount } from "@/services/api/api";
-import { IsToday } from "@/utils/IsToday";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { List, NavBar, Toast } from "antd-mobile";
 import { LikeOutline, DeleteOutline, UserOutline } from "antd-mobile-icons";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { getLikeAmount } from "@/services/api/api";
+import { IsToday } from "@/utils/IsToday";
 
 const { Item } = List;
 
@@ -17,12 +17,6 @@ function Setting() {
   const [lastLikeTime, setLastLikeTime] = useState(
     localStorage.getItem("lastLikeTime") || ""
   );
-
-  useEffect(() => {
-    getLikeAmount().then((res) => {
-      setLikeAmount(res.data.data.amount);
-    });
-  }, []);
 
   /**
    * 数据处理
@@ -38,8 +32,8 @@ function Setting() {
     } else {
       localStorage.setItem("lastLikeTime", new Date().toISOString());
       setLastLikeTime(localStorage.getItem("lastLikeTime")!);
-      getLikeAmount(1).then((res) => {
-        setLikeAmount(res.data.data.amount);
+      getLikeAmount().then((res) => {
+        setLikeAmount(res.data);
       });
       Toast.show({
         icon: "success",

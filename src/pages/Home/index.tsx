@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavBar, Image, Button } from "antd-mobile";
 
 import BottomBar from "@/components/BottomBar";
+import { postUV } from "@/services/api/api";
 import xhw from "@/assets/xhw.jpeg";
 import styles from "./index.less";
 
 function Home() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    postUV("home");
+  }, []);
 
   return (
     <div className={styles["home"]}>

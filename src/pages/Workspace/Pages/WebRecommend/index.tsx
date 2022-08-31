@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, NavBar, Image } from "antd-mobile";
 
 import ItemInfo from "@/components/ItemInfo";
@@ -6,8 +6,13 @@ import BottomBar from "@/components/BottomBar";
 import { webData } from "./constants";
 import cat from "@/assets/cat.gif";
 import styles from "./index.less";
+import { postUV } from "@/services/api/api";
 
 function WebRecommend() {
+  useEffect(() => {
+    postUV("web");
+  }, []);
+
   return (
     <div className={styles["web"]}>
       <div className={styles["web-header"]}>
