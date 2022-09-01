@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { List, NavBar, Toast } from "antd-mobile";
 import { LikeOutline, DeleteOutline, UserOutline } from "antd-mobile-icons";
 import { getLikeAmount } from "@/services/api/api";
-import { IsToday } from "@/utils/IsToday";
+import { IsToday } from "@/utils/utils";
 
 const { Item } = List;
 

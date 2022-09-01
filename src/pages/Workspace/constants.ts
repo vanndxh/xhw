@@ -31,5 +31,12 @@ export const GetApps = () => {
         navigate("/workspace/webRecommend");
       },
     },
+    {
+      icon: "https://img.51miz.com/Element/00/80/90/39/2dc9a918_E809039_2c5773b5.jpg",
+      name: "uv统计",
+      onClick: () => {
+        navigate("/workspace/uvStatistics");
+      },
+    },
   ];
 };

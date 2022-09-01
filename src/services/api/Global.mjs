@@ -33,13 +33,28 @@ export const getUv = (req, res) => {
     if (error) {
       throw error;
     } else {
+      let uvTrend = {};
+      let tempData = {};
+      results?.map((i) => {
+        /** 处理trend数据 */
+        const tag = `${i?.time?.split("/")[0]}.${i?.time?.split("/")[1]}`;
+        uvTrend = {
+          ...uvTrend,
+          [tag]: (uvTrend?.[tag] || 0) + 1,
+        };
+
+        /** 处理总数据 */
+        tempData = {
+          ...tempData,
+          total: (tempData?.total || 0) + 1,
+          [i?.page]: (tempData?.[i?.page] || 0) + 1,
+        };
+      });
       res.json({
         code: 200,
         data: {
-          total: results?.length,
-          home: results?.filter((i) => i?.page === "home")?.length,
-          genshin: results?.filter((i) => i?.page === "genshin")?.length,
-          web: results?.filter((i) => i?.page === "web")?.length,
+          ...tempData,
+          trend: uvTrend,
         },
         message: "获取uv成功",
       });
