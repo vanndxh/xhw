@@ -3,6 +3,10 @@
  */
 import axios from "axios";
 
+/** 请求的基础地址 */
+// axios.defaults.baseURL = "http://localhost:8088";
+axios.defaults.baseURL = "https://vanndxh.ltd:8088";
+
 /** global */
 export const postUV = (page: string) => {
   return axios.post("/global/uv", { page });

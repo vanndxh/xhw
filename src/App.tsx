@@ -1,5 +1,4 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import axios from "axios";
 
 import Home from "./pages/Home";
 
@@ -15,9 +14,6 @@ import Setting from "./pages/Mine/Setting";
 import NotFound from "./pages/NotFound";
 
 function App() {
-  /** 请求的基础地址 */
-  axios.defaults.baseURL = "http://localhost:8088";
-
   return (
     /** 路由 */
     <BrowserRouter>

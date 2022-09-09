@@ -9,7 +9,9 @@ export const postUv = (req, res) => {
   const page = req?.body?.page || "home";
 
   db.query(
-    `insert into uv values ('${page}', '${new Date().toLocaleString()}')`,
+    `insert into uv values ('${page}', '${new Date()
+      .toLocaleString()
+      .format("YYYY/MM/DD HH:mm:ss")}')`,
     (error, results, fields) => {
       if (error) {
         throw error;
