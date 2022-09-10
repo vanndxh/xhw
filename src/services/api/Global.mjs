@@ -1,4 +1,5 @@
 import { db } from "../database/db.mjs";
+import vsql from "../vsql.js";
 
 /**
  * @file 用户访问页面时记录uv
@@ -7,22 +8,20 @@ import { db } from "../database/db.mjs";
  */
 export const postUv = (req, res) => {
   const page = req?.body?.page || "home";
-
-  db.query(
-    `insert into uv values ('${page}', '${new Date()
-      .toLocaleString()
-      .format("YYYY/MM/DD HH:mm:ss")}')`,
-    (error, results, fields) => {
-      if (error) {
-        throw error;
-      } else {
-        res.json({
-          code: 200,
-          message: "记录用户uv成功",
-        });
-      }
+  const sql = new vsql("uv")
+    .values([page, new Date().toLocaleString()])
+    .insert();
+  // `insert into uv values ('${page}', '${new Date().toLocaleString()}')`
+  db.query(sql, (error, results, fields) => {
+    if (error) {
+      throw error;
+    } else {
+      res.json({
+        code: 200,
+        message: "记录用户uv成功",
+      });
     }
-  );
+  });
 };
 
 /**
@@ -31,7 +30,8 @@ export const postUv = (req, res) => {
  * @path /global/uv
  */
 export const getUv = (req, res) => {
-  db.query(`select * from uv`, (error, results, fields) => {
+  const sql = new vsql("uv").select(); // select * from uv
+  db.query(sql, (error, results, fields) => {
     if (error) {
       throw error;
     } else {
@@ -70,24 +70,28 @@ export const getUv = (req, res) => {
  * @path /global/like
  */
 export const getLikeAmount = (req, res) => {
-  db.query(
-    `insert into like_data values ('${new Date().toLocaleString()}')`,
-    (error, results, fields) => {
-      if (error) {
-        throw error;
-      } else {
-        db.query(`select * from like_data`, (error, results, fields) => {
-          if (error) {
-            throw error;
-          } else {
-            res.send({
-              code: 200,
-              data: results?.length,
-              message: "获取uv成功",
-            });
-          }
-        });
-      }
+  const sql1 = new vsql("like_data")
+    .values([new Date().toLocaleString()])
+    .insert();
+  //  `insert into like_data values ('${new Date().toLocaleString()}')`
+  const sql2 = new vsql("like_data").select();
+  // select * from like_data
+
+  db.query(sql1, (error, results, fields) => {
+    if (error) {
+      throw error;
+    } else {
+      db.query(sql2, (error, results, fields) => {
+        if (error) {
+          throw error;
+        } else {
+          res.send({
+            code: 200,
+            data: results?.length,
+            message: "获取uv成功",
+          });
+        }
+      });
     }
-  );
+  });
 };
