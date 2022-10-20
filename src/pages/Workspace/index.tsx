@@ -10,9 +10,9 @@ function Workspace() {
   return (
     <div className={styles["workspace"]}>
       <Grid columns={4} gap={8}>
-        {GetApps().map((app) => {
+        {GetApps().map((app, index) => {
           return (
-            <Grid.Item className={styles["workspace-app"]}>
+            <Grid.Item className={styles["workspace-app"]} key={index}>
               <FakeApp
                 name={app?.name}
                 icon={app?.icon}

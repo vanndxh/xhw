@@ -15,6 +15,7 @@ import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
 import styles from "./index.less";
+import { postUV } from "@/services/api/api";
 
 function Genshin() {
   const [inputValue, setInputValue] = useState(""); // 输入框
@@ -29,6 +30,7 @@ function Genshin() {
 
   /** 获取localStorage存储的上次记录 */
   useEffect(() => {
+    postUV("genshin");
     const gachaRoleData = localStorage.getItem("gachaRoleData");
     const gachaWeaponData = localStorage.getItem("gachaWeaponData");
     const gachaNormalData = localStorage.getItem("gachaNormalData");
