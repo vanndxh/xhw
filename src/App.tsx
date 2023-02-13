@@ -6,6 +6,7 @@ import Workspace from "./pages/Workspace";
 import WebRecommend from "./pages/Workspace/Pages/WebRecommend";
 import Genshin from "./pages/Workspace/Pages/Genshin";
 import UVStatistics from "./pages/Workspace/Pages/UVStatistics";
+import CssTest from "./pages/Workspace/Pages/CssTest";
 
 import Mine from "./pages/Mine";
 import Author from "./pages/Mine/Author";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/workspace/webRecommend" element={<WebRecommend />} />
         <Route path="/workspace/genshin" element={<Genshin />} />
         <Route path="/workspace/uvStatistics" element={<UVStatistics />} />
+        <Route path="/workspace/cssTest" element={<CssTest />} />
 
         <Route path="/mine" element={<Mine />} />
         <Route path="/mine/author" element={<Author />} />

@@ -1,0 +1,29 @@
+.css {
+  width: 100%;
+
+  &-header {
+    background: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  &-body {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+
+    &-child {
+      height: 50px;
+      width: 50px;
+      background: red;
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      // transform: translateX(-50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
