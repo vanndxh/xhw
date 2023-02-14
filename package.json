@@ -17,6 +17,7 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
+    "antd": "^5.2.1",
     "antd-mobile": "^5.16.1",
     "axios": "^0.27.2",
     "babel-jest": "^27.4.2",
@@ -168,7 +169,6 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "less": "^4.1.3",
-    "less-loader": "^11.0.0",
-    "node-sass": "^7.0.1"
+    "less-loader": "^11.0.0"
   }
 }

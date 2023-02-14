@@ -1,0 +1,32 @@
+.vtable-header {
+  height: 50px;
+  background: rgb(245, 245, 245);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  justify-content: space-between;
+  border-radius: 8px;
+
+  &-left {
+    height: 50px;
+    display: flex;
+    align-items: center;
+
+    :global {
+      .ant-form-item {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.vtable-footer {
+  height: 50px;
+  background: rgb(245, 245, 245);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+}
