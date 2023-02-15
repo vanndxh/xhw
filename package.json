@@ -5,7 +5,7 @@
   "author": "vanndxh",
   "license": "MIT",
   "dependencies": {
-    "@vanndxh/vtil": "^0.0.3",
+    "@ant-design/icons": "^5.0.1",
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
@@ -17,6 +17,7 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
+    "@vanndxh/vtil": "^0.0.3",
     "antd": "^5.2.1",
     "antd-mobile": "^5.16.1",
     "axios": "^0.27.2",

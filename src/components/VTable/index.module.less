@@ -1,22 +1,36 @@
 .vtable-header {
-  height: 50px;
+  height: auto;
   background: rgb(245, 245, 245);
   margin-bottom: 10px;
   display: flex;
-  align-items: center;
   padding: 0 12px;
   justify-content: space-between;
   border-radius: 8px;
 
   &-left {
-    height: 50px;
+    margin: 10px 0;
+    height: 100%;
     display: flex;
     align-items: center;
+    width: calc(100% - 100px);
 
     :global {
       .ant-form-item {
         margin: 0;
       }
+      .ant-row {
+        width: 100%;
+      }
+    }
+  }
+
+  &-right {
+    width: 160px;
+    position: relative;
+
+    &-buttons {
+      display: flex;
+      margin-top: 10px;
     }
   }
 }
