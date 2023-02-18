@@ -17,6 +17,8 @@ interface Props {
   columns: any[];
   /** 筛选项配置 */
   filters: FilterItem[];
+  /** fetch */
+  fetch: () => void;
   /** 重置按键右侧额外自定义按钮 */
   extraButton?: ReactElement;
   /** 分页器左侧自定义内容 */

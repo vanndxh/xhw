@@ -87,7 +87,7 @@ function CssTest() {
 
       <div className={styles["css-table-wrapper"]}>
         <div className={styles["css-table"]}>
-          <VTable dataSource={dataSource} columns={columns} filters={filters} />
+          <VTable dataSource={dataSource} columns={columns} filters={filters} fetch={() => {}}/>
         </div>
       </div>
 
