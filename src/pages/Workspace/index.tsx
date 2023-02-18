@@ -50,6 +50,13 @@ function Workspace() {
         navigate("/workspace/cssTest");
       },
     },
+    {
+      icon: "https://bpic.588ku.com/element_origin_min_pic/19/04/09/e9fce6e83b97827742824bf4c4efdfdd.jpg",
+      name: "component练习",
+      onClick: () => {
+        navigate("/workspace/componentTest");
+      },
+    },
   ];
 
   return (
