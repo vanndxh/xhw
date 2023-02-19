@@ -13,33 +13,35 @@ interface Props {
 function AutoPrint(props: Props) {
   const { text } = props;
 
-  /** 是否展示右侧光标 */
-  const [isShowCursor, setIsShowCursor] = useState(true);
   /** 展示文本位数 */
   const [showNumber, setShowNumber] = useState(0);
-
-  let cursorTimer: any, textTimer: any;
+  /** 是否展示右侧光标 */
+  const [isShowCursor, setIsShowCursor] = useState(true);
+  /** 文本展示timer */
+  const [textTimer, setTextTimer] = useState<any>(0);
+  /** 展示右侧光标的timer */
+  const [cursorTimer, setCursorTimer] = useState<any>(0);
 
   useEffect(() => {
-    textTimer = setInterval(() => {
-      console.log("textTimer", textTimer);
+    const newTextTimer = setInterval(() => {
       setIsShowCursor((pre) => !pre);
     }, 500);
+    setTextTimer(newTextTimer);
 
-    cursorTimer = setInterval(() => {
-      console.log(350 + 100 * Math.random(), cursorTimer);
+    const newCursorTimer = setInterval(() => {
       setShowNumber((pre) => pre + 1);
-    }, 350 + 100 * Math.random());
-
+    }, 400);
+    setCursorTimer(newCursorTimer);
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    /** TODO: 以下清空无效，待修复 */
     if (showNumber === text?.length) {
+      setIsShowCursor(false);
       clearInterval(textTimer);
       clearInterval(cursorTimer);
     }
+    // eslint-disable-next-line
   }, [showNumber]);
 
   return (
