@@ -2376,10 +2376,10 @@
   dependencies:
     "@use-gesture/core" "10.2.15"
 
-"@vanndxh/vtil@^0.0.3":
-  "integrity" "sha512-4UC1b2IKUQdU3HIi2/HLOAbNE3UrjZx9OCa6Y99Ri5C/QXk1VugzJE0t4MHR4WeL/pG8yzKKhuEW2JlLJ9rWnA=="
-  "resolved" "https://registry.npmjs.org/@vanndxh/vtil/-/vtil-0.0.3.tgz"
-  "version" "0.0.3"
+"@vanndxh/vtil@^0.0.5":
+  "integrity" "sha512-kqqKb6zxy+1QvrCtWE1ODU/E+o/wm56dBJOqQDALHgZygp5qlwSiuE1zxupBfgJA9Fa1IpPSIpYie+88u5uTMg=="
+  "resolved" "https://registry.npmjs.org/@vanndxh/vtil/-/vtil-0.0.5.tgz"
+  "version" "0.0.5"
   dependencies:
     "react-scripts" "5.0.1"
     "typescript" "^4.9.4"
@@ -12272,7 +12272,7 @@
   dependencies:
     "is-typedarray" "^1.0.0"
 
-"typescript@^3.2.1 || ^4", "typescript@^4.7.4", "typescript@^4.9.4", "typescript@>= 2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta":
+"typescript@^3.2.1 || ^4", "typescript@^4.9.4", "typescript@>= 2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta":
   "integrity" "sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
   "version" "4.9.5"

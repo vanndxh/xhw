@@ -17,24 +17,58 @@ import NotFound from "../pages/NotFound";
 export const routes = [
   /** 首页 */
   {
-    path: "/",
+    path: "/*",
     element: <Home />,
+    children: [
+      /** 工作台 */
+      {
+        path: "workspace",
+        element: <Workspace />,
+        children: [
+          {
+            path: "webRecommend",
+            element: <WebRecommend />,
+          },
+          {
+            path: "genshin",
+            element: <Genshin />,
+          },
+          {
+            path: "uvStatistics",
+            element: <UVStatistics />,
+          },
+          {
+            path: "cssTest",
+            element: <CssTest />,
+          },
+          {
+            path: "componentTest",
+            element: <ComponentTest />,
+          },
+        ],
+      },
+      /** 我的 */
+      {
+        path: "mine",
+        element: <Mine />,
+        children: [
+          {
+            path: "author",
+            element: <Author />,
+          },
+          {
+            path: "setting",
+            element: <Setting />,
+          },
+        ],
+      },
+    ],
   },
 
   /** 工作台 */
   {
     path: "/workspace",
     element: <Workspace />,
-    children: [
-      {
-        path: "/workspace/webRecommend",
-        element: <WebRecommend />,
-      },
-      {
-        path: "/workspace/componentTest",
-        element: <ComponentTest />,
-      },
-    ],
   },
   {
     path: "/workspace/webRecommend",
@@ -61,12 +95,6 @@ export const routes = [
   {
     path: "/mine",
     element: <Mine />,
-    children: [
-      {
-        path: "/author",
-        element: <Author />,
-      },
-    ],
   },
   {
     path: "/mine/author",

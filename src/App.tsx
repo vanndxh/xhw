@@ -1,18 +1,12 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useRoutes } from "react-router-dom";
 import { routes } from "./utils/routes";
 
 function App() {
+  const RouteElement = () => useRoutes(routes as any);
+
   return (
-    /** 路由 */
     <BrowserRouter>
-      <Routes>
-        {routes.map((i) => {
-          i?.children?.map((j) => (
-            <Route path={j.path} element={j.element} key={j.path} />
-          ));
-          return <Route path={i.path} element={i.element} key={i.path} />;
-        })}
-      </Routes>
+      <RouteElement />
     </BrowserRouter>
   );
 }

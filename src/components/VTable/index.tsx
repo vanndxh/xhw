@@ -36,7 +36,7 @@ function VTable(props: Props) {
         <div className={styles["vtable-header-left"]}>
           <Row gutter={[16, 16]}>
             {(isFold ? filters?.slice(0, 4) : filters)?.map((i) => (
-              <Col span={i?.span || 6}>
+              <Col span={i?.span || 6} key={i?.key}>
                 <Form.Item label={i?.label} name={i?.key} key={i?.key}>
                   {i?.render?.()}
                 </Form.Item>
