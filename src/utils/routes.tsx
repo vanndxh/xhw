@@ -17,92 +17,58 @@ import NotFound from "../pages/NotFound";
 export const routes = [
   /** 首页 */
   {
-    path: "/*",
+    path: "/",
     element: <Home />,
-    children: [
-      /** 工作台 */
-      {
-        path: "workspace",
-        element: <Workspace />,
-        children: [
-          {
-            path: "webRecommend",
-            element: <WebRecommend />,
-          },
-          {
-            path: "genshin",
-            element: <Genshin />,
-          },
-          {
-            path: "uvStatistics",
-            element: <UVStatistics />,
-          },
-          {
-            path: "cssTest",
-            element: <CssTest />,
-          },
-          {
-            path: "componentTest",
-            element: <ComponentTest />,
-          },
-        ],
-      },
-      /** 我的 */
-      {
-        path: "mine",
-        element: <Mine />,
-        children: [
-          {
-            path: "author",
-            element: <Author />,
-          },
-          {
-            path: "setting",
-            element: <Setting />,
-          },
-        ],
-      },
-    ],
   },
 
   /** 工作台 */
   {
     path: "/workspace",
-    element: <Workspace />,
-  },
-  {
-    path: "/workspace/webRecommend",
-    element: <WebRecommend />,
-  },
-  {
-    path: "/workspace/genshin",
-    element: <Genshin />,
-  },
-  {
-    path: "/workspace/uvStatistics",
-    element: <UVStatistics />,
-  },
-  {
-    path: "/workspace/cssTest",
-    element: <CssTest />,
-  },
-  {
-    path: "/workspace/componentTest",
-    element: <ComponentTest />,
+    children: [
+      {
+        path: "",
+        element: <Workspace />,
+      },
+      {
+        path: "webRecommend",
+        element: <WebRecommend />,
+      },
+      {
+        path: "genshin",
+        element: <Genshin />,
+      },
+      {
+        path: "uvStatistics",
+        element: <UVStatistics />,
+      },
+      {
+        path: "cssTest",
+        element: <CssTest />,
+      },
+      {
+        path: "componentTest",
+        element: <ComponentTest />,
+      },
+    ],
   },
 
   /** 我的 */
   {
     path: "/mine",
-    element: <Mine />,
-  },
-  {
-    path: "/mine/author",
-    element: <Author />,
-  },
-  {
-    path: "/mine/setting",
-    element: <Setting />,
+    children: [
+      {
+        path: "",
+        element: <Mine />,
+      },
+      {
+        path: "author",
+        element: <Author />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
+      },
+    ],
   },
 
   /** 404 Not Found */
