@@ -1,0 +1,33 @@
+.progress-container {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.progress-fill {
+  position: absolute;
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+.progress-fill::after {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  content: "";
+  transform: translateY(-50%);
+  opacity: 0.6;
+  animation: flickering 2s ease-in-out infinite;
+}
+
+@keyframes flickering {
+  0% {
+    box-shadow: 0 0 15px 5px #fff;
+  }
+  50% {
+    box-shadow: 0 0 15px 7px #fff;
+  }
+  100% {
+    box-shadow: 0 0 15px 5px #fff;
+  }
+}
