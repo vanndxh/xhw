@@ -118,10 +118,9 @@ function Genshin() {
       duration: 3000,
     });
 
+    const params = inputValue?.split("?")?.[1].split("#")?.[0];
     const res = await axios.get(
-      getGachaUrl +
-        inputValue?.split("?")?.[1].split("#")?.[0] +
-        `&gacha_type=${gachaType}&page=${currentPage}&size=20&end_id=${endId}`,
+      `${getGachaUrl}${params}&gacha_type=${gachaType}&page=${currentPage}&size=20&end_id=${endId}`,
       {
         baseURL: "",
       }
@@ -143,12 +142,8 @@ function Genshin() {
 
   /** 获取原始数据（setInterval） */
   const getGachaData = () => {
-    if (!inputValue) {
-      Toast.show({
-        icon: "fail",
-        content: "请输入导出链接",
-      });
-    } else if (
+    if (
+      !inputValue ||
       inputValue.indexOf("?") === -1 ||
       inputValue.indexOf("#") === -1
     ) {
@@ -156,16 +151,16 @@ function Genshin() {
         icon: "fail",
         content: "导出链接解析失败",
       });
+      return;
+    }
+    setLoading(true);
+    gachaType = GACHA_TYPE_KEY.role.code;
+    if (timer === undefined) {
+      timer = setInterval(() => {
+        fetchData();
+      }, 1000);
     } else {
-      setLoading(true);
-      gachaType = GACHA_TYPE_KEY.role.code;
-      if (timer === undefined) {
-        timer = setInterval(() => {
-          fetchData();
-        }, 1000);
-      } else {
-        clearInterval(timer);
-      }
+      clearInterval(timer);
     }
   };
 
@@ -186,7 +181,8 @@ function Genshin() {
           color="primary"
           fill="outline"
           onClick={getGachaData}
-          disabled={loading}>
+          disabled={loading}
+        >
           开始获取
         </Button>
 
@@ -199,7 +195,8 @@ function Genshin() {
                   const index = tabItems.findIndex((item) => item.key === key);
                   setActiveIndex(index);
                   swiperRef.current?.swipeTo(index);
-                }}>
+                }}
+              >
                 {tabItems.map((item) => (
                   <Tabs.Tab title={item.title} key={item.key} />
                 ))}
@@ -209,10 +206,11 @@ function Genshin() {
                 loop
                 indicator={() => null}
                 ref={swiperRef}
-                defaultIndex={activeIndex}
-                onIndexChange={(index) => {
-                  setActiveIndex(index);
-                }}>
+                // defaultIndex={activeIndex}
+                // onIndexChange={(index) => {
+                //   setActiveIndex(index);
+                // }}
+              >
                 <Swiper.Item>
                   <GachaShowTabItem isRole={true} data={gachaRoleData} />
                 </Swiper.Item>
