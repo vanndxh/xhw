@@ -69,10 +69,10 @@ function GachaShowStatistics(props: Props) {
   return (
     <div className={styles["tab"]}>
       {dataShow.map((i) => (
-        <div className={styles["tab-statistics"]}>
+        <div className={styles["tab-statistics"]} key={i.title}>
           <p className={styles["tab-statistics-title"]}>{i.title}</p>
           {i.items.map((j) => (
-            <div className={styles["tab-statistics-item"]}>
+            <div className={styles["tab-statistics-item"]} key={j.label}>
               <div>{j.label}</div>
               <div>{j.value}</div>
             </div>

@@ -72,13 +72,8 @@ export const calculateStatistics = (props: CalculateStatisticsProps) => {
  * @file 处理原始数据至可展示数据
  * @param rawData 原始数据
  */
-interface HandleRawDataProps {
-  rawData: any[];
-}
 
-export const hanedleRawData = (props: HandleRawDataProps) => {
-  const { rawData } = props;
-
+export const hanedleRawData = (rawData: any[]) => {
   const tempData = [];
   let count = 0;
   let preName = "已垫";

@@ -78,27 +78,27 @@ function Genshin() {
       gachaType = GACHA_TYPE_KEY.weapon.code;
       endId = "0";
       currentPage = 1;
-      setGachaRoleData(hanedleRawData({ rawData: gachaData }));
+      setGachaRoleData(hanedleRawData(gachaData));
       localStorage.setItem(
         "gachaRoleData",
-        JSON.stringify(hanedleRawData({ rawData: gachaData }))
+        JSON.stringify(hanedleRawData(gachaData))
       );
       gachaData = [];
     } else if (gachaType === GACHA_TYPE_KEY.weapon.code) {
       gachaType = GACHA_TYPE_KEY.normal.code;
       endId = "0";
       currentPage = 1;
-      setGachaWeaponData(hanedleRawData({ rawData: gachaData }));
+      setGachaWeaponData(hanedleRawData(gachaData));
       localStorage.setItem(
         "gachaWeaponData",
-        JSON.stringify(hanedleRawData({ rawData: gachaData }))
+        JSON.stringify(hanedleRawData(gachaData))
       );
       gachaData = [];
     } else {
-      setGachaNormalData(hanedleRawData({ rawData: gachaData }));
+      setGachaNormalData(hanedleRawData(gachaData));
       localStorage.setItem(
         "gachaNormalData",
-        JSON.stringify(hanedleRawData({ rawData: gachaData }))
+        JSON.stringify(hanedleRawData(gachaData))
       );
       clearInterval(timer);
       setLoading(false);
