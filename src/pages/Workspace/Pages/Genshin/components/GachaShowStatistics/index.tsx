@@ -8,59 +8,77 @@ interface Props {
 function GachaShowStatistics(props: Props) {
   const { statisticsData } = props;
 
+  const dataShow = [
+    {
+      title: "角色",
+      items: [
+        {
+          label: "总抽数",
+          value: statisticsData?.rolePullNumber || "-",
+        },
+        {
+          label: "总金数",
+          value: statisticsData?.roleNumber || "-",
+        },
+        {
+          label: "每限定抽数",
+          value: statisticsData?.pullsPerLimitRole || "-",
+        },
+        {
+          label: "角色不歪概率",
+          value: `${statisticsData?.limitRate}%`,
+        },
+      ],
+    },
+    {
+      title: "武器",
+      items: [
+        {
+          label: "总抽数",
+          value: statisticsData?.weaponPullNumber || "-",
+        },
+        {
+          label: "总金数",
+          value: statisticsData?.weaponGoldNumber || "-",
+        },
+        {
+          label: "每金抽数",
+          value: statisticsData?.pullsPerWeapon || "-",
+        },
+      ],
+    },
+    {
+      title: "常驻",
+      items: [
+        {
+          label: "总抽数",
+          value: statisticsData?.normalPullNumber || "-",
+        },
+        {
+          label: "总金数",
+          value: statisticsData?.normalGoldNumber || "-",
+        },
+        {
+          label: "每金抽数",
+          value: statisticsData?.pullsPerNormal || "-",
+        },
+      ],
+    },
+  ];
+
   return (
     <div className={styles["tab"]}>
-      <div className={styles["tab-statistics"]}>
-        <p className={styles["tab-statistics-title"]}>角色</p>
-        <div className={styles["tab-statistics-item"]}>
-          <div>总抽数</div>
-          <div>{statisticsData?.rolePullNumber}</div>
+      {dataShow.map((i) => (
+        <div className={styles["tab-statistics"]}>
+          <p className={styles["tab-statistics-title"]}>{i.title}</p>
+          {i.items.map((j) => (
+            <div className={styles["tab-statistics-item"]}>
+              <div>{j.label}</div>
+              <div>{j.value}</div>
+            </div>
+          ))}
         </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>总金数</div>
-          <div>{statisticsData?.roleNumber}</div>
-        </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>每限定角色抽数</div>
-          <div>{statisticsData?.pullsPerLimitRole}</div>
-        </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>角色不歪概率</div>
-          <div>{statisticsData?.limitRate}%</div>
-        </div>
-      </div>
-
-      <div className={styles["tab-statistics"]}>
-        <p className={styles["tab-statistics-title"]}>武器</p>
-        <div className={styles["tab-statistics-item"]}>
-          <div>总抽数</div>
-          <div>{statisticsData?.weaponPullNumber}</div>
-        </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>总金数</div>
-          <div>{statisticsData?.weaponGoldNumber}</div>
-        </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>每金光抽数</div>
-          <div>{statisticsData?.pullsPerWeapon}</div>
-        </div>
-      </div>
-
-      <div className={styles["tab-statistics"]}>
-        <p className={styles["tab-statistics-title"]}>常驻</p>
-        <div className={styles["tab-statistics-item"]}>
-          <div>总抽数</div>
-          <div>{statisticsData?.normalPullNumber}</div>
-        </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>总金数</div>
-          <div>{statisticsData?.normalGoldNumber}</div>
-        </div>
-        <div className={styles["tab-statistics-item"]}>
-          <div>每金光抽数</div>
-          <div>{statisticsData?.pullsPerNormal}</div>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
