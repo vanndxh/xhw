@@ -3,103 +3,97 @@ import { Button, Input, Mask, NavBar, Tabs, Toast } from "antd-mobile";
 import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
 import axios from "axios";
 import BottomBar from "@/components/BottomBar";
-import {
-  GachaDataShowItem,
-  GACHA_TYPE,
-  GACHA_TYPE_KEY,
-  getGachaUrl,
-  tabItems,
-} from "./constants";
-import { calculateStatistics, hanedleRawData } from "./utils";
+import { GACHA_TYPE, GACHA_TYPE_KEY, getGachaUrl, tabItems } from "./constants";
+import { hanedleRawData } from "./utils";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
 import styles from "./index.less";
 import { postUV } from "@/services/api/api";
 
+interface GachaDataType {
+  role?: any[];
+  weapon?: any[];
+  normal?: any[];
+}
+
 function Genshin() {
-  const [inputValue, setInputValue] = useState(""); // 输入框
-  const [loading, setLoading] = useState(false); // 控制查询状态
-  const [gachaRoleData, setGachaRoleData] = useState<GachaDataShowItem[]>();
-  const [gachaWeaponData, setGachaWeaponData] = useState<GachaDataShowItem[]>();
-  const [gachaNormalData, setGachaNormalData] = useState<GachaDataShowItem[]>();
-  const [statisticsData, setStatisticsData] = useState<any>();
+  const swiperRef = useRef<SwiperRef>(null);
+
+  /** 用户提供参数链接 */
+  const [inputValue, setInputValue] = useState("");
+  /** 控制查询状态 */
+  const [loading, setLoading] = useState(false);
+  /** 获取到的数据 */
+  const [gachaData, setGachaData] = useState<GachaDataType>({});
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const swiperRef = useRef<SwiperRef>(null);
+  /** 获取抽卡数据相关参数 */
+  let gachaParams = {
+    endId: "0",
+    currentPage: 1,
+    gachaType: GACHA_TYPE_KEY.ROLE,
+  };
+  let tempData: any[] = [];
+  let timer: any;
 
   /** 获取localStorage存储的上次记录 */
   useEffect(() => {
     postUV("genshin");
-    const gachaRoleData = localStorage.getItem("gachaRoleData");
-    const gachaWeaponData = localStorage.getItem("gachaWeaponData");
-    const gachaNormalData = localStorage.getItem("gachaNormalData");
-    if (gachaRoleData) {
-      setGachaRoleData(JSON.parse(gachaRoleData));
-    }
-    if (gachaWeaponData) {
-      setGachaWeaponData(JSON.parse(gachaWeaponData));
-    }
-    if (gachaNormalData) {
-      setGachaNormalData(JSON.parse(gachaNormalData));
-    }
-    if (gachaRoleData || gachaWeaponData || gachaNormalData) {
-      Toast.show({
-        icon: "success",
-        content: "获取上次查询记录成功！",
-        duration: 1000,
-      });
-    }
+    // if (!gachaData) {
+    //   const localData = localStorage.getItem("genshinGachaData");
+    //   setGachaData(JSON.parse(localData || "{}"));
+    //   if (localData) {
+    //     Toast.show({
+    //       icon: "success",
+    //       content: "获取上次查询记录成功！",
+    //       duration: 1000,
+    //     });
+    //   }
+    // }
   }, []);
 
-  /** 当数据改变时，更新统计 */
-  useEffect(() => {
-    if (gachaRoleData || gachaWeaponData || gachaNormalData) {
-      setStatisticsData(
-        calculateStatistics({
-          gachaRoleData,
-          gachaWeaponData,
-          gachaNormalData,
-        } as any)
-      );
-    }
-  }, [gachaRoleData, gachaWeaponData, gachaNormalData]);
-
-  /** 获取抽卡数据相关参数 */
-  let endId = "0";
-  let currentPage = 1;
-  let gachaData: any[] = [];
-  let timer: any;
-  let gachaType: string = GACHA_TYPE_KEY.role.code; // 301-role 302-weapon 200-normal 100-new 0-end
-
-  /** 请求结束后操作 */
+  /** 一个卡池请求结束后操作 */
   const handleFinish = () => {
-    if (gachaType === GACHA_TYPE_KEY.role.code) {
-      gachaType = GACHA_TYPE_KEY.weapon.code;
-      endId = "0";
-      currentPage = 1;
-      setGachaRoleData(hanedleRawData(gachaData));
-      localStorage.setItem(
-        "gachaRoleData",
-        JSON.stringify(hanedleRawData(gachaData))
-      );
-      gachaData = [];
-    } else if (gachaType === GACHA_TYPE_KEY.weapon.code) {
-      gachaType = GACHA_TYPE_KEY.normal.code;
-      endId = "0";
-      currentPage = 1;
-      setGachaWeaponData(hanedleRawData(gachaData));
-      localStorage.setItem(
-        "gachaWeaponData",
-        JSON.stringify(hanedleRawData(gachaData))
-      );
-      gachaData = [];
-    } else {
-      setGachaNormalData(hanedleRawData(gachaData));
-      localStorage.setItem(
-        "gachaNormalData",
-        JSON.stringify(hanedleRawData(gachaData))
-      );
+    /** 角色 */
+    if (gachaParams?.gachaType === GACHA_TYPE_KEY.ROLE) {
+      gachaParams = {
+        gachaType: GACHA_TYPE_KEY.WEAPON,
+        endId: "0",
+        currentPage: 1,
+      };
+      setGachaData((pre) => ({
+        ...pre,
+        role: hanedleRawData(tempData),
+      }));
+      tempData = [];
+      return;
+    }
+    /** 武器 */
+    if (gachaParams?.gachaType === GACHA_TYPE_KEY.WEAPON) {
+      gachaParams = {
+        gachaType: GACHA_TYPE_KEY.NORMAL,
+        endId: "0",
+        currentPage: 1,
+      };
+      setGachaData((pre) => ({
+        ...pre,
+        weapon: hanedleRawData(tempData),
+      }));
+      tempData = [];
+      return;
+    }
+    /** 常驻 */
+    if (gachaParams?.gachaType === GACHA_TYPE_KEY.NORMAL) {
+      gachaParams = {
+        gachaType: GACHA_TYPE_KEY.ROLE,
+        endId: "0",
+        currentPage: 1,
+      };
+      setGachaData((pre) => ({
+        ...pre,
+        normal: hanedleRawData(tempData),
+      }));
       clearInterval(timer);
       setLoading(false);
       Toast.show({
@@ -107,6 +101,9 @@ function Genshin() {
         content: "获取成功！",
         duration: 1000,
       });
+      // localStorage.setItem("genshinGachaData", JSON.stringify(gachaData));
+      tempData = [];
+      return;
     }
   };
 
@@ -114,47 +111,54 @@ function Genshin() {
   const fetchData = async () => {
     Toast.show({
       icon: "loading",
-      content: `获取${GACHA_TYPE[gachaType]}池第${currentPage}页中，不要乱点啊喂！`,
+      content: `获取${GACHA_TYPE[gachaParams.gachaType].label}池第${
+        gachaParams.currentPage
+      }页中，不要乱点啊喂！`,
       duration: 3000,
     });
 
     const params = inputValue?.split("?")?.[1].split("#")?.[0];
     const res = await axios.get(
-      `${getGachaUrl}${params}&gacha_type=${gachaType}&page=${currentPage}&size=20&end_id=${endId}`,
+      `${getGachaUrl}${params}&gacha_type=${
+        GACHA_TYPE[gachaParams.gachaType].code
+      }&page=${gachaParams.currentPage}&size=20&end_id=${gachaParams.endId}`,
       {
         baseURL: "",
       }
     );
-    if (!res.data.data.list) {
-      handleFinish();
-    } else {
-      if (res.data.data.list.length < 20) {
-        handleFinish();
-      }
-      endId = res?.data?.data?.list[19]?.id || "";
-      // eslint-disable-next-line
-      res?.data?.data?.list?.map((i: any) => {
-        gachaData.push(i);
+
+    /** 请求失败 */
+    if (!res?.data?.data) {
+      Toast.show({
+        icon: "fail",
+        content: "请求失败",
       });
-      currentPage++;
+      clearInterval(timer);
+      setLoading(false);
+      return;
+    }
+
+    /** 有数据，则处理数据 */
+    if (res.data.data.list.length) {
+      gachaParams = {
+        ...gachaParams,
+        endId: res?.data?.data?.list[res.data.data.list.length - 1]?.id || "",
+        currentPage: gachaParams.currentPage + 1,
+      };
+      tempData = [...[...tempData, ...res?.data?.data?.list]];
+      return;
+    }
+
+    /** 没更多数据了，结束 */
+    if (!res.data.data.list.length) {
+      handleFinish();
+      return;
     }
   };
 
   /** 获取原始数据（setInterval） */
   const getGachaData = () => {
-    if (
-      !inputValue ||
-      inputValue.indexOf("?") === -1 ||
-      inputValue.indexOf("#") === -1
-    ) {
-      Toast.show({
-        icon: "fail",
-        content: "导出链接解析失败",
-      });
-      return;
-    }
     setLoading(true);
-    gachaType = GACHA_TYPE_KEY.role.code;
     if (timer === undefined) {
       timer = setInterval(() => {
         fetchData();
@@ -187,7 +191,7 @@ function Genshin() {
         </Button>
 
         <div className={styles["genshin-footer"]}>
-          {gachaRoleData ? (
+          {gachaData?.role || gachaData?.normal || gachaData?.weapon ? (
             <div className={styles["genshin-footer-show"]}>
               <Tabs
                 activeKey={tabItems[activeIndex].key}
@@ -206,24 +210,27 @@ function Genshin() {
                 loop
                 indicator={() => null}
                 ref={swiperRef}
-                // defaultIndex={activeIndex}
-                // onIndexChange={(index) => {
-                //   setActiveIndex(index);
-                // }}
               >
                 <Swiper.Item>
-                  <GachaShowTabItem isRole={true} data={gachaRoleData} />
+                  <GachaShowTabItem
+                    isRole={true}
+                    data={gachaData?.role || []}
+                  />
                 </Swiper.Item>
                 <Swiper.Item>
-                  <GachaShowTabItem isRole={false} data={gachaWeaponData!} />
+                  <GachaShowTabItem
+                    isRole={false}
+                    data={gachaData?.weapon || []}
+                  />
                 </Swiper.Item>
                 <Swiper.Item>
-                  <GachaShowTabItem isRole={false} data={gachaNormalData!} />
+                  <GachaShowTabItem
+                    isRole={false}
+                    data={gachaData?.normal || []}
+                  />
                 </Swiper.Item>
                 <Swiper.Item>
-                  {statisticsData && (
-                    <GachaShowStatistics statisticsData={statisticsData} />
-                  )}
+                  <GachaShowStatistics data={gachaData} />
                 </Swiper.Item>
               </Swiper>
             </div>

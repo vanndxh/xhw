@@ -1,4 +1,4 @@
-import { GachaDataShowItem, normalPoolRole } from "./constants";
+import { normalPoolRole } from "./constants";
 
 /**
  * @file 计算抽卡统计数据
@@ -6,6 +6,11 @@ import { GachaDataShowItem, normalPoolRole } from "./constants";
  * @param gachaWeaponData
  * @param gachaNormalData
  */
+
+interface GachaDataShowItem {
+  name: string;
+  count: number;
+}
 
 interface CalculateStatisticsProps {
   gachaRoleData: GachaDataShowItem[];
@@ -54,16 +59,22 @@ export const calculateStatistics = (props: CalculateStatisticsProps) => {
     : "-";
 
   const data = {
-    rolePullNumber: rolePullNumber,
-    roleNumber: roleGoldNumber,
-    limitRate: limitRate,
-    pullsPerLimitRole: pullsPerLimitRole,
-    weaponGoldNumber: weaponGoldNumber,
-    weaponPullNumber: weaponPullNumber,
-    pullsPerWeapon: pullsPerWeapon,
-    normalGoldNumber: normalGoldNumber,
-    normalPullNumber: normalPullNumber,
-    pullsPerNormal: pullsPerNormal,
+    role: {
+      totalPull: rolePullNumber,
+      totalGold: roleGoldNumber,
+      limitRate,
+      pullPerLimit: pullsPerLimitRole,
+    },
+    weapon: {
+      totalPull: weaponPullNumber,
+      totalGold: weaponGoldNumber,
+      pullPerLimit: pullsPerWeapon,
+    },
+    normal: {
+      totalPull: normalPullNumber,
+      totalGold: normalGoldNumber,
+      pullPerLimit: pullsPerNormal,
+    },
   };
   return data;
 };

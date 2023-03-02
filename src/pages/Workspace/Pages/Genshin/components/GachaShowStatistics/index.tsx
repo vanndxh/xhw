@@ -1,32 +1,38 @@
+/**
+ * @file 统计模块
+ */
 import React from "react";
+import { calculateStatistics } from "../../utils";
 import styles from "./index.less";
 
 interface Props {
-  statisticsData: any;
+  /** 总数据数据 */
+  data: any;
 }
 
 function GachaShowStatistics(props: Props) {
-  const { statisticsData } = props;
+  const { data } = props;
 
+  const handledData = calculateStatistics(data);
   const dataShow = [
     {
       title: "角色",
       items: [
         {
           label: "总抽数",
-          value: statisticsData?.rolePullNumber || "-",
+          value: handledData?.role?.totalPull || "-",
         },
         {
           label: "总金数",
-          value: statisticsData?.roleNumber || "-",
+          value: handledData?.role?.totalGold || "-",
         },
         {
           label: "每限定抽数",
-          value: statisticsData?.pullsPerLimitRole || "-",
+          value: handledData?.role?.pullPerLimit || "-",
         },
         {
           label: "角色不歪概率",
-          value: `${statisticsData?.limitRate}%`,
+          value: `${handledData?.role?.limitRate}%`,
         },
       ],
     },
@@ -35,15 +41,15 @@ function GachaShowStatistics(props: Props) {
       items: [
         {
           label: "总抽数",
-          value: statisticsData?.weaponPullNumber || "-",
+          value: handledData?.weapon?.totalPull || "-",
         },
         {
           label: "总金数",
-          value: statisticsData?.weaponGoldNumber || "-",
+          value: handledData?.weapon?.totalGold || "-",
         },
         {
           label: "每金抽数",
-          value: statisticsData?.pullsPerWeapon || "-",
+          value: handledData?.weapon?.pullPerLimit || "-",
         },
       ],
     },
@@ -52,15 +58,15 @@ function GachaShowStatistics(props: Props) {
       items: [
         {
           label: "总抽数",
-          value: statisticsData?.normalPullNumber || "-",
+          value: handledData?.normal?.totalPull || "-",
         },
         {
           label: "总金数",
-          value: statisticsData?.normalGoldNumber || "-",
+          value: handledData?.normal?.totalGold || "-",
         },
         {
           label: "每金抽数",
-          value: statisticsData?.pullsPerNormal || "-",
+          value: handledData?.normal?.pullPerLimit || "-",
         },
       ],
     },
