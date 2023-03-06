@@ -3,7 +3,7 @@ import React from "react";
 import Index from "../pages/index";
 
 /** pc */
-import { PC } from "../pages/PC/Home";
+import { PC } from "../pages/PC";
 
 /** mobile */
 import Mobile from "../pages/Mobile";

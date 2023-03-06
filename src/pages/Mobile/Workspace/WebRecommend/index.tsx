@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Divider, NavBar, Image } from "antd-mobile";
 
 import ItemInfo from "@/components/ItemInfo";
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/pages/Mobile/components/BottomBar";
 import { webData } from "./constants";
 import cat from "@/assets/cat.gif";
 import styles from "./index.less";
@@ -27,7 +27,8 @@ function WebRecommend() {
               onClick={() => {
                 window.open(i.url);
               }}
-              key={index}>
+              key={index}
+            >
               <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );
@@ -40,7 +41,8 @@ function WebRecommend() {
               onClick={() => {
                 window.open(i.url);
               }}
-              key={index}>
+              key={index}
+            >
               <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );
@@ -53,7 +55,8 @@ function WebRecommend() {
               onClick={() => {
                 window.open(i.url);
               }}
-              key={index}>
+              key={index}
+            >
               <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );
@@ -66,7 +69,8 @@ function WebRecommend() {
               onClick={() => {
                 window.open(i.url);
               }}
-              key={index}>
+              key={index}
+            >
               <ItemInfo icon={i.icon} title={i.title} desc={i.desc} />
             </div>
           );

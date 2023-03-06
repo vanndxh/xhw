@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Toast } from "antd-mobile";
 import { useNavigate } from "react-router-dom";
 
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/pages/Mobile/components/BottomBar";
 import FakeApp from "./components/FakeApp";
 
 import wzry from "@/assets/wzry.png";

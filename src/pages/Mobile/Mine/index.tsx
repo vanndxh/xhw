@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { List, NavBar, Skeleton } from "antd-mobile";
 import { UserSetOutline, SetOutline } from "antd-mobile-icons";
-import BottomBar from "../../../components/BottomBar";
+import BottomBar from "../components/BottomBar";
 import styles from "./index.less";
 
 function Mine() {

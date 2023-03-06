@@ -1,6 +1,6 @@
 import React from "react";
 import { NavBar } from "antd-mobile";
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/pages/Mobile/components/BottomBar";
 import styles from "./index.less";
 import VTable from "@/components/VTable";
 import { Input } from "antd";
@@ -87,7 +87,12 @@ function CssTest() {
 
       <div className={styles["css-table-wrapper"]}>
         <div className={styles["css-table"]}>
-          <VTable dataSource={dataSource} columns={columns} filters={filters} fetch={() => {}}/>
+          <VTable
+            dataSource={dataSource}
+            columns={columns}
+            filters={filters}
+            fetch={() => {}}
+          />
         </div>
       </div>
 

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavBar, Image, Button } from "antd-mobile";
 
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/pages/Mobile/components/BottomBar";
 import { postUV } from "@/services/api/api";
 import xhw from "@/assets/xhw.jpeg";
 import styles from "./index.less";

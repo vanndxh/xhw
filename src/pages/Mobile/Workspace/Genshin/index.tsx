@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Input, Mask, NavBar, Tabs, Toast } from "antd-mobile";
 import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
 import axios from "axios";
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/pages/Mobile/components/BottomBar";
 import { GACHA_TYPE, GACHA_TYPE_KEY, getGachaUrl, tabItems } from "./constants";
 import { hanedleRawData } from "./utils";
 import GachaShowTabItem from "./components/GachaShowTabItem";
