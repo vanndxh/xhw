@@ -1,7 +1,7 @@
 /**
  * @file 统计模块
  */
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { calculateStatistics } from "../../utils";
 import styles from "./index.less";
 
@@ -13,7 +13,14 @@ interface Props {
 function GachaShowStatistics(props: Props) {
   const { data } = props;
 
-  const handledData = calculateStatistics(data);
+  const handledData = useMemo(() => {
+    return calculateStatistics(data);
+  }, [data]);
+
+  useEffect(() => {
+    console.log(handledData, "....");
+  }, [handledData]);
+
   const dataShow = [
     {
       title: "角色",

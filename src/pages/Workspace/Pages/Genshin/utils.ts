@@ -1,89 +1,6 @@
 import { normalPoolRole } from "./constants";
 
-/**
- * @file 计算抽卡统计数据
- * @param gachaRoleData
- * @param gachaWeaponData
- * @param gachaNormalData
- */
-
-interface GachaDataShowItem {
-  name: string;
-  count: number;
-}
-
-interface CalculateStatisticsProps {
-  gachaRoleData: GachaDataShowItem[];
-  gachaWeaponData: GachaDataShowItem[];
-  gachaNormalData: GachaDataShowItem[];
-}
-
-export const calculateStatistics = (props: CalculateStatisticsProps) => {
-  const { gachaRoleData, gachaWeaponData, gachaNormalData } = props;
-  const roleGoldNumber = gachaRoleData ? gachaRoleData?.length - 1 : 0;
-  let rolePullNumber = 0;
-  let limitGoldNumber = 0;
-  // eslint-disable-next-line
-  gachaRoleData?.map((i) => {
-    rolePullNumber += i.count;
-    if (!normalPoolRole.includes(i.name)) {
-      limitGoldNumber++;
-    }
-  });
-  limitGoldNumber--;
-  const pullsPerLimitRole = limitGoldNumber
-    ? String((rolePullNumber / limitGoldNumber) * 1.0).slice(0, 4)
-    : "-";
-  const limitRate = limitGoldNumber
-    ? String((limitGoldNumber / roleGoldNumber) * 100.0).slice(0, 4)
-    : "-";
-  // weapon
-  const weaponGoldNumber = gachaWeaponData ? gachaWeaponData?.length - 1 : 0;
-  let weaponPullNumber = 0;
-  // eslint-disable-next-line
-  gachaWeaponData?.map((i) => {
-    weaponPullNumber += i.count;
-  });
-  const pullsPerWeapon = weaponGoldNumber
-    ? String((weaponPullNumber / weaponGoldNumber) * 1.0).slice(0, 4)
-    : "-";
-  // normal
-  const normalGoldNumber = gachaNormalData ? gachaNormalData?.length - 1 : 0;
-  let normalPullNumber = 0;
-  // eslint-disable-next-line
-  gachaNormalData?.map((i) => {
-    normalPullNumber += i.count;
-  });
-  const pullsPerNormal = normalGoldNumber
-    ? String((normalPullNumber / normalGoldNumber) * 1.0).slice(0, 4)
-    : "-";
-
-  const data = {
-    role: {
-      totalPull: rolePullNumber,
-      totalGold: roleGoldNumber,
-      limitRate,
-      pullPerLimit: pullsPerLimitRole,
-    },
-    weapon: {
-      totalPull: weaponPullNumber,
-      totalGold: weaponGoldNumber,
-      pullPerLimit: pullsPerWeapon,
-    },
-    normal: {
-      totalPull: normalPullNumber,
-      totalGold: normalGoldNumber,
-      pullPerLimit: pullsPerNormal,
-    },
-  };
-  return data;
-};
-
-/**
- * @file 处理原始数据至可展示数据
- * @param rawData 原始数据
- */
-
+/** 第一次处理数据--原数组至统计数据 */
 export const hanedleRawData = (rawData: any[]) => {
   const tempData = [];
   let count = 0;
@@ -109,4 +26,84 @@ export const hanedleRawData = (rawData: any[]) => {
   }
 
   return tempData;
+};
+
+/** 第二次处理数据--将数据计算成展示数据 */
+interface GachaDataShowItem {
+  name: string;
+  count: number;
+}
+interface RawDataProps {
+  role: GachaDataShowItem[];
+  weapon: GachaDataShowItem[];
+  normal: GachaDataShowItem[];
+}
+
+export const calculateStatistics = (rawData: RawDataProps) => {
+  const { role = [], weapon = [], normal = [] } = rawData;
+
+  /**
+   * role
+   */
+  const roleGoldNumber = role ? role?.length - 1 : 0;
+  let rolePullNumber = 0;
+  let limitGoldNumber = -1;
+  // eslint-disable-next-line
+  role?.map((i) => {
+    rolePullNumber += i.count;
+    if (!normalPoolRole.includes(i.name)) {
+      limitGoldNumber++;
+    }
+  });
+  const pullsPerLimitRole = limitGoldNumber
+    ? String((rolePullNumber / limitGoldNumber) * 1.0).slice(0, 5)
+    : "-";
+  const limitRate = limitGoldNumber
+    ? String((limitGoldNumber / roleGoldNumber) * 100.0).slice(0, 5)
+    : "-";
+
+  /**
+   * weapon
+   */
+  const weaponGoldNumber = weapon ? weapon?.length - 1 : 0;
+  let weaponPullNumber = 0;
+  // eslint-disable-next-line
+  weapon?.map((i) => {
+    weaponPullNumber += i.count;
+  });
+  const pullsPerWeapon = weaponGoldNumber
+    ? String((weaponPullNumber / weaponGoldNumber) * 1.0).slice(0, 4)
+    : "-";
+
+  /**
+   * normal
+   */
+  const normalGoldNumber = normal ? normal?.length - 1 : 0;
+  let normalPullNumber = 0;
+  // eslint-disable-next-line
+  normal?.map((i) => {
+    normalPullNumber += i.count;
+  });
+  const pullsPerNormal = normalGoldNumber
+    ? String((normalPullNumber / normalGoldNumber) * 1.0).slice(0, 4)
+    : "-";
+
+  return {
+    role: {
+      totalPull: rolePullNumber,
+      totalGold: roleGoldNumber,
+      limitRate,
+      pullPerLimit: pullsPerLimitRole,
+    },
+    weapon: {
+      totalPull: weaponPullNumber,
+      totalGold: weaponGoldNumber,
+      pullPerLimit: pullsPerWeapon,
+    },
+    normal: {
+      totalPull: normalPullNumber,
+      totalGold: normalGoldNumber,
+      pullPerLimit: pullsPerNormal,
+    },
+  };
 };

@@ -211,24 +211,16 @@ function Genshin() {
                 indicator={() => null}
                 ref={swiperRef}
               >
-                <Swiper.Item>
-                  <GachaShowTabItem
-                    isRole={true}
-                    data={gachaData?.role || []}
-                  />
-                </Swiper.Item>
-                <Swiper.Item>
-                  <GachaShowTabItem
-                    isRole={false}
-                    data={gachaData?.weapon || []}
-                  />
-                </Swiper.Item>
-                <Swiper.Item>
-                  <GachaShowTabItem
-                    isRole={false}
-                    data={gachaData?.normal || []}
-                  />
-                </Swiper.Item>
+                {
+                  ["role", "weapon", "normal"].map((i: string) => (
+                    <Swiper.Item key={i}>
+                      <GachaShowTabItem
+                        isRole={i === "role"}
+                        data={(gachaData as any)?.[i] || []}
+                      />
+                    </Swiper.Item>
+                  )) as any
+                }
                 <Swiper.Item>
                   <GachaShowStatistics data={gachaData} />
                 </Swiper.Item>
