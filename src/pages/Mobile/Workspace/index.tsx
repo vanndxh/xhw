@@ -17,7 +17,7 @@ function Workspace() {
       icon: ys,
       name: "原神",
       onClick: () => {
-        navigate("/workspace/genshin");
+        navigate("/m/workspace/genshin");
       },
     },
     {
@@ -33,28 +33,28 @@ function Workspace() {
       icon: "https://bpic.588ku.com/element_origin_min_pic/19/04/09/e9fce6e83b97827742824bf4c4efdfdd.jpg",
       name: "小网站推荐",
       onClick: () => {
-        navigate("/workspace/webRecommend");
+        navigate("/m/workspace/webRecommend");
       },
     },
     {
       icon: "https://img.51miz.com/Element/00/80/90/39/2dc9a918_E809039_2c5773b5.jpg",
       name: "uv统计",
       onClick: () => {
-        navigate("/workspace/uvStatistics");
+        navigate("/m/workspace/uvStatistics");
       },
     },
     {
       icon: "https://bpic.588ku.com/element_origin_min_pic/19/04/09/e9fce6e83b97827742824bf4c4efdfdd.jpg",
       name: "css练习",
       onClick: () => {
-        navigate("/workspace/cssTest");
+        navigate("/m/workspace/cssTest");
       },
     },
     {
       icon: "https://bpic.588ku.com/element_origin_min_pic/19/04/09/e9fce6e83b97827742824bf4c4efdfdd.jpg",
       name: "component练习",
       onClick: () => {
-        navigate("/workspace/componentTest");
+        navigate("/m/workspace/componentTest");
       },
     },
   ];

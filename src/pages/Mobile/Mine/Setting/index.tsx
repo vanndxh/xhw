@@ -46,7 +46,7 @@ function Setting() {
     <div>
       <NavBar
         onBack={() => {
-          navigate("/mine");
+          navigate("/m/mine");
         }}>
         设置
       </NavBar>
@@ -56,7 +56,7 @@ function Setting() {
           prefix={<UserOutline />}
           disabled
           onClick={() => {
-            navigate("/mine/author");
+            navigate("/m/mine/author");
           }}>
           关于作者
         </Item>

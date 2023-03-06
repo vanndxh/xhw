@@ -1,3 +1,6 @@
+/**
+ * @file workspace首页
+ */
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavBar, Image, Button } from "antd-mobile";
@@ -7,7 +10,7 @@ import { postUV } from "@/services/api/api";
 import xhw from "@/assets/xhw.jpeg";
 import styles from "./index.less";
 
-function Home() {
+function Mobile() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,14 +26,18 @@ function Home() {
       <div className={styles["home-body"]}>
         <div className={styles["home-body-content"]}>
           <Image src={xhw} width={300} height={150} fit="contain" />
-          <Button
-            fill="outline"
-            onClick={() => {
-              navigate("/workspace");
-            }}>
-            这破网站能
-            <span className={styles["home-body-content-gan"]}>干</span>嘛 ➡️
-          </Button>
+
+          <div className={styles["home-body-content-buttons"]}>
+            <Button
+              fill="outline"
+              onClick={() => {
+                navigate("/m/workspace");
+              }}
+            >
+              Do Something →
+            </Button>
+            <Button fill="outline">电脑版</Button>
+          </div>
         </div>
       </div>
 
@@ -39,4 +46,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Mobile;

@@ -15,17 +15,17 @@ const BottomBar = (props: Props) => {
 
   const tabs = [
     {
-      key: "/",
+      key: "/m",
       title: "首页",
       icon: <AppOutline />,
     },
     {
-      key: "/workspace",
+      key: "/m/workspace",
       title: "工作台",
       icon: <PieOutline />,
     },
     {
-      key: "/mine",
+      key: "/m/mine",
       title: "个人中心",
       icon: <UserOutline />,
     },
@@ -39,7 +39,8 @@ const BottomBar = (props: Props) => {
         onChange={(value) => {
           navigate(value);
           onChange?.();
-        }}>
+        }}
+      >
         {tabs.map((item) => (
           <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
         ))}

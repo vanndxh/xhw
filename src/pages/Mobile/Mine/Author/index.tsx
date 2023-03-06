@@ -8,7 +8,7 @@ function Author() {
     <div className={styles["author-box"]}>
       <NavBar
         onBack={() => {
-          navigate("/mine");
+          navigate("/m/mine");
         }}>
         关于作者
       </NavBar>

@@ -1,72 +1,92 @@
 import React from "react";
-import Home from "../pages/Home";
+/** 分流 */
+import Index from "../pages/index";
 
-import Workspace from "../pages/Workspace";
-import WebRecommend from "../pages/Workspace/Pages/WebRecommend";
-import Genshin from "../pages/Workspace/Pages/Genshin";
-import UVStatistics from "../pages/Workspace/Pages/UVStatistics";
-import CssTest from "../pages/Workspace/Pages/CssTest";
-import ComponentTest from "../pages/Workspace/Pages/ComponentTest";
+/** pc */
+import { PC } from "../pages/PC/Home";
 
-import Mine from "../pages/Mine";
-import Author from "../pages/Mine/Author";
-import Setting from "../pages/Mine/Setting";
+/** mobile */
+import Mobile from "../pages/Mobile";
 
+import Workspace from "../pages/Mobile/Workspace";
+import WebRecommend from "../pages/Mobile/Workspace/WebRecommend";
+import Genshin from "../pages/Mobile/Workspace/Genshin";
+import CssTest from "../pages/Mobile/Workspace/CssTest";
+import ComponentTest from "../pages/Mobile/Workspace/ComponentTest";
+
+import Mine from "../pages/Mobile/Mine";
+import Author from "../pages/Mobile/Mine/Author";
+import Setting from "../pages/Mobile/Mine/Setting";
+
+/** 404 */
 import NotFound from "../pages/NotFound";
 
 export const routes = [
-  /** 首页 */
+  /**
+   * 自动分流页
+   */
   {
     path: "/",
-    element: <Home />,
+    element: <Index />,
   },
 
-  /** 工作台 */
+  /**
+   * PC端
+   */
   {
-    path: "/workspace",
+    path: "/pc",
+    element: <PC />,
+  },
+
+  /** 移动端 */
+  {
+    path: "/m",
     children: [
       {
         path: "",
-        element: <Workspace />,
+        element: <Mobile />,
       },
       {
-        path: "webRecommend",
-        element: <WebRecommend />,
+        path: "workspace",
+        children: [
+          {
+            path: "",
+            element: <Workspace />,
+          },
+          {
+            path: "webRecommend",
+            element: <WebRecommend />,
+          },
+          {
+            path: "genshin",
+            element: <Genshin />,
+          },
+          {
+            path: "cssTest",
+            element: <CssTest />,
+          },
+          {
+            path: "componentTest",
+            element: <ComponentTest />,
+          },
+        ],
       },
       {
-        path: "genshin",
-        element: <Genshin />,
-      },
-      {
-        path: "uvStatistics",
-        element: <UVStatistics />,
-      },
-      {
-        path: "cssTest",
-        element: <CssTest />,
-      },
-      {
-        path: "componentTest",
-        element: <ComponentTest />,
-      },
-    ],
-  },
-
-  /** 我的 */
-  {
-    path: "/mine",
-    children: [
-      {
-        path: "",
-        element: <Mine />,
-      },
-      {
-        path: "author",
-        element: <Author />,
-      },
-      {
-        path: "setting",
-        element: <Setting />,
+        path: "mine",
+        children: [
+          {
+            path: "",
+            element: <Mine />,
+          },
+          {
+            path: "author",
+            element: <Author />,
+          },
+          {
+            path: "setting",
+            element: <Setting />,
+          },
+        ],
       },
     ],
   },
