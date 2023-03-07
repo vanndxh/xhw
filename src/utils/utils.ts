@@ -7,17 +7,3 @@ export const IsToday = (date: Date) => {
     date.getDate === today.getDate
   );
 };
-
-/** 对象转数组 */
-export function getObjectToArray(
-  data: Record<string, any>,
-  key?: string,
-  alias?: string
-) {
-  return Object.entries(data).map((item) => {
-    return {
-      [key || "label"]: item[1][alias || "name"],
-      value: item[0],
-    };
-  });
-}

@@ -43,7 +43,7 @@ interface RawDataProps {
 }
 
 export const calculateStatistics = (rawData: RawDataProps) => {
-  const { role = [], weapon = [], normal = [] } = rawData;
+  const { role, weapon, normal } = rawData;
 
   /**
    * role
@@ -58,10 +58,10 @@ export const calculateStatistics = (rawData: RawDataProps) => {
       limitGoldNumber++;
     }
   });
-  const pullsPerLimitRole = limitGoldNumber
+  const pullsPerLimitRole = role
     ? String((rolePullNumber / limitGoldNumber) * 1.0).slice(0, 5)
     : "-";
-  const limitRate = limitGoldNumber
+  const limitRate = role
     ? String((limitGoldNumber / roleGoldNumber) * 100.0).slice(0, 5)
     : "-";
 

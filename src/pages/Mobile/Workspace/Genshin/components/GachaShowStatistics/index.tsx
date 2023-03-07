@@ -1,6 +1,7 @@
 /**
  * @file 统计模块
  */
+import { Card } from "antd";
 import React, { useMemo } from "react";
 import { calculateStatistics } from "../../../../../../utils/genshin";
 import styles from "./index.less";
@@ -78,15 +79,27 @@ function GachaShowStatistics(props: Props) {
   return (
     <div className={styles["tab"]}>
       {dataShow.map((i) => (
-        <div className={styles["tab-statistics"]} key={i.title}>
-          <p className={styles["tab-statistics-title"]}>{i.title}</p>
+        <Card
+          title={i?.title}
+          key={i.title}
+          className={styles["tab-statistics"]}
+        >
           {i.items.map((j) => (
             <div className={styles["tab-statistics-item"]} key={j.label}>
               <div>{j.label}</div>
               <div>{j.value}</div>
             </div>
           ))}
-        </div>
+        </Card>
+        // <div className={styles["tab-statistics"]} key={i.title}>
+        //   <p className={styles["tab-statistics-title"]}>{i.title}</p>
+        //   {i.items.map((j) => (
+        //     <div className={styles["tab-statistics-item"]} key={j.label}>
+        //       <div>{j.label}</div>
+        //       <div>{j.value}</div>
+        //     </div>
+        //   ))}
+        // </div>
       ))}
     </div>
   );

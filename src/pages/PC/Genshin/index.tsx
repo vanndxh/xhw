@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageLayout from "../components/PageLayout";
 import { GachaDataType } from "@/pages/Mobile/Workspace/Genshin";
 import styles from "./index.module.less";
@@ -15,9 +15,7 @@ import GachaShowTabItem from "@/pages/Mobile/Workspace/Genshin/components/GachaS
 import GachaShowStatistics from "@/pages/Mobile/Workspace/Genshin/components/GachaShowStatistics";
 import NoDataTip from "@/pages/Mobile/Workspace/Genshin/components/NoDataTip";
 
-interface Props {}
-
-function PCGenshin(props: Props) {
+function PCGenshin() {
   /** 用户提供参数链接 */
   const [inputValue, setInputValue] = useState("");
   /** 控制查询状态 */
@@ -176,6 +174,10 @@ function PCGenshin(props: Props) {
       clearInterval(timer);
     }
   };
+
+  useEffect(() => {
+    console.log(navigator.clipboard.readText());
+  }, []);
 
   return (
     <PageLayout>
