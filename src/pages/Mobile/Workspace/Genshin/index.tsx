@@ -11,7 +11,7 @@ import NoDataTip from "./components/NoDataTip";
 import styles from "./index.less";
 import { postUV } from "@/services/api/api";
 
-interface GachaDataType {
+export interface GachaDataType {
   role?: any[];
   weapon?: any[];
   normal?: any[];
