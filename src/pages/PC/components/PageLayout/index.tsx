@@ -1,9 +1,23 @@
+/**
+ * @file PC端页面布局组件
+ */
 import React from "react";
-// import styles from './index.module.less';
+import SiderBar from "../SiderBar";
+import styles from "./index.module.less";
 
-interface Props {}
+interface Props {
+  /** 内部内容 */
+  children?: React.ReactNode;
+}
 
 function PageLayout(props: Props) {
-  return <div></div>;
+  const { children } = props;
+
+  return (
+    <div className={styles["pc"]}>
+      <SiderBar />
+      <div className={styles["pc-content"]}>{children}</div>
+    </div>
+  );
 }
 export default PageLayout;

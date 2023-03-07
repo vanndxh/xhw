@@ -1,4 +1,7 @@
-import { normalPoolRole } from "./constants";
+/**
+ * @file 原神板块相关工具函数
+ */
+import { normalPoolRole } from "../pages/Mobile/Workspace/Genshin/constants";
 
 /** 第一次处理数据--原数组至统计数据 */
 export const hanedleRawData = (rawData: any[]) => {

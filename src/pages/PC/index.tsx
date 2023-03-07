@@ -1,15 +1,10 @@
 /**
- * @file PC端页面首页
+ * @file PC端页面首页-快捷url合集
  */
 import React from "react";
-import styles from "./index.module.less";
-import SiderBar from "./components/SiderBar";
+import PageLayout from "./components/PageLayout";
+// import styles from "./index.module.less";
 
-export function PC() {
-  return (
-    <div className={styles["pc"]}>
-      <SiderBar />
-      <div className={styles["pc-content"]}>test</div>
-    </div>
-  );
+export function PCUrl() {
+  return <PageLayout>url</PageLayout>;
 }

@@ -36,7 +36,14 @@ function Mobile() {
             >
               Do Something →
             </Button>
-            <Button fill="outline">电脑版</Button>
+            <Button
+              fill="outline"
+              onClick={() => {
+                navigate("/pc");
+              }}
+            >
+              电脑版
+            </Button>
           </div>
         </div>
       </div>

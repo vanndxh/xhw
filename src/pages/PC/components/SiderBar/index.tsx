@@ -4,12 +4,18 @@ import { Image } from "antd-mobile";
 import xhw from "@/assets/xhw.jpeg";
 import styles from "./index.module.less";
 import { CloudSyncOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 function SiderBar() {
+  const navigate = useNavigate();
   const items: any = [
     {
-      label: "test",
-      key: "test",
+      label: "快捷url",
+      key: "url",
+    },
+    {
+      label: "原神抽卡导出",
+      key: "genshin",
     },
   ];
 
@@ -19,9 +25,23 @@ function SiderBar() {
         <div className={styles["sider-bar-logo"]}>
           <Image src={xhw} width={120} height={80} />
         </div>
-        <Menu onClick={() => {}} mode="inline" items={items} />
+        <Menu
+          onClick={(e) => {
+            navigate(`/pc/${e?.key}`);
+          }}
+          selectedKeys={[window.location.href.split("/pc/")?.[1]]}
+          mode="inline"
+          items={items}
+        />
       </div>
-      <Button icon={<CloudSyncOutlined />}>手机版</Button>
+      <Button
+        icon={<CloudSyncOutlined />}
+        onClick={() => {
+          navigate("/m");
+        }}
+      >
+        手机版
+      </Button>
     </div>
   );
 }

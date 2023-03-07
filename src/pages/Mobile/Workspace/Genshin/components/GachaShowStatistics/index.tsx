@@ -1,8 +1,8 @@
 /**
  * @file 统计模块
  */
-import React, { useEffect, useMemo } from "react";
-import { calculateStatistics } from "../../utils";
+import React, { useMemo } from "react";
+import { calculateStatistics } from "../../../../../../utils/genshin";
 import styles from "./index.less";
 
 interface Props {
@@ -16,10 +16,6 @@ function GachaShowStatistics(props: Props) {
   const handledData = useMemo(() => {
     return calculateStatistics(data);
   }, [data]);
-
-  useEffect(() => {
-    console.log(handledData, "....");
-  }, [handledData]);
 
   const dataShow = [
     {

@@ -3,7 +3,8 @@ import React from "react";
 import Index from "../pages/index";
 
 /** pc */
-import { PC } from "../pages/PC";
+import { PCUrl } from "../pages/PC";
+import PCGenshin from "../pages/PC/Genshin";
 
 /** mobile */
 import Mobile from "../pages/Mobile";
@@ -20,6 +21,7 @@ import Setting from "../pages/Mobile/Mine/Setting";
 
 /** 404 */
 import NotFound from "../pages/NotFound";
+import { Navigate } from "react-router-dom";
 
 export const routes = [
   /**
@@ -35,7 +37,20 @@ export const routes = [
    */
   {
     path: "/pc",
-    element: <PC />,
+    children: [
+      {
+        path: "",
+        element: <Navigate to="/pc/url" />,
+      },
+      {
+        path: "url",
+        element: <PCUrl />,
+      },
+      {
+        path: "genshin",
+        element: <PCGenshin />,
+      },
+    ],
   },
 
   /** 移动端 */
