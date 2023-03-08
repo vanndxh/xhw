@@ -40,7 +40,7 @@ export const routes = [
     children: [
       {
         path: "",
-        element: <Navigate to="/pc/url" />,
+        element: <Navigate to="/pc/genshin" />,
       },
       {
         path: "url",

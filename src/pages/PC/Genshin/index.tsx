@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PageLayout from "../components/PageLayout";
 import { GachaDataType } from "@/pages/Mobile/Workspace/Genshin";
 import styles from "./index.module.less";
@@ -174,10 +174,6 @@ function PCGenshin() {
       clearInterval(timer);
     }
   };
-
-  useEffect(() => {
-    console.log(navigator.clipboard.readText());
-  }, []);
 
   return (
     <PageLayout>
