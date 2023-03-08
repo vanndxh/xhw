@@ -10,7 +10,7 @@ import {
 } from "@/pages/Mobile/Workspace/Genshin/constants";
 import { hanedleRawData } from "@/utils/genshin";
 import axios from "axios";
-import { Button, Input, Tabs } from "antd";
+import { Button, Input, message, Tabs } from "antd";
 import GachaShowTabItem from "@/pages/Mobile/Workspace/Genshin/components/GachaShowTabItem";
 import GachaShowStatistics from "@/pages/Mobile/Workspace/Genshin/components/GachaShowStatistics";
 import NoDataTip from "@/pages/Mobile/Workspace/Genshin/components/NoDataTip";
@@ -121,7 +121,7 @@ function PCGenshin() {
       content: `获取${GACHA_TYPE[gachaParams.gachaType].label}池第${
         gachaParams.currentPage
       }页中，不要乱点啊喂！`,
-      duration: 3000,
+      duration: 1000,
     });
 
     const params = inputValue?.split("?")?.[1].split("#")?.[0];
@@ -136,10 +136,7 @@ function PCGenshin() {
 
     /** 请求失败 */
     if (!res?.data?.data) {
-      Toast.show({
-        icon: "fail",
-        content: "请求失败",
-      });
+      message.error(`请求失败, ${res?.data?.message}`);
       clearInterval(timer);
       setLoading(false);
       return;

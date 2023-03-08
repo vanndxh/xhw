@@ -7,13 +7,15 @@ function NoDataTip() {
       key: "getUrl",
       title: "怎么获取导出链接？",
       render: () =>
-        `游戏打开抽卡界面，然后在powershell输入iex(irm'https://lelaer.com/d.ps1')`,
+        `游戏打开抽卡界面，然后在powershell输入iex(irm 'https://lelaer.com/d.ps1')`,
       extra: (
         <Button
           type="link"
           style={{ padding: 0 }}
           onClick={() => {
-            navigator.clipboard.writeText(`iex(irm'https://lelaer.com/d.ps1')`);
+            navigator.clipboard.writeText(
+              `iex(irm 'https://lelaer.com/d.ps1')`
+            );
             message.success("复制成功");
           }}
         >
