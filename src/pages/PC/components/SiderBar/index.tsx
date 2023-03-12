@@ -3,19 +3,21 @@ import { Button, Menu } from "antd";
 import { Image } from "antd-mobile";
 import xhw from "@/assets/xhw.jpeg";
 import styles from "./index.module.less";
-import { CloudSyncOutlined } from "@ant-design/icons";
+import {
+  CloudSyncOutlined,
+  GithubOutlined,
+  YuqueOutlined,
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { icon_ys } from "@/utils/constants";
 
 function SiderBar() {
   const navigate = useNavigate();
   const items: any = [
     {
-      label: "快捷url",
-      key: "url",
-    },
-    {
       label: "原神抽卡导出",
       key: "genshin",
+      icon: icon_ys,
     },
   ];
 
@@ -31,17 +33,41 @@ function SiderBar() {
           }}
           selectedKeys={[window.location.href.split("/pc/")?.[1]]}
           mode="inline"
-          items={items}
+          items={items?.map((i: any) => ({
+            ...i,
+            icon: (
+              <Image
+                src={i?.icon}
+                style={{ borderRadius: 8, width: 20, height: 20 }}
+              />
+            ),
+          }))}
         />
       </div>
-      <Button
-        icon={<CloudSyncOutlined />}
-        onClick={() => {
-          navigate("/m");
-        }}
-      >
-        手机版
-      </Button>
+
+      <div className={styles["sider-bar-bottom"]}>
+        <Button
+          icon={<CloudSyncOutlined />}
+          onClick={() => {
+            navigate("/m");
+          }}
+          className={styles["sider-bar-bottom-mobile"]}
+        >
+          手机版
+        </Button>
+        <GithubOutlined
+          className={styles["sider-bar-bottom-url"]}
+          onClick={() => {
+            window.open("https://github.com/vanndxh");
+          }}
+        />
+        <YuqueOutlined
+          className={styles["sider-bar-bottom-url"]}
+          onClick={() => {
+            window.open("https://www.yuque.com/vanndxh/coderv");
+          }}
+        />
+      </div>
     </div>
   );
 }

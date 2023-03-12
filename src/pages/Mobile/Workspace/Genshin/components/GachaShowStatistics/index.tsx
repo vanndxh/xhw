@@ -31,6 +31,10 @@ function GachaShowStatistics(props: Props) {
           value: handledData?.role?.totalGold || "-",
         },
         {
+          label: "限定金数",
+          value: handledData?.role?.limitGoldNumber || "-",
+        },
+        {
           label: "每限定抽数",
           value: handledData?.role?.pullPerLimit || "-",
         },

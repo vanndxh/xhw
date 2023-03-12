@@ -1,39 +1,24 @@
 .pc-genshin {
   display: flex;
-  align-items: center;
-  margin: 12px;
-  height: calc(100% - 24px);
-  border-radius: 12px;
-  background: #fff;
+  justify-content: space-between;
+  height: calc(100vh - 136px);
+  overflow: auto;
 
   &-left {
-    width: 50%;
-    height: calc(100% - 24px);
-    padding: 24px;
-
-    &-title {
-      font-weight: bold;
-      font-size: 18px;
-      margin: 12px 0;
-    }
+    width: 60%;
 
     &-inputline {
       display: flex;
       align-items: center;
-
-      &-input {
-        margin-right: 10px;
-      }
     }
 
     &-tabs {
       max-width: 400px;
+      margin-top: 10px;
     }
   }
 
   &-right {
-    width: 50%;
-    height: calc(100% - 120px);
-    padding: 24px;
+    width: 30%;
   }
 }

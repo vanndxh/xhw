@@ -95,6 +95,7 @@ export const calculateStatistics = (rawData: RawDataProps) => {
     role: {
       totalPull: rolePullNumber,
       totalGold: roleGoldNumber,
+      limitGoldNumber,
       limitRate,
       pullPerLimit: pullsPerLimitRole,
     },

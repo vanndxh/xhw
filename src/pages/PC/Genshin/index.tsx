@@ -10,7 +10,7 @@ import {
 } from "@/pages/Mobile/Workspace/Genshin/constants";
 import { handleRawData } from "@/utils/genshin";
 import axios from "axios";
-import { Button, Input, message, Tabs } from "antd";
+import { Button, Card, Input, message, Tabs } from "antd";
 import GachaShowTabItem from "@/pages/Mobile/Workspace/Genshin/components/GachaShowTabItem";
 import GachaShowStatistics from "@/pages/Mobile/Workspace/Genshin/components/GachaShowStatistics";
 import NoDataTip from "@/pages/Mobile/Workspace/Genshin/components/NoDataTip";
@@ -25,7 +25,7 @@ function PCGenshin() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   /** 获取抽卡数据相关参数 */
-  const fetchInterval = 700;
+  const fetchInterval = 800;
   let gachaParams = {
     endId: "0",
     currentPage: 1,
@@ -175,41 +175,44 @@ function PCGenshin() {
 
   return (
     <PageLayout>
-      <div className={styles["pc-genshin"]}>
-        <div className={styles["pc-genshin-left"]}>
-          <div className={styles["pc-genshin-left-title"]}>
-            原神抽卡记录导出
-          </div>
-          <div className={styles["pc-genshin-left-inputline"]}>
-            <Input
-              placeholder="请输入导出链接"
-              value={inputValue}
-              onChange={(e) => {
-                setInputValue(e.target.value);
-              }}
-              className={styles["pc-genshin-left-inputline-input"]}
-            />
-            <Button color="primary" onClick={getGachaData} disabled={loading}>
-              开始获取
-            </Button>
-          </div>
+      <Card title="原神抽卡记录导出">
+        <div className={styles["pc-genshin"]}>
+          <div className={styles["pc-genshin-left"]}>
+            <div className={styles["pc-genshin-left-inputline"]}>
+              <Input
+                placeholder="请输入导出链接"
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+              />
+              <Button
+                color="primary"
+                onClick={getGachaData}
+                disabled={loading}
+                style={{ marginLeft: 10 }}
+              >
+                开始获取
+              </Button>
+            </div>
 
-          <div className={styles["pc-genshin-left-tabs"]}>
             <Tabs
+              type="card"
               activeKey={tabItems[activeIndex].key}
               onChange={(key) => {
                 const index = tabItems.findIndex((item) => item.key === key);
                 setActiveIndex(index);
               }}
               items={tabItems}
+              className={styles["pc-genshin-left-tabs"]}
             />
           </div>
-        </div>
 
-        <div className={styles["pc-genshin-right"]}>
-          <NoDataTip />
+          <div className={styles["pc-genshin-right"]}>
+            <NoDataTip />
+          </div>
         </div>
-      </div>
+      </Card>
     </PageLayout>
   );
 }

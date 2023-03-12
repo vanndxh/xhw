@@ -51,7 +51,7 @@ function NoDataTip() {
           title={i.title}
           extra={i?.extra}
           key={i.key}
-          style={{ marginBottom: 10, width: 400 }}
+          style={{ marginBottom: 10, width: "100%" }}
         >
           {i.render()}
         </Card>
