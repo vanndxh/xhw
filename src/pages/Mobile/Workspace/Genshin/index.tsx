@@ -4,7 +4,6 @@ import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
 import axios from "axios";
 import BottomBar from "@/pages/Mobile/components/BottomBar";
 import { GACHA_TYPE, GACHA_TYPE_KEY, getGachaUrl, tabItems } from "./constants";
-import { hanedleRawData } from "../../../../utils/genshin";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
@@ -244,3 +243,7 @@ function Genshin() {
   );
 }
 export default Genshin;
+function hanedleRawData(tempData: any[]): any[] | undefined {
+  throw new Error("Function not implemented.");
+}
+

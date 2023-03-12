@@ -4,7 +4,7 @@
 import { normalPoolRole } from "../pages/Mobile/Workspace/Genshin/constants";
 
 /** 第一次处理数据--原数组至统计数据 */
-export const hanedleRawData = (rawData: any[]) => {
+export const handleRawData = (rawData: any[]) => {
   const tempData = [];
   let count = 0;
   let preName = "已垫";

@@ -8,7 +8,7 @@ import {
   GACHA_TYPE_KEY,
   getGachaUrl,
 } from "@/pages/Mobile/Workspace/Genshin/constants";
-import { hanedleRawData } from "@/utils/genshin";
+import { handleRawData } from "@/utils/genshin";
 import axios from "axios";
 import { Button, Input, message, Tabs } from "antd";
 import GachaShowTabItem from "@/pages/Mobile/Workspace/Genshin/components/GachaShowTabItem";
@@ -25,6 +25,7 @@ function PCGenshin() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   /** 获取抽卡数据相关参数 */
+  const fetchInterval = 700;
   let gachaParams = {
     endId: "0",
     currentPage: 1,
@@ -69,9 +70,10 @@ function PCGenshin() {
         endId: "0",
         currentPage: 1,
       };
+      const roleData = handleRawData(tempData);
       setGachaData((pre) => ({
         ...pre,
-        role: hanedleRawData(tempData),
+        role: roleData,
       }));
       tempData = [];
       return;
@@ -83,9 +85,10 @@ function PCGenshin() {
         endId: "0",
         currentPage: 1,
       };
+      const weaponData = handleRawData(tempData);
       setGachaData((pre) => ({
         ...pre,
-        weapon: hanedleRawData(tempData),
+        weapon: weaponData,
       }));
       tempData = [];
       return;
@@ -97,16 +100,17 @@ function PCGenshin() {
         endId: "0",
         currentPage: 1,
       };
+      const normalData = handleRawData(tempData);
       setGachaData((pre) => ({
         ...pre,
-        normal: hanedleRawData(tempData),
+        normal: normalData,
       }));
       clearInterval(timer);
       setLoading(false);
       Toast.show({
         icon: "success",
         content: "获取成功！",
-        duration: 1000,
+        duration: fetchInterval,
       });
       // localStorage.setItem("genshinGachaData", JSON.stringify(gachaData));
       tempData = [];
@@ -121,18 +125,15 @@ function PCGenshin() {
       content: `获取${GACHA_TYPE[gachaParams.gachaType].label}池第${
         gachaParams.currentPage
       }页中，不要乱点啊喂！`,
-      duration: 1000,
+      duration: fetchInterval,
     });
 
-    const params = inputValue?.split("?")?.[1].split("#")?.[0];
-    const res = await axios.get(
-      `${getGachaUrl}${params}&gacha_type=${
-        GACHA_TYPE[gachaParams.gachaType].code
-      }&page=${gachaParams.currentPage}&size=20&end_id=${gachaParams.endId}`,
-      {
-        baseURL: "",
-      }
-    );
+    const fetchUrl = `${getGachaUrl}${
+      inputValue?.split("?")?.[1].split("#")?.[0]
+    }&gacha_type=${GACHA_TYPE[gachaParams.gachaType].code}&page=${
+      gachaParams.currentPage
+    }&size=20&end_id=${gachaParams.endId}`;
+    const res = await axios.get(fetchUrl, { baseURL: "" });
 
     /** 请求失败 */
     if (!res?.data?.data) {
@@ -166,7 +167,7 @@ function PCGenshin() {
     if (timer === undefined) {
       timer = setInterval(() => {
         fetchData();
-      }, 1000);
+      }, fetchInterval);
     } else {
       clearInterval(timer);
     }

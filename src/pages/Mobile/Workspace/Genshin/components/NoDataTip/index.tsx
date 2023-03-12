@@ -7,7 +7,7 @@ function NoDataTip() {
       key: "getUrl",
       title: "怎么获取导出链接？",
       render: () =>
-        `游戏打开抽卡界面，然后在powershell输入iex(irm 'https://lelaer.com/d.ps1')`,
+        `游戏打开抽卡界面，然后在powershell输入iex(irm 'https://lelaer.com/d.ps1')，将自动复制到剪贴板`,
       extra: (
         <Button
           type="link"
