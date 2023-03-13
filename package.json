@@ -4,6 +4,10 @@
   "private": true,
   "author": "vanndxh",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vanndxh/xhw-pro.git"
+  },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@babel/core": "^7.16.0",
