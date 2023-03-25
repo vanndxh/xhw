@@ -9,7 +9,7 @@ import {
   YuqueOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { icon_ys } from "@/utils/constants";
+import { iconUrl } from "@/utils/constants";
 
 function SiderBar() {
   const navigate = useNavigate();
@@ -17,7 +17,12 @@ function SiderBar() {
     {
       label: "原神抽卡导出",
       key: "genshin",
-      icon: icon_ys,
+      icon: iconUrl.genshin,
+    },
+    {
+      label: "GPT国内镜像",
+      key: "gpt",
+      icon: iconUrl.gpt,
     },
   ];
 

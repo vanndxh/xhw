@@ -6,15 +6,15 @@ import BottomBar from "@/pages/Mobile/components/BottomBar";
 import FakeApp from "./components/FakeApp";
 
 import wzry from "@/assets/wzry.png";
-import ys from "@/assets/ys.jpeg";
 import styles from "./index.less";
+import { iconUrl } from "@/utils/constants";
 
 function Workspace() {
   const navigate = useNavigate();
 
   const apps = [
     {
-      icon: ys,
+      icon: iconUrl.genshin,
       name: "原神",
       onClick: () => {
         navigate("/m/workspace/genshin");

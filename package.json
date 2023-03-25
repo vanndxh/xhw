@@ -53,6 +53,7 @@
     "mini-css-extract-plugin": "^2.4.5",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.19",
+    "openai": "^3.2.1",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",

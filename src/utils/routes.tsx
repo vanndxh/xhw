@@ -5,6 +5,7 @@ import Index from "../pages/index";
 /** pc */
 import { PCUrl } from "../pages/PC";
 import PCGenshin from "../pages/PC/Genshin";
+import GPT from "@/pages/PC/GPT";
 
 /** mobile */
 import Mobile from "../pages/Mobile";
@@ -49,6 +50,10 @@ export const routes = [
       {
         path: "genshin",
         element: <PCGenshin />,
+      },
+      {
+        path: "gpt",
+        element: <GPT />,
       },
     ],
   },

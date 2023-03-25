@@ -1,0 +1,31 @@
+.gpt {
+  height: calc(100vh - 136px);
+  overflow: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &-tip {
+    width: 100%;
+  }
+
+  &-history {
+    width: 60%;
+    overflow: auto;
+    height: calc(100% - 100px);
+
+    &-item {
+      padding: 10px;
+      border-radius: 12px;
+      margin: 10px;
+    }
+  }
+
+  &-input {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+}
