@@ -1,41 +1,26 @@
 # Xhw-pro
 
-http://vanndxh.ltd
-
-又是一个乱七八糟的React+Ts练手项目，项目主要配置：
+又是一个乱七八糟的 React+Ts 练手项目，项目主要配置：
 
 - 前端：react.js
 - 后端：node.js
-- UI库：antd.mobile
+- UI 库：antd.mobile
 - 请求工具：axios
 - 服务器：腾讯云
 - 服务器代理：宝塔面板
 
+主要功能：
+
+- 原神抽卡记录导出
+- chat gpt 镜像
+
 [项目开发笔记](https://www.yuque.com/vanndxh/coderv/xhwpro)
-
-
 
 ## 快速开始
 
 后端 `yarn api`
 
 前端 `yarn start`
-
-
-
-## 开发环境
-
-- `react` ^18.2.0
-
-- `react-router-dom` ^6.3.0
-
-- `typescript` ^4.7.4
-
-- `antd-mobile` ^5.16.1
-
-- `axios`^0.27.2
-
-  
 
 ## 联系作者
 
@@ -47,10 +32,8 @@ http://vanndxh.ltd
 
 - yuque https://www.yuque.com/vanndxh
 
-  
-
 ## License
 
 MIT
 
-Copyright © 2022 vanndxh
+Copyright © 2022-2023 vanndxh
