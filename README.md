@@ -4,7 +4,7 @@
 
 - 前端：react.js
 - 后端：node.js
-- UI 库：antd.mobile
+- UI 库：antd.mobile + antd
 - 请求工具：axios
 - 服务器：腾讯云
 - 服务器代理：宝塔面板
