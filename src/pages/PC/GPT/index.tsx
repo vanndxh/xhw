@@ -28,7 +28,8 @@ function GPT() {
   /** openai config */
   const configuration = new Configuration({
     organization: "org-EENErx6nDg1dVhDSZd8HBbyc",
-    apiKey: "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",
+    apiKey: "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",
+    // apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   const models = [
@@ -86,7 +87,7 @@ function GPT() {
         <div className={styles["gpt"]}>
           <div className={styles["gpt-history"]}>
             <div className={styles["gpt-tip"]}>
-              <Alert message="请开全局代理再使用~" type="info" showIcon />
+              {/* <Alert message="请开全局代理再使用~" type="info" showIcon /> */}
             </div>
 
             <Spin tip="Loading..." spinning={loading}>
