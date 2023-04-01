@@ -175,7 +175,7 @@ function PCGenshin() {
 
   return (
     <PageLayout>
-      <Card title="原神抽卡记录导出">
+      <Card title="原神抽卡记录导出" bordered={false}>
         <div className={styles["pc-genshin"]}>
           <div className={styles["pc-genshin-left"]}>
             <div className={styles["pc-genshin-left-inputline"]}>
