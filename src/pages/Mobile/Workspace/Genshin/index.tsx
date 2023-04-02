@@ -3,7 +3,12 @@ import { Button, Input, Mask, NavBar, Tabs, Toast } from "antd-mobile";
 import Swiper, { SwiperRef } from "antd-mobile/es/components/swiper";
 import axios from "axios";
 import BottomBar from "@/pages/Mobile/components/BottomBar";
-import { GACHA_TYPE, GACHA_TYPE_KEY, getGachaUrl, tabItems } from "./constants";
+import {
+  GachaType,
+  GachaTypeKey,
+  getGachaUrl,
+  tabItems,
+} from "../../../PC/Genshin/constants";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
@@ -31,7 +36,7 @@ function Genshin() {
   let gachaParams = {
     endId: "0",
     currentPage: 1,
-    gachaType: GACHA_TYPE_KEY.ROLE,
+    gachaType: GachaTypeKey.ROLE,
   };
   let tempData: any[] = [];
   let timer: any;
@@ -55,9 +60,9 @@ function Genshin() {
   /** 一个卡池请求结束后操作 */
   const handleFinish = () => {
     /** 角色 */
-    if (gachaParams?.gachaType === GACHA_TYPE_KEY.ROLE) {
+    if (gachaParams?.gachaType === GachaTypeKey.ROLE) {
       gachaParams = {
-        gachaType: GACHA_TYPE_KEY.WEAPON,
+        gachaType: GachaTypeKey.WEAPON,
         endId: "0",
         currentPage: 1,
       };
@@ -69,9 +74,9 @@ function Genshin() {
       return;
     }
     /** 武器 */
-    if (gachaParams?.gachaType === GACHA_TYPE_KEY.WEAPON) {
+    if (gachaParams?.gachaType === GachaTypeKey.WEAPON) {
       gachaParams = {
-        gachaType: GACHA_TYPE_KEY.NORMAL,
+        gachaType: GachaTypeKey.NORMAL,
         endId: "0",
         currentPage: 1,
       };
@@ -83,9 +88,9 @@ function Genshin() {
       return;
     }
     /** 常驻 */
-    if (gachaParams?.gachaType === GACHA_TYPE_KEY.NORMAL) {
+    if (gachaParams?.gachaType === GachaTypeKey.NORMAL) {
       gachaParams = {
-        gachaType: GACHA_TYPE_KEY.ROLE,
+        gachaType: GachaTypeKey.ROLE,
         endId: "0",
         currentPage: 1,
       };
@@ -110,7 +115,7 @@ function Genshin() {
   const fetchData = async () => {
     Toast.show({
       icon: "loading",
-      content: `获取${GACHA_TYPE[gachaParams.gachaType].label}池第${
+      content: `获取${GachaType[gachaParams.gachaType].label}池第${
         gachaParams.currentPage
       }页中，不要乱点啊喂！`,
       duration: 3000,
@@ -119,7 +124,7 @@ function Genshin() {
     const params = inputValue?.split("?")?.[1].split("#")?.[0];
     const res = await axios.get(
       `${getGachaUrl}${params}&gacha_type=${
-        GACHA_TYPE[gachaParams.gachaType].code
+        GachaType[gachaParams.gachaType].code
       }&page=${gachaParams.currentPage}&size=20&end_id=${gachaParams.endId}`,
       {
         baseURL: "",
@@ -246,4 +251,3 @@ export default Genshin;
 function hanedleRawData(tempData: any[]): any[] | undefined {
   throw new Error("Function not implemented.");
 }
-

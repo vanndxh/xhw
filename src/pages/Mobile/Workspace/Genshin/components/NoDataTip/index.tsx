@@ -23,24 +23,6 @@ function NoDataTip() {
         </Button>
       ),
     },
-    {
-      key: "bug",
-      title: "使用bug反馈",
-      render: () => (
-        <>尽量按正常逻辑使用，没有测试过异常情况，有bug可以微博反馈我，谢谢啦</>
-      ),
-      extra: (
-        <Button
-          type="link"
-          style={{ padding: 0 }}
-          onClick={() => {
-            window.open("https://weibo.com/u/6864286293");
-          }}
-        >
-          联系作者
-        </Button>
-      ),
-    },
   ];
   return (
     <div

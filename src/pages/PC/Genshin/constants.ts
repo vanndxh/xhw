@@ -1,3 +1,5 @@
+import { iconUrl } from "@/utils/constants";
+
 /** 请求抽卡数据接口 */
 export const getGachaUrl = "/api/mihoyo/event/gacha_info/api/getGachaLog?";
 
@@ -21,9 +23,22 @@ export const tabItems = [
 ];
 
 export const rolePicUrl = {
-  已垫: "data:image/png;base64,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",
+  已垫: iconUrl.question,
+  提纳里:
+    "https://patchwiki.biligame.com/images/ys/e/e5/9bq657i9ork1vn2uzv3fpd7p5q8dlqc.png",
+  白术: "https://patchwiki.biligame.com/images/ys/thumb/1/14/rkydprgsuw6uaxbm4wotnaj8dw2v30a.png/60px-%E7%99%BD%E6%9C%AF%E5%A4%B4%E5%83%8F.png",
+  妮露: "https://patchwiki.biligame.com/images/ys/e/e1/94sj2gmd3pywnqv7ep9fdn5xrkfxaum.png",
+  赛诺: "https://patchwiki.biligame.com/images/ys/7/72/4yr49hl7qyuzcku5hnjrls2zrswcen5.png",
+  艾尔海森:
+    "https://patchwiki.biligame.com/images/ys/e/e2/nugjaod5qmffz3tbtt8is50d8hf1u5r.png",
+  流浪者:
+    "https://patchwiki.biligame.com/images/ys/6/69/ottjnyh4hg2kid1zqfiqlqext5w5v84.png",
   枫原万叶:
     "https://patchwiki.biligame.com/images/ys/6/6a/e1n6v73p785ne6kew41q9snh45zrup2.png",
+  纳西妲:
+    "https://patchwiki.biligame.com/images/ys/7/7e/g5x8lguvxfq0hkv211yfecjdvm0xhe7.png",
+  迪希雅:
+    "https://patchwiki.biligame.com/images/ys/9/98/n64mnzi2yy03qpzld3in619wijfqyj6.png",
   夜兰: "https://patchwiki.biligame.com/images/ys/4/42/e49y27vv8lhk0a9h199pgc0ramj3dk4.png",
   神里绫人:
     "https://patchwiki.biligame.com/images/ys/c/c7/sdgu6bh00rod7lypt9l9c9xlxojtjhl.png",
@@ -59,21 +74,21 @@ export const rolePicUrl = {
 } as Record<string, string>;
 
 /** 池子枚举 */
-export enum GACHA_TYPE_KEY {
+export enum GachaTypeKey {
   ROLE = "ROLE",
   WEAPON = "WEAPON",
   NORMAL = "NORMAL",
 }
-export const GACHA_TYPE: any = {
-  [GACHA_TYPE_KEY.ROLE]: {
+export const GachaType: any = {
+  [GachaTypeKey.ROLE]: {
     label: "角色",
     code: "301",
   },
-  [GACHA_TYPE_KEY.WEAPON]: {
+  [GachaTypeKey.WEAPON]: {
     label: "武器",
     code: "302",
   },
-  [GACHA_TYPE_KEY.NORMAL]: {
+  [GachaTypeKey.NORMAL]: {
     label: "常驻",
     code: "200",
   },

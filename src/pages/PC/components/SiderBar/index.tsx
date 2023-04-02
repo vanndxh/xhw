@@ -1,3 +1,6 @@
+/**
+ * @file 边导航栏
+ */
 import React from "react";
 import { Button, Menu } from "antd";
 import { Image } from "antd-mobile";
@@ -35,6 +38,7 @@ function SiderBar() {
         <Menu
           onClick={(e) => {
             navigate(`/pc/${e?.key}`);
+            clearInterval("all");
           }}
           selectedKeys={[window.location.href.split("/pc/")?.[1]]}
           mode="inline"
@@ -60,18 +64,23 @@ function SiderBar() {
         >
           手机版
         </Button>
-        <GithubOutlined
-          className={styles["sider-bar-bottom-url"]}
-          onClick={() => {
-            window.open("https://github.com/vanndxh");
-          }}
-        />
-        <YuqueOutlined
-          className={styles["sider-bar-bottom-url"]}
-          onClick={() => {
-            window.open("https://www.yuque.com/vanndxh/coderv");
-          }}
-        />
+        <div className={styles["sider-bar-bottom-url"]}>
+          <GithubOutlined
+            style={{ fontSize: 18 }}
+            onClick={() => {
+              window.open("https://github.com/vanndxh");
+            }}
+          />
+        </div>
+
+        <div className={styles["sider-bar-bottom-url"]}>
+          <YuqueOutlined
+            style={{ fontSize: 18 }}
+            onClick={() => {
+              window.open("https://www.yuque.com/vanndxh/coderv");
+            }}
+          />
+        </div>
       </div>
     </div>
   );
