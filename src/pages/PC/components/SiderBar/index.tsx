@@ -63,6 +63,7 @@ function SiderBar() {
           className={styles["sider-bar-bottom-mobile"]}
         >
           手机版
+          <span className={styles["sider-bar-bottom-mobile-span"]} />
         </Button>
         <div className={styles["sider-bar-bottom-url"]}>
           <GithubOutlined

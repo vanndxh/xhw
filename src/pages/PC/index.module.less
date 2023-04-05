@@ -1,8 +1,13 @@
-.pc {
-  height: 100vh;
-  display: flex;
+.test-div {
+  background: linear-gradient(to right, #ec695c, #61c454) no-repeat right bottom;
+  width: 400px;
+  height: 300px;
+  margin: 20px;
+  background-size: 0 2px;
+  transition: background-size 1000ms;
 
-  &-content {
-    width: calc(100vw - 256px);
+  &:hover {
+    background-position-x: left;
+    background-size: 100% 2px;
   }
 }
