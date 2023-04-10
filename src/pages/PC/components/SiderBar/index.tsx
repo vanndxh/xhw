@@ -27,6 +27,11 @@ function SiderBar() {
       key: "gpt",
       icon: iconUrl.gpt,
     },
+    {
+      label: "我的文章",
+      key: "docs",
+      icon: iconUrl.yuque,
+    },
   ];
 
   return (
@@ -44,12 +49,15 @@ function SiderBar() {
           mode="inline"
           items={items?.map((i: any) => ({
             ...i,
-            icon: (
-              <Image
-                src={i?.icon}
-                style={{ borderRadius: 8, width: 20, height: 20 }}
-              />
-            ),
+            icon:
+              typeof i.icon === "string" ? (
+                <Image
+                  src={i?.icon}
+                  style={{ borderRadius: 8, width: 20, height: 20 }}
+                />
+              ) : (
+                i.icon
+              ),
           }))}
         />
       </div>
