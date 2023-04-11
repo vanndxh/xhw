@@ -1,0 +1,37 @@
+.todo {
+  height: calc(100vh - 104px);
+
+  &-list {
+    width: 60%;
+    height: calc(100vh - 120px);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    :global {
+      .ant-collapse-header {
+        width: 200px;
+
+        &-text {
+          font-weight: bold;
+        }
+      }
+      .ant-collapse-content-box {
+        padding: 2px !important;
+      }
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 30px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 500ms;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}

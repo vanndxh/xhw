@@ -7,6 +7,7 @@ import { PCUrl } from "../pages/PC";
 import PCGenshin from "../pages/PC/Genshin";
 import GPT from "@/pages/PC/GPT";
 import Docs from "@/pages/PC/Docs";
+import Todo from "@/pages/PC/Todo";
 
 /** mobile */
 import Mobile from "../pages/Mobile";
@@ -59,6 +60,10 @@ export const routes = [
       {
         path: "docs",
         element: <Docs />,
+      },
+      {
+        path: "todo",
+        element: <Todo />,
       },
     ],
   },
