@@ -2,15 +2,17 @@
  * @file 待办列表
  */
 import React, { useEffect, useState } from "react";
-import styles from "./index.module.less";
-import PageLayout from "../components/PageLayout";
 import { Button, Card, Collapse, Tag } from "antd";
 import {
   CaretRightOutlined,
   CheckOutlined,
   PlusOutlined,
+  RestOutlined,
 } from "@ant-design/icons";
-import AddTodoListModal from "./AddTodoListModal";
+import PageLayout from "../components/PageLayout";
+import AddItemModal from "./components/AddItemModal";
+import styles from "./index.module.less";
+import DelClassModal from "./components/DelClassModal";
 
 const { Panel } = Collapse;
 
@@ -20,11 +22,17 @@ interface TodoItem {
   color?: string;
 }
 
-function Todo() {
-  const [todoList, setTodoList] = useState<any>([]);
-  const [addOpen, setAddOpen] = useState(false);
+interface TodoClass {
+  label: React.ReactNode;
+  children?: TodoItem[];
+}
 
-  const todoInit: any = [
+function Todo() {
+  const [todoList, setTodoList] = useState<TodoClass[]>([]);
+  const [addOpen, setAddOpen] = useState(false);
+  const [delOpen, setDelOpen] = useState(false);
+
+  const todoInit: TodoClass[] = [
     {
       label: "原神",
       children: [
@@ -49,6 +57,42 @@ function Todo() {
     },
   ];
 
+  const opButtons = [
+    {
+      icon: <PlusOutlined />,
+      isDanger: false,
+      onclick: () => {
+        setAddOpen(true);
+      },
+      label: "新增",
+    },
+    {
+      icon: <RestOutlined />,
+      isDanger: true,
+      onclick: () => {
+        setDelOpen(true);
+      },
+      label: "删除分组",
+    },
+  ];
+
+  const handleDeleteItem = (
+    classification: string,
+    todo: string,
+    tag: string
+  ) => {
+    const newTodoList = todoList?.map((i: TodoClass) => {
+      const filteredChildren = {
+        ...i,
+        children: i?.children?.filter(
+          (j: TodoItem) => j?.tag !== tag || j?.label !== todo
+        ),
+      };
+      return i?.label !== classification ? i : filteredChildren;
+    });
+    setTodoList(newTodoList);
+  };
+
   useEffect(() => {
     /** todo list 初始化 */
     setTodoList(todoInit);
@@ -62,31 +106,36 @@ function Todo() {
           {/** 左侧列表 */}
           <div className={styles["todo-left"]}>
             <div className={styles["todo-left-buttonline"]}>
-              <Button
-                icon={<PlusOutlined />}
-                type="primary"
-                onClick={() => {
-                  setAddOpen(true);
-                }}
-              >
-                新增
-              </Button>
+              {opButtons.map((i) => (
+                <Button
+                  key={i?.label}
+                  icon={i?.icon}
+                  type="primary"
+                  danger={i?.isDanger}
+                  onClick={i?.onclick}
+                  className={styles["todo-left-buttonline-item"]}
+                >
+                  {i?.label}
+                </Button>
+              ))}
             </div>
 
             <Collapse
-              defaultActiveKey={todoList.map((i: any) => i.label)}
+              defaultActiveKey={
+                todoList?.map((i: TodoClass) => i.label) as string[]
+              }
               ghost
               className={styles["todo-left-list"]}
               expandIcon={({ isActive }) => (
                 <CaretRightOutlined rotate={isActive ? 90 : 0} />
               )}
             >
-              {todoList?.map((i: any) => (
-                <Panel header={i.label} key={i?.label}>
-                  {i.children.map((j: TodoItem) => (
+              {todoList?.map((i: TodoClass) => (
+                <Panel header={i.label} key={i?.label as string}>
+                  {i?.children?.map((j: TodoItem) => (
                     <div
                       className={styles["todo-left-list-item"]}
-                      key={j?.label as any}
+                      key={j?.label as string}
                     >
                       <div>
                         {j?.tag && (
@@ -95,7 +144,18 @@ function Todo() {
                         {j.label}
                       </div>
                       <div>
-                        <Button icon={<CheckOutlined />} size="small" />
+                        <Button
+                          icon={<CheckOutlined />}
+                          size="small"
+                          onClick={() => {
+                            handleDeleteItem(
+                              i?.label as string,
+                              j?.label as string,
+                              j?.tag as string
+                            );
+                          }}
+                          key={"test"}
+                        />
                       </div>
                     </div>
                   ))}
@@ -110,10 +170,18 @@ function Todo() {
       </Card>
 
       {/** modals */}
-      <AddTodoListModal
+      <AddItemModal
         open={addOpen}
         onCancel={() => {
           setAddOpen(false);
+        }}
+        todoList={todoList}
+        setTodoList={setTodoList}
+      />
+      <DelClassModal
+        open={delOpen}
+        onCancel={() => {
+          setDelOpen(false);
         }}
         todoList={todoList}
         setTodoList={setTodoList}

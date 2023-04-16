@@ -1,9 +1,9 @@
+/**
+ * @file 新增待办弹窗
+ */
 import React from "react";
-// import styles from "./index.module.less";
 import { Form, Input, Modal, ModalProps, message } from "antd";
-import ClassSelect from "../components/ClassSelect";
-
-const { TextArea } = Input;
+import ClassSelect from "../ClassSelect";
 
 interface Props extends ModalProps {
   /** 是否展示 */
@@ -14,7 +14,7 @@ interface Props extends ModalProps {
   setTodoList: (e: any) => void;
 }
 
-function AddTodoListModal(props: Props) {
+function AddItemModal(props: Props) {
   const { open, onCancel, todoList, setTodoList } = props;
   const [form] = Form.useForm();
   const { validateFields, resetFields } = form;
@@ -38,7 +38,7 @@ function AddTodoListModal(props: Props) {
       label: "待办事项",
       rules: [{ required: true, message: "必填项" }],
       render: () => (
-        <TextArea
+        <Input.TextArea
           placeholder="请输入待办事项内容"
           maxLength={128}
           showCount
@@ -112,4 +112,4 @@ function AddTodoListModal(props: Props) {
     </Modal>
   );
 }
-export default AddTodoListModal;
+export default AddItemModal;
