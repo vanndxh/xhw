@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,9 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
   "include": [
@@ -32,7 +26,8 @@
     "./src/**/*.ts",
     "./src/**/*.tsx",
     "./mock/*",
-    "./config/define.d.ts"
+    "./config/define.d.ts",
+    "./src/**/*.less"
   ],
   "exclude": [
     "./node_modules",

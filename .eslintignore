@@ -1,0 +1,9 @@
+# https文件
+/src/services/vanndxh.ltd.key
+/src/services/vanndxh.ltd_bundle.crt
+
+# 静态资源
+/src/assets/*
+
+# main
+/src/**/*.less

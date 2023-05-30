@@ -68,7 +68,7 @@ function Genshin() {
       };
       setGachaData((pre) => ({
         ...pre,
-        role: hanedleRawData(tempData),
+        // role: hanedleRawData(tempData),
       }));
       tempData = [];
       return;
@@ -82,7 +82,7 @@ function Genshin() {
       };
       setGachaData((pre) => ({
         ...pre,
-        weapon: hanedleRawData(tempData),
+        // weapon: hanedleRawData(tempData),
       }));
       tempData = [];
       return;
@@ -96,7 +96,7 @@ function Genshin() {
       };
       setGachaData((pre) => ({
         ...pre,
-        normal: hanedleRawData(tempData),
+        // normal: hanedleRawData(tempData),
       }));
       clearInterval(timer);
       setLoading(false);
@@ -248,6 +248,6 @@ function Genshin() {
   );
 }
 export default Genshin;
-function hanedleRawData(tempData: any[]): any[] | undefined {
-  throw new Error("Function not implemented.");
-}
+// function hanedleRawData(tempData: any[]): any[] | undefined {
+//   throw new Error("Function not implemented.");
+// }
