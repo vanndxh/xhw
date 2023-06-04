@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    "react/react-in-jsx-scope": 0,
+    "react/react-in-jsx-scope": 0, // 解决默认react在jsx中错误
     "no-use-before-define": 2,
     "no-console": 2,
   },
