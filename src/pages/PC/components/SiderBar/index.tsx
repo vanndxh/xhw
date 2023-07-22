@@ -23,6 +23,11 @@ function SiderBar() {
       icon: iconUrl.genshin,
     },
     {
+      label: "原神抽卡模拟",
+      key: "genshinWish",
+      icon: iconUrl.genshin,
+    },
+    {
       label: "GPT国内镜像",
       key: "gpt",
       icon: iconUrl.gpt,

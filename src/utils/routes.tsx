@@ -25,6 +25,7 @@ import Setting from "../pages/Mobile/Mine/Setting";
 /** 404 */
 import NotFound from "../pages/NotFound";
 import { Navigate } from "react-router-dom";
+import GenshinWish from "@/pages/PC/GenshinWish";
 
 export const routes = [
   /**
@@ -64,6 +65,10 @@ export const routes = [
       {
         path: "todo",
         element: <Todo />,
+      },
+      {
+        path: "genshinWish",
+        element: <GenshinWish />,
       },
     ],
   },
