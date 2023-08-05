@@ -6,9 +6,12 @@ import { useNavigate } from "react-router";
 
 function Index() {
   const navigate = useNavigate();
+  const isMobile = /mobile|android|iphone|ipad|phone/i.test(
+    window.navigator.userAgent.toLowerCase()
+  );
 
   useEffect(() => {
-    if (window.screen.width > window.screen.height) {
+    if (!isMobile) {
       navigate("/pc");
     } else {
       navigate("/m");
