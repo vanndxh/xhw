@@ -1,22 +1,23 @@
 /**
  * @file 原神抽卡记录导出
  */
-import React, { useState } from "react";
-import PageLayout from "../components/PageLayout";
-import { GachaDataType } from "@/pages/Mobile/Workspace/Genshin";
-import styles from "./index.module.less";
+import { useState } from "react";
+import { Button, Card, Input, message, Tabs } from "antd";
 import { Toast } from "antd-mobile";
+import axios from "axios";
+
+import PageLayout from "../components/PageLayout";
+import type { GachaDataType } from "@/pages/Mobile/Workspace/Genshin";
 import {
   GachaType,
   GachaTypeKey,
   getGachaUrl,
 } from "@/pages/PC/Genshin/constants";
-import { handleRawData } from "@/utils/genshin";
-import axios from "axios";
-import { Button, Card, Input, message, Tabs } from "antd";
 import GachaShowTabItem from "@/pages/Mobile/Workspace/Genshin/components/GachaShowTabItem";
 import GachaShowStatistics from "@/pages/Mobile/Workspace/Genshin/components/GachaShowStatistics";
 import NoDataTip from "@/pages/Mobile/Workspace/Genshin/components/NoDataTip";
+import { handleRawData } from "@/utils/genshin";
+import styles from "./index.module.less";
 
 function PCGenshin() {
   /** 用户提供参数链接 */

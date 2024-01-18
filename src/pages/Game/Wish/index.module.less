@@ -1,0 +1,64 @@
+.wish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 16px;
+
+  .wish-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .wish-header-close {
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .wish-show {
+    width: 80%;
+    height: 80vh;
+    background-color: #66b2ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .wish-show-item {
+      height: 90%;
+      width: 100px;
+      border: 1px solid #000;
+      border-radius: 4px;
+      margin: 20px;
+    }
+  }
+
+  .wish-buttons {
+    padding: 20px;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    bottom: 0;
+    right: 0;
+
+    .wish-buttons-single {
+      margin-right: 10px;
+      font-weight: bold;
+      width: 200px;
+    }
+    .wish-buttons-ten {
+      margin-right: 10px;
+      font-weight: bold;
+      width: 200px;
+    }
+  }
+}

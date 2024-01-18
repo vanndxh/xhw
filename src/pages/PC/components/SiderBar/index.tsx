@@ -9,6 +9,7 @@ import styles from "./index.module.less";
 import {
   CloudSyncOutlined,
   GithubOutlined,
+  RadarChartOutlined,
   YuqueOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -20,11 +21,6 @@ function SiderBar() {
     {
       label: "原神抽卡导出",
       key: "genshin",
-      icon: iconUrl.genshin,
-    },
-    {
-      label: "原神抽卡模拟",
-      key: "genshinWish",
       icon: iconUrl.genshin,
     },
     {
@@ -83,23 +79,25 @@ function SiderBar() {
           手机版
           <span className={styles["sider-bar-bottom-mobile-span"]} />
         </Button>
-        <div className={styles["sider-bar-bottom-url"]}>
-          <GithubOutlined
-            style={{ fontSize: 18 }}
-            onClick={() => {
-              window.open("https://github.com/vanndxh");
-            }}
-          />
-        </div>
 
-        <div className={styles["sider-bar-bottom-url"]}>
-          <YuqueOutlined
-            style={{ fontSize: 18 }}
-            onClick={() => {
-              window.open("https://www.yuque.com/vanndxh/coderv");
-            }}
-          />
-        </div>
+        <RadarChartOutlined
+          className={styles["sider-bar-bottom-url"]}
+          onClick={() => navigate("/game/index")}
+        />
+
+        <GithubOutlined
+          className={styles["sider-bar-bottom-url"]}
+          onClick={() => {
+            window.open("https://github.com/vanndxh");
+          }}
+        />
+
+        <YuqueOutlined
+          className={styles["sider-bar-bottom-url"]}
+          onClick={() => {
+            window.open("https://www.yuque.com/vanndxh/coderv");
+          }}
+        />
       </div>
     </div>
   );

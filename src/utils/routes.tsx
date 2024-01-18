@@ -22,10 +22,13 @@ import Mine from "../pages/Mobile/Mine";
 import Author from "../pages/Mobile/Mine/Author";
 import Setting from "../pages/Mobile/Mine/Setting";
 
+/** 游戏相关 */
+import GameIndex from "@/pages/Game/GameIndex";
+
 /** 404 */
 import NotFound from "../pages/NotFound";
 import { Navigate } from "react-router-dom";
-import GenshinWish from "@/pages/PC/GenshinWish";
+import Wish from "@/pages/Game/Wish";
 
 export const routes = [
   /**
@@ -65,10 +68,6 @@ export const routes = [
       {
         path: "todo",
         element: <Todo />,
-      },
-      {
-        path: "genshinWish",
-        element: <GenshinWish />,
       },
     ],
   },
@@ -122,6 +121,21 @@ export const routes = [
             element: <Setting />,
           },
         ],
+      },
+    ],
+  },
+
+  /** 游戏相关 */
+  {
+    path: "/game",
+    children: [
+      {
+        path: "index",
+        element: <GameIndex />,
+      },
+      {
+        path: "wish",
+        element: <Wish />,
       },
     ],
   },

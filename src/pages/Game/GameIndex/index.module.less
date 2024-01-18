@@ -1,0 +1,52 @@
+.game-index {
+  padding: 16px;
+
+  .game-index-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .game-index-header-title {
+      display: flex;
+      align-items: center;
+
+      .game-index-header-title-icon {
+        padding: 10px;
+        border-radius: 50%;
+        margin-right: 5px;
+        cursor: pointer;
+        font-size: 24px;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .game-index-header-action {
+      display: flex;
+      align-items: center;
+
+      .game-index-header-action-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 12px;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  .game-index-body {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
