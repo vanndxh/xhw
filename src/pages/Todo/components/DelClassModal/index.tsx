@@ -1,7 +1,6 @@
 /**
  * @file 删除分组弹窗
  */
-import React from "react";
 import { Form, Modal, ModalProps, Select, message } from "antd";
 
 interface Props extends ModalProps {

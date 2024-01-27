@@ -1,11 +1,7 @@
 /**
  * @file 边导航栏
  */
-import React from "react";
 import { Button, Menu } from "antd";
-import { Image } from "antd-mobile";
-import xhw from "@/assets/xhw.jpeg";
-import styles from "./index.module.less";
 import {
   CloudSyncOutlined,
   GithubOutlined,
@@ -13,9 +9,12 @@ import {
   YuqueOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { Image } from "antd-mobile";
+import xhw from "@/assets/xhw.jpeg";
 import { iconUrl } from "@/utils/constants";
+import styles from "./index.module.less";
 
-function SiderBar() {
+export default function SiderBar() {
   const navigate = useNavigate();
   const items: any = [
     {
@@ -28,11 +27,6 @@ function SiderBar() {
       key: "gpt",
       icon: iconUrl.gpt,
     },
-    // {
-    //   label: "待办列表",
-    //   key: "todo",
-    //   icon: iconUrl.todo,
-    // },
     {
       label: "我的文章",
       key: "docs",
@@ -102,4 +96,3 @@ function SiderBar() {
     </div>
   );
 }
-export default SiderBar;

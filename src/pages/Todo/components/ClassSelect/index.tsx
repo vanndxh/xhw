@@ -1,7 +1,7 @@
 /**
  * @file 分组选择组件
  */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input, Select } from "antd";
 import styles from "./index.module.less";
 

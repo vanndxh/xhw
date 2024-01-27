@@ -6,16 +6,12 @@ import { Button, Card, Input, message, Tabs } from "antd";
 import { Toast } from "antd-mobile";
 import axios from "axios";
 
-import PageLayout from "../components/PageLayout";
+import PageLayout from "@/components/PageLayout";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
-import { handleRawData } from "@/pages/PC/Genshin/util";
-import {
-  GachaType,
-  GachaTypeKey,
-  getGachaUrl,
-} from "@/pages/PC/Genshin/constants";
+import { handleRawData } from "./util";
+import { GachaType, GachaTypeKey, getGachaUrl } from "./constants";
 import styles from "./index.module.less";
 
 type GachaDataType = {

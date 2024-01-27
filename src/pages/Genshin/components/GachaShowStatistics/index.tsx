@@ -1,9 +1,9 @@
 /**
  * @file 统计模块
  */
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Card } from "antd";
-import { calculateStatistics } from "@/pages/PC/Genshin/util";
+import { calculateStatistics } from "../../util";
 import styles from "./index.less";
 
 interface Props {

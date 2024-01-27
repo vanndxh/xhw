@@ -1,4 +1,6 @@
-import React from "react";
+/**
+ * @file 数据展示tab项
+ */
 import { Image, ProgressBar } from "antd-mobile";
 import { normalPoolRole, rolePicUrl } from "../../constants";
 import styles from "./index.less";

@@ -1,7 +1,6 @@
 /**
  * @file 新增待办弹窗
  */
-import React from "react";
 import { Form, Input, Modal, ModalProps, message } from "antd";
 import ClassSelect from "../ClassSelect";
 

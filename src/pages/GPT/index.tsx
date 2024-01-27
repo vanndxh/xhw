@@ -15,7 +15,7 @@ import {
 } from "antd";
 import { Configuration, OpenAIApi } from "openai";
 import { RestOutlined, SendOutlined, UserOutlined } from "@ant-design/icons";
-import PageLayout from "../components/PageLayout";
+import PageLayout from "../../components/PageLayout";
 import styles from "./index.module.less";
 import { iconUrl } from "@/utils/constants";
 

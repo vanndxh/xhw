@@ -9,10 +9,11 @@ import {
   PlusOutlined,
   RestOutlined,
 } from "@ant-design/icons";
-import PageLayout from "../components/PageLayout";
+
+import PageLayout from "@/components/PageLayout";
 import AddItemModal from "./components/AddItemModal";
-import styles from "./index.module.less";
 import DelClassModal from "./components/DelClassModal";
+import styles from "./index.module.less";
 
 const { Panel } = Collapse;
 

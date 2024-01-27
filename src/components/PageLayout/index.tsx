@@ -2,7 +2,7 @@
  * @file PC端页面布局组件
  */
 import React from "react";
-import SiderBar from "../SiderBar";
+import SiderBar from "@/components/SiderBar";
 import styles from "./index.module.less";
 
 interface Props {

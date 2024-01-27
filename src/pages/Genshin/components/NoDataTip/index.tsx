@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Card, message } from "antd";
 
 function NoDataTip() {
@@ -13,10 +12,11 @@ function NoDataTip() {
           type="link"
           style={{ padding: 0 }}
           onClick={() => {
-            navigator.clipboard.writeText(
-              `iex(irm 'https://lelaer.com/d.ps1')`
-            );
-            message.success("复制成功");
+            navigator.clipboard
+              .writeText(`iex(irm 'https://lelaer.com/d.ps1')`)
+              .then(() => {
+                message.success("复制成功");
+              });
           }}
         >
           点此复制命令
