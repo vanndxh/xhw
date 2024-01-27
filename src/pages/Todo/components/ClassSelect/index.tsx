@@ -25,17 +25,11 @@ function ClassSelect(props: Props) {
         className={styles["class-select-select"]}
         onChange={(e) => {
           setIsAdd(e);
-          onChange?.(undefined as any);
+          onChange?.("");
         }}
         options={[
-          {
-            label: "从已有分组选择",
-            value: false,
-          },
-          {
-            label: "新建",
-            value: true,
-          },
+          { label: "从已有分组选择", value: false },
+          { label: "新建", value: true },
         ]}
       />
 
@@ -49,10 +43,7 @@ function ClassSelect(props: Props) {
             onChange?.(e);
           }}
           className={styles["class-select-input"]}
-          options={classes?.map((i: any) => ({
-            label: i,
-            value: i,
-          }))}
+          options={classes?.map((i) => ({ label: i, value: i }))}
         />
       )}
 
@@ -64,9 +55,7 @@ function ClassSelect(props: Props) {
           className={styles["class-select-input"]}
           placeholder="请输入分组名，最多7个字"
           allowClear
-          onChange={(e) => {
-            onChange?.(e?.target?.value);
-          }}
+          onChange={(e) => onChange?.(e?.target?.value)}
         />
       )}
     </div>

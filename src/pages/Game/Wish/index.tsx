@@ -10,7 +10,7 @@ import styles from "./index.module.less";
 function Wish() {
   const navigate = useNavigate();
 
-  const [mockData, setMockData] = useState<any>([]);
+  const [mockData, setMockData] = useState<ObjectType[]>([]);
 
   /** 生成模拟数据 */
   const generateData = (isSingle: boolean) => {
@@ -37,7 +37,7 @@ function Wish() {
       </div>
 
       <div className={styles["wish-show"]}>
-        {mockData?.map((i: any, index: number) => (
+        {mockData?.map((i, index: number) => (
           <div key={index} className={styles["wish-show-item"]}></div>
         ))}
       </div>

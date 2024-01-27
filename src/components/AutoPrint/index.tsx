@@ -2,7 +2,7 @@
  * @file 自动打印组件
  * @param text 需要打印的文本
  */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.less";
 
 interface Props {
@@ -18,9 +18,9 @@ function AutoPrint(props: Props) {
   /** 是否展示右侧光标 */
   const [isShowCursor, setIsShowCursor] = useState(true);
   /** 文本展示timer */
-  const [textTimer, setTextTimer] = useState<any>(0);
+  const [textTimer, setTextTimer] = useState<number | NodeJS.Timer>(0);
   /** 展示右侧光标的timer */
-  const [cursorTimer, setCursorTimer] = useState<any>(0);
+  const [cursorTimer, setCursorTimer] = useState<number | NodeJS.Timer>(0);
 
   useEffect(() => {
     const newTextTimer = setInterval(() => {
@@ -32,7 +32,6 @@ function AutoPrint(props: Props) {
       setShowNumber((pre) => pre + 1);
     }, 400);
     setCursorTimer(newCursorTimer);
-    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

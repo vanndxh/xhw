@@ -9,15 +9,14 @@ import axios from "axios";
 import PageLayout from "@/components/PageLayout";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
-import NoDataTip from "./components/NoDataTip";
 import { handleRawData } from "./util";
 import { GachaType, GachaTypeKey, getGachaUrl } from "./constants";
 import styles from "./index.module.less";
 
-type GachaDataType = {
-  role?: any[];
-  weapon?: any[];
-  normal?: any[];
+export type GachaDataType = {
+  role?: ObjectType[];
+  weapon?: ObjectType[];
+  normal?: ObjectType[];
 };
 
 function PCGenshin() {
@@ -36,8 +35,8 @@ function PCGenshin() {
     currentPage: 1,
     gachaType: GachaTypeKey.ROLE,
   };
-  let tempData: any[] = [];
-  let timer: any;
+  let tempData: ObjectType[] = [];
+  let timer;
 
   const tabItems = [
     {
@@ -180,16 +179,18 @@ function PCGenshin() {
 
   return (
     <PageLayout>
-      <Card title="原神抽卡记录导出" bordered={false}>
+      <Card
+        title="原神抽卡记录导出"
+        bordered={false}
+        style={{ height: "100%" }}
+      >
         <div className={styles["pc-genshin"]}>
           <div className={styles["pc-genshin-left"]}>
             <div className={styles["pc-genshin-left-inputline"]}>
               <Input
                 placeholder="请输入导出链接"
                 value={inputValue}
-                onChange={(e) => {
-                  setInputValue(e.target.value);
-                }}
+                onChange={(e) => setInputValue(e.target.value)}
               />
               <Button
                 color="primary"
@@ -214,7 +215,27 @@ function PCGenshin() {
           </div>
 
           <div className={styles["pc-genshin-right"]}>
-            <NoDataTip />
+            <Card
+              title="怎么获取导出链接？"
+              extra={
+                <Button
+                  type="link"
+                  style={{ padding: 0 }}
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(`iex(irm 'https://lelaer.com/d.ps1')`)
+                      .then(() => {
+                        message.success("复制成功");
+                      });
+                  }}
+                >
+                  点此复制命令
+                </Button>
+              }
+              style={{ marginBottom: 10, width: "100%" }}
+            >
+              {`游戏打开抽卡界面，然后在powershell输入iex(irm 'https://lelaer.com/d.ps1')，将自动复制到剪贴板`}
+            </Card>
           </div>
         </div>
       </Card>

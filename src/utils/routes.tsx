@@ -1,5 +1,3 @@
-import { Navigate } from "react-router-dom";
-
 import Index from "@/pages/index";
 import Genshin from "@/pages/Genshin";
 import GPT from "@/pages/GPT";

@@ -79,7 +79,7 @@ export enum GachaTypeKey {
   WEAPON = "WEAPON",
   NORMAL = "NORMAL",
 }
-export const GachaType: any = {
+export const GachaType = {
   [GachaTypeKey.ROLE]: {
     label: "角色",
     code: "301",

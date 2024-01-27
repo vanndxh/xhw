@@ -7,7 +7,7 @@ import styles from "./index.less";
 
 interface Props {
   isRole: boolean;
-  data: any[];
+  data: ObjectType[];
 }
 
 function GachaShowTabItem(props: Props) {

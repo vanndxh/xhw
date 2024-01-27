@@ -1,11 +1,12 @@
 /**
  * @file 原神板块相关工具函数
  */
+import { GachaDataType } from ".";
 import { normalPoolRole } from "./constants";
 
 /** 第一次处理数据--原数组至统计数据 */
-export const handleRawData = (rawData: any[]) => {
-  const tempData = [];
+export const handleRawData = (rawData) => {
+  const tempData: Object[] = [];
   let count = 0;
   let preName = "已垫";
   // eslint-disable-next-line
@@ -32,17 +33,7 @@ export const handleRawData = (rawData: any[]) => {
 };
 
 /** 第二次处理数据--将数据计算成展示数据 */
-interface GachaDataShowItem {
-  name: string;
-  count: number;
-}
-interface RawDataProps {
-  role: GachaDataShowItem[];
-  weapon: GachaDataShowItem[];
-  normal: GachaDataShowItem[];
-}
-
-export const calculateStatistics = (rawData: RawDataProps) => {
+export const calculateStatistics = (rawData: GachaDataType) => {
   const { role, weapon, normal } = rawData;
 
   /**

@@ -1,5 +1,4 @@
 .sider-bar {
-  height: calc(100% - 24px);
   width: 256px;
   padding: 12px;
   display: flex;
@@ -8,26 +7,34 @@
   border-right: 1px solid rgba(0, 0, 0, 0.05);
 
   :global {
+    // 隐藏目录右侧很丑的线
     .ant-menu-inline {
       border-inline-end: none !important;
     }
+
+    // icon右侧空出距离
+    .ant-image {
+      margin-right: 5px;
+    }
   }
 
-  &-logo {
+  .sider-bar-menu-icon {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .sider-bar-logo {
     display: flex;
     justify-content: center;
   }
 
-  &-bottom {
+  .sider-bar-bottom {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 
-    &-mobile {
-      width: 90%;
-    }
-
-    &-url {
+    .sider-bar-bottom-url {
       cursor: pointer;
       border-radius: 6px;
       width: 32px;

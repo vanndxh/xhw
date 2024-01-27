@@ -8,9 +8,11 @@ interface Props extends ModalProps {
   /** 是否展示 */
   open: boolean;
   /** 原有todo list */
-  todoList: any[];
+  todoList: ObjectType[];
   /** set todo list */
-  setTodoList: (e: any) => void;
+  setTodoList: (e: ObjectType[]) => void;
+
+  onCancel: () => void;
 }
 
 function AddItemModal(props: Props) {
@@ -62,18 +64,15 @@ function AddItemModal(props: Props) {
               children: [newItem],
             },
           ]
-        : todoList?.map((i: any) =>
+        : todoList?.map((i) =>
             i?.label === values?.class
-              ? {
-                  ...i,
-                  children: [...i?.children, newItem],
-                }
+              ? { ...i, children: [...i?.children, newItem] }
               : i
           );
       setTodoList(newTodoList);
       message.success("添加成功");
       resetFields();
-      onCancel?.(undefined as any);
+      onCancel?.();
     });
   };
 
@@ -87,7 +86,7 @@ function AddItemModal(props: Props) {
       onOk={handleAdd}
       onCancel={() => {
         resetFields();
-        onCancel?.(undefined as any);
+        onCancel?.();
       }}
       width={"60vw"}
     >

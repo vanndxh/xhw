@@ -171,7 +171,7 @@ function Todo() {
       </Card>
 
       {/** modals */}
-      <AddItemModal
+      {/* <AddItemModal
         open={addOpen}
         onCancel={() => {
           setAddOpen(false);
@@ -186,7 +186,7 @@ function Todo() {
         }}
         todoList={todoList}
         setTodoList={setTodoList}
-      />
+      /> */}
     </PageLayout>
   );
 }

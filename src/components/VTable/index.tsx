@@ -12,9 +12,9 @@ interface FilterItem {
 
 interface Props {
   /** 表格数据 */
-  dataSource: any[];
+  dataSource: ObjectType[];
   /** 列表项配置 */
-  columns: any[];
+  columns: ObjectType[];
   /** 筛选项配置 */
   filters: FilterItem[];
   /** fetch */

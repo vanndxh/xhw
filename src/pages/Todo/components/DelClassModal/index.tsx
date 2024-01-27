@@ -1,15 +1,17 @@
 /**
  * @file 删除分组弹窗
  */
-import { Form, Modal, ModalProps, Select, message } from "antd";
+import { Form, Modal, Select, message } from "antd";
 
-interface Props extends ModalProps {
+interface Props {
   /** 是否展示 */
   open: boolean;
   /** 原有todo list */
-  todoList: any[];
+  todoList: ObjectType[];
   /** set todo list */
-  setTodoList: (e: any) => void;
+  setTodoList: (e: ObjectType[]) => void;
+
+  onCancel: () => void;
 }
 
 function DelClassModal(props: Props) {
@@ -26,12 +28,7 @@ function DelClassModal(props: Props) {
         <Select
           allowClear
           placeholder="请选择分组"
-          options={todoList
-            ?.map((i) => i?.label)
-            ?.map((i: any) => ({
-              label: i,
-              value: i,
-            }))}
+          options={todoList?.map((i) => ({ label: i?.label, value: i?.label }))}
         />
       ),
     },
@@ -39,13 +36,11 @@ function DelClassModal(props: Props) {
 
   const handleAdd = () => {
     validateFields().then((values) => {
-      const newTodoList = todoList?.filter(
-        (i: any) => i?.label !== values?.class
-      );
+      const newTodoList = todoList?.filter((i) => i?.label !== values?.class);
       setTodoList(newTodoList);
       message.success("删除成功");
       resetFields();
-      onCancel?.(undefined as any);
+      onCancel?.();
     });
   };
 
@@ -59,7 +54,7 @@ function DelClassModal(props: Props) {
       onOk={handleAdd}
       onCancel={() => {
         resetFields();
-        onCancel?.(undefined as any);
+        onCancel?.();
       }}
       width={"60vw"}
     >

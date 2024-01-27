@@ -1,7 +1,7 @@
 /**
  * @file chat gpt 国内镜像
  */
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Avatar,
   Button,
@@ -13,14 +13,14 @@ import {
   Select,
   Spin,
 } from "antd";
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, CreateChatCompletionRequest, OpenAIApi } from "openai";
 import { RestOutlined, SendOutlined, UserOutlined } from "@ant-design/icons";
 import PageLayout from "../../components/PageLayout";
-import styles from "./index.module.less";
 import { iconUrl } from "@/utils/constants";
+import styles from "./index.module.less";
 
 function GPT() {
-  const [history, setHistory] = useState<any[]>([]);
+  const [history, setHistory] = useState<ObjectType[]>([]);
   const [questionValue, setQuestionValue] = useState<string>();
   const [loading, setLoading] = useState(false);
 
@@ -57,25 +57,18 @@ function GPT() {
       },
     ]);
     setQuestionValue("");
-    const res: any = await openai.createChatCompletion({
+    const res = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [
-        ...history,
-        {
-          role: "user",
-          content: questionValue,
-        },
-      ],
-    });
+      messages: [...history, { role: "user", content: questionValue }],
+    } as CreateChatCompletionRequest);
     const returnMessage = res?.data?.choices?.[0]?.message;
-    setHistory([
-      ...history,
-      {
-        role: "user",
-        content: questionValue,
-      },
-      returnMessage,
-    ]);
+    if (returnMessage) {
+      setHistory([
+        ...history,
+        { role: "user", content: questionValue },
+        returnMessage,
+      ]);
+    }
     setLoading(false);
   };
 

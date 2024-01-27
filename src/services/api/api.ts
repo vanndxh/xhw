@@ -17,7 +17,7 @@ export const getUv = () => {
   });
 };
 export const getLikeAmount = () => {
-  return axios.get("/global/like").then((res: any) => {
+  return axios.get("/global/like").then((res) => {
     return res?.data;
   });
 };

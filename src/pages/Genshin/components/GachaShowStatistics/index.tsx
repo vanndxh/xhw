@@ -3,12 +3,13 @@
  */
 import { useMemo } from "react";
 import { Card } from "antd";
-import { calculateStatistics } from "../../util";
+import {  calculateStatistics } from "../../util";
 import styles from "./index.less";
+import { GachaDataType } from "../..";
 
 interface Props {
   /** 总数据数据 */
-  data: any;
+  data: GachaDataType;
 }
 
 function GachaShowStatistics(props: Props) {

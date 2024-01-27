@@ -18,7 +18,8 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "noImplicitAny": false
   },
   "include": [
     "./src/services/api.d.ts",
@@ -26,7 +27,7 @@
     "./src/**/*.ts",
     "./src/**/*.tsx",
     "./mock/*",
-    "./config/define.d.ts",
+    "src/types/define.d.ts",
     "./src/**/*.less"
   ],
   "exclude": [
