@@ -1,4 +1,6 @@
-import React from "react";
+/**
+ * @file 闪光进度条组件
+ */
 import styles from "./index.module.less";
 
 interface Props {

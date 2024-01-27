@@ -1,9 +1,9 @@
 /**
- * @file 左icon，右两行，经典信息展示组件
+ * @file 经典信息展示组件
+ * @description 左icon，右两行信息展示
  * @author vanndxh
  */
-import React from "react";
-import { Image } from "antd-mobile";
+import { Image } from "antd";
 import styles from "./index.less";
 
 interface Props {
@@ -20,7 +20,7 @@ function ItemInfo(props: Props) {
 
   return (
     <div className={styles["item"]}>
-      <Image src={icon} width={40} height={40} fit="contain" />
+      <Image src={icon} width={40} height={40} />
 
       <div className={styles["item-text"]}>
         <div className={styles["item-text-title"]}>{title}</div>

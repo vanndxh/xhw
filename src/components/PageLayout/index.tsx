@@ -1,5 +1,5 @@
 /**
- * @file PC端页面布局组件
+ * @file PC端页面通用布局组件
  */
 import React from "react";
 import SiderBar from "@/components/SiderBar";

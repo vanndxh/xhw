@@ -1,6 +1,5 @@
 /**
  * @file 自动打印组件
- * @param text 需要打印的文本
  */
 import { useEffect, useState } from "react";
 import styles from "./index.module.less";

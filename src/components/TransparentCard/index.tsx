@@ -1,18 +1,33 @@
 import React from "react";
 
 interface Props {
-  /** 内部内容 */
+  /**
+   * @description 内部内容
+   */
   children?: React.ReactNode;
-  /** 宽度 */
+  /**
+   * @description 宽度
+   * @default auto
+   */
   width?: string;
-  /** 高度 */
+  /**
+   * @description 高度
+   * @default auto
+   */
   height?: string;
-  /** 背景模糊度: default 8 */
+  /**
+   * @description 背景模糊度
+   * @default 8
+   */
   blurDegree?: number;
-  /** 圆角度: default 0 */
+  /**
+   * @description 圆角度
+   * @default 0
+   */
   borderRadius?: number;
   /**
-   * 白底透明度: 0-完成透明 1-完全白底（可以当正常card用）
+   * @description 白底透明度: 0-完成透明 1-完全白底（可以当正常card用）
+   * @default 0.5
    */
   bgOpacity?: number;
 }
@@ -27,15 +42,16 @@ function TransparentCard(props: Props) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        width: width ? width : "auto",
-        height: height ? height : "auto",
-        backdropFilter: blurDegree ? `blur(${blurDegree}px)` : "blur(8px)",
-        borderRadius: borderRadius ? `${borderRadius}px` : "0",
+        width: width || "auto",
+        height: height || "auto",
+        backdropFilter: `blur(${blurDegree || 8}px)`,
+        borderRadius: borderRadius || 0,
         background:
           bgOpacity || bgOpacity === 0
             ? `rgba(255, 255, 255, ${bgOpacity})`
             : `rgba(255, 255, 255, 0.5)`,
-      }}>
+      }}
+    >
       {children}
     </div>
   );

@@ -32,4 +32,4 @@
 
 MIT
 
-Copyright © 2022-2023 vanndxh
+Copyright © 2022-2024 vanndxh
