@@ -9,7 +9,6 @@ export const handleRawData = (rawData) => {
   const tempData: Object[] = [];
   let count = 0;
   let preName = "已垫";
-  // eslint-disable-next-line
   rawData?.map((i) => {
     if (i.rank_type === "5") {
       tempData.push({
@@ -42,7 +41,6 @@ export const calculateStatistics = (rawData: GachaDataType) => {
   const roleGoldNumber = role ? role?.length - 1 : 0;
   let rolePullNumber = 0;
   let limitGoldNumber = -1;
-  // eslint-disable-next-line
   role?.map((i) => {
     rolePullNumber += i.count;
     if (!normalPoolRole.includes(i.name)) {
@@ -61,7 +59,7 @@ export const calculateStatistics = (rawData: GachaDataType) => {
    */
   const weaponGoldNumber = weapon ? weapon?.length - 1 : 0;
   let weaponPullNumber = 0;
-  // eslint-disable-next-line
+ 
   weapon?.map((i) => {
     weaponPullNumber += i.count;
   });
@@ -74,7 +72,6 @@ export const calculateStatistics = (rawData: GachaDataType) => {
    */
   const normalGoldNumber = normal ? normal?.length - 1 : 0;
   let normalPullNumber = 0;
-  // eslint-disable-next-line
   normal?.map((i) => {
     normalPullNumber += i.count;
   });

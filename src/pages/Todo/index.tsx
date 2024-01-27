@@ -29,10 +29,6 @@ interface TodoClass {
 }
 
 function Todo() {
-  const [todoList, setTodoList] = useState<TodoClass[]>([]);
-  const [addOpen, setAddOpen] = useState(false);
-  const [delOpen, setDelOpen] = useState(false);
-
   const todoInit: TodoClass[] = [
     {
       label: "原神",
@@ -58,21 +54,21 @@ function Todo() {
     },
   ];
 
+  const [todoList, setTodoList] = useState<TodoClass[]>(todoInit);
+  const [addOpen, setAddOpen] = useState(false);
+  const [delOpen, setDelOpen] = useState(false);
+
   const opButtons = [
     {
       icon: <PlusOutlined />,
       isDanger: false,
-      onclick: () => {
-        setAddOpen(true);
-      },
+      onclick: () => setAddOpen(true),
       label: "新增",
     },
     {
       icon: <RestOutlined />,
       isDanger: true,
-      onclick: () => {
-        setDelOpen(true);
-      },
+      onclick: () => setDelOpen(true),
       label: "删除分组",
     },
   ];
@@ -93,12 +89,6 @@ function Todo() {
     });
     setTodoList(newTodoList);
   };
-
-  useEffect(() => {
-    /** todo list 初始化 */
-    setTodoList(todoInit);
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <PageLayout>

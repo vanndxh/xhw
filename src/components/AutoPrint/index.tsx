@@ -40,7 +40,6 @@ function AutoPrint(props: Props) {
       clearInterval(textTimer);
       clearInterval(cursorTimer);
     }
-    // eslint-disable-next-line
   }, [showNumber]);
 
   return (
