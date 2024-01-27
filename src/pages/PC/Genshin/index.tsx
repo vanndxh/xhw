@@ -10,7 +10,6 @@ import PageLayout from "../components/PageLayout";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import NoDataTip from "./components/NoDataTip";
-import type { GachaDataType } from "@/pages/Mobile/Workspace/Genshin";
 import { handleRawData } from "@/pages/PC/Genshin/util";
 import {
   GachaType,
@@ -18,6 +17,12 @@ import {
   getGachaUrl,
 } from "@/pages/PC/Genshin/constants";
 import styles from "./index.module.less";
+
+type GachaDataType = {
+  role?: any[];
+  weapon?: any[];
+  normal?: any[];
+};
 
 function PCGenshin() {
   /** 用户提供参数链接 */
