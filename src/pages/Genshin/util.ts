@@ -1,17 +1,19 @@
 /**
  * @file 原神板块相关工具函数
  */
-import { GachaDataType } from ".";
-import { normalPoolRole } from "./constants";
+import { normalPoolRole, GachaDataType } from "./constants";
 
-/** 第一次处理数据--原数组至统计数据 */
+/**
+ * 第一次处理数据
+ * 原抽卡详情 -> 只有5星的数据
+ */
 export const handleRawData = (rawData) => {
-  const tempData: Object[] = [];
+  const finalData: Object[] = [];
   let count = 0;
   let preName = "已垫";
   rawData?.map((i) => {
     if (i.rank_type === "5") {
-      tempData.push({
+      finalData.push({
         name: preName,
         count: count + 1,
       });
@@ -22,16 +24,19 @@ export const handleRawData = (rawData) => {
     }
   });
   if (count) {
-    tempData.push({
+    finalData.push({
       name: preName,
       count: count + 1,
     });
   }
 
-  return tempData;
+  return finalData;
 };
 
-/** 第二次处理数据--将数据计算成展示数据 */
+/**
+ * 第二次处理数据
+ * 将5星数据 -> 统计学数据
+ */
 export const calculateStatistics = (rawData: GachaDataType) => {
   const { role, weapon, normal } = rawData;
 
@@ -59,10 +64,8 @@ export const calculateStatistics = (rawData: GachaDataType) => {
    */
   const weaponGoldNumber = weapon ? weapon?.length - 1 : 0;
   let weaponPullNumber = 0;
- 
-  weapon?.map((i) => {
-    weaponPullNumber += i.count;
-  });
+
+  weapon?.map((i) => (weaponPullNumber += i.count));
   const pullsPerWeapon = weaponGoldNumber
     ? String((weaponPullNumber / weaponGoldNumber) * 1.0).slice(0, 4)
     : "-";
@@ -72,9 +75,7 @@ export const calculateStatistics = (rawData: GachaDataType) => {
    */
   const normalGoldNumber = normal ? normal?.length - 1 : 0;
   let normalPullNumber = 0;
-  normal?.map((i) => {
-    normalPullNumber += i.count;
-  });
+  normal?.map((i) => (normalPullNumber += i.count));
   const pullsPerNormal = normalGoldNumber
     ? String((normalPullNumber / normalGoldNumber) * 1.0).slice(0, 4)
     : "-";
@@ -83,7 +84,7 @@ export const calculateStatistics = (rawData: GachaDataType) => {
     role: {
       totalPull: rolePullNumber,
       totalGold: roleGoldNumber,
-      limitGoldNumber,
+      limitGoldNumber: role ? limitGoldNumber : "-",
       limitRate,
       pullPerLimit: pullsPerLimitRole,
     },

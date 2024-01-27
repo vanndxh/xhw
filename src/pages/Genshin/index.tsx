@@ -3,23 +3,19 @@
  */
 import { useState } from "react";
 import { Button, Card, Input, message, Tabs } from "antd";
-import { Toast } from "antd-mobile";
 import axios from "axios";
 
 import PageLayout from "@/components/PageLayout";
 import GachaShowTabItem from "./components/GachaShowTabItem";
 import GachaShowStatistics from "./components/GachaShowStatistics";
 import { handleRawData } from "./util";
-import { GachaType, GachaTypeKey, getGachaUrl } from "./constants";
+import { GachaDataType, GachaType, GachaTypeKey } from "./constants";
 import styles from "./index.module.less";
 
-export type GachaDataType = {
-  role?: ObjectType[];
-  weapon?: ObjectType[];
-  normal?: ObjectType[];
-};
-
 function PCGenshin() {
+  const [messageApi, contextHolder] = message.useMessage();
+  message.config({ maxCount: 1 });
+
   /** 用户提供参数链接 */
   const [inputValue, setInputValue] = useState("");
   /** 控制查询状态 */
@@ -111,10 +107,11 @@ function PCGenshin() {
       }));
       clearInterval(timer);
       setLoading(false);
-      Toast.show({
-        icon: "success",
+      message.destroy("loading");
+      messageApi.open({
+        key: "success",
+        type: "success",
         content: "获取成功！",
-        duration: fetchInterval,
       });
       // localStorage.setItem("genshinGachaData", JSON.stringify(gachaData));
       tempData = [];
@@ -124,14 +121,17 @@ function PCGenshin() {
 
   /** 接口请求操作 */
   const fetchData = async () => {
-    Toast.show({
-      icon: "loading",
-      content: `获取${GachaType[gachaParams.gachaType].label}池第${
-        gachaParams.currentPage
-      }页中，不要乱点啊喂！`,
-      duration: fetchInterval,
+    const loadingTipText = `获取${GachaType[gachaParams.gachaType].label}池第${
+      gachaParams.currentPage
+    }页中，不要乱点啊喂！`;
+    messageApi.open({
+      key: "loading",
+      type: "loading",
+      content: loadingTipText,
+      duration: fetchInterval / 1000,
     });
 
+    const getGachaUrl = "/api/mihoyo/event/gacha_info/api/getGachaLog?";
     const fetchUrl = `${getGachaUrl}${
       inputValue?.split("?")?.[1].split("#")?.[0]
     }&gacha_type=${GachaType[gachaParams.gachaType].code}&page=${
@@ -141,7 +141,11 @@ function PCGenshin() {
 
     /** 请求失败 */
     if (!res?.data?.data) {
-      message.error(`请求失败, ${res?.data?.message}`);
+      messageApi.open({
+        key: "error",
+        type: "error",
+        content: res?.data?.message || "请求失败",
+      });
       clearInterval(timer);
       setLoading(false);
       return;
@@ -225,7 +229,11 @@ function PCGenshin() {
                     navigator.clipboard
                       .writeText(`iex(irm 'https://lelaer.com/d.ps1')`)
                       .then(() => {
-                        message.success("复制成功");
+                        messageApi.open({
+                          key: "tip",
+                          type: "success",
+                          content: "复制成功",
+                        });
                       });
                   }}
                 >
@@ -239,6 +247,8 @@ function PCGenshin() {
           </div>
         </div>
       </Card>
+
+      {contextHolder}
     </PageLayout>
   );
 }

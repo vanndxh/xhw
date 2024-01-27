@@ -3,12 +3,12 @@
  */
 import { useMemo } from "react";
 import { Card } from "antd";
-import {  calculateStatistics } from "../../util";
+import { calculateStatistics } from "../../util";
+import { GachaDataType } from "../../constants";
 import styles from "./index.less";
-import { GachaDataType } from "../..";
 
 interface Props {
-  /** 总数据数据 */
+  /** 总数据 */
   data: GachaDataType;
 }
 

@@ -1,7 +1,10 @@
 import { iconUrl } from "@/utils/constants";
 
-/** 请求抽卡数据接口 */
-export const getGachaUrl = "/api/mihoyo/event/gacha_info/api/getGachaLog?";
+export type GachaDataType = {
+  role?: ObjectType[];
+  weapon?: ObjectType[];
+  normal?: ObjectType[];
+};
 
 /** 常驻池角色 */
 export const normalPoolRole = [
@@ -71,7 +74,7 @@ export const rolePicUrl = {
     "https://patchwiki.biligame.com/images/ys/9/94/mkpw3ljc2eoea75lhkyccu6mbsbiqnr.png",
   七七: "https://patchwiki.biligame.com/images/ys/8/8b/049fpv6jcr66mln0nmbbfgigfrkgrzo.png",
   琴: "https://patchwiki.biligame.com/images/ys/1/1a/g3cl4mrxow8af265n2ajqtnuf99pkfa.png",
-} as Record<string, string>;
+};
 
 /** 池子枚举 */
 export enum GachaTypeKey {

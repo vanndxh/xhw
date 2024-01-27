@@ -1,7 +1,7 @@
 /**
  * @file 数据展示tab项
  */
-import { Image, ProgressBar } from "antd-mobile";
+import { Image, Progress } from "antd";
 import { normalPoolRole, rolePicUrl } from "../../constants";
 import styles from "./index.less";
 
@@ -16,11 +16,11 @@ function GachaShowTabItem(props: Props) {
   const getProgressColor = (count: number): string => {
     if (count <= 60) {
       return "linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)";
-    } else if (count <= 80) {
-      return "linear-gradient(120deg, #f6d365 0%, #fda085 100%)";
-    } else {
-      return "linear-gradient(120deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #cf556c 100%)";
     }
+    if (count <= 80) {
+      return "linear-gradient(120deg, #f6d365 0%, #fda085 100%)";
+    }
+    return "linear-gradient(120deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #cf556c 100%)";
   };
 
   return (
@@ -33,15 +33,9 @@ function GachaShowTabItem(props: Props) {
                 <Image src={rolePicUrl[i?.name]} width={20} height={20} />
                 <span className={styles["tab-item-left-name"]}>{i.name}</span>
               </div>
-              <ProgressBar
+              <Progress
                 percent={(i?.count / 90) * 100}
-                text={i?.count}
-                style={{
-                  "--track-width": "12px",
-                  "--track-color": "white",
-                  "--fill-color": getProgressColor(i?.count),
-                  "--text-width": "5px",
-                }}
+                strokeColor={getProgressColor(i?.count)}
                 className={styles["tab-item-center"]}
               />
               <div className={styles["tab-item-right"]}>

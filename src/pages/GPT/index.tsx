@@ -120,9 +120,8 @@ function GPT() {
               onClick={queryGptApi}
               style={{ marginLeft: 10 }}
               loading={loading}
-            >
-              <SendOutlined />
-            </Button>
+              icon={<SendOutlined />}
+            />
             <Button
               onClick={() => {
                 Modal.confirm({
@@ -135,9 +134,8 @@ function GPT() {
               }}
               style={{ marginLeft: 10 }}
               loading={loading}
-            >
-              <RestOutlined />
-            </Button>
+              icon={<RestOutlined />}
+            />
           </div>
         </div>
       </Card>
