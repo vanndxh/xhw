@@ -7,16 +7,16 @@ import { Toast } from "antd-mobile";
 import axios from "axios";
 
 import PageLayout from "../components/PageLayout";
+import GachaShowTabItem from "./components/GachaShowTabItem";
+import GachaShowStatistics from "./components/GachaShowStatistics";
+import NoDataTip from "./components/NoDataTip";
 import type { GachaDataType } from "@/pages/Mobile/Workspace/Genshin";
+import { handleRawData } from "@/pages/PC/Genshin/util";
 import {
   GachaType,
   GachaTypeKey,
   getGachaUrl,
 } from "@/pages/PC/Genshin/constants";
-import GachaShowTabItem from "@/pages/Mobile/Workspace/Genshin/components/GachaShowTabItem";
-import GachaShowStatistics from "@/pages/Mobile/Workspace/Genshin/components/GachaShowStatistics";
-import NoDataTip from "@/pages/Mobile/Workspace/Genshin/components/NoDataTip";
-import { handleRawData } from "@/utils/genshin";
 import styles from "./index.module.less";
 
 function PCGenshin() {

@@ -28,11 +28,11 @@ function SiderBar() {
       key: "gpt",
       icon: iconUrl.gpt,
     },
-    {
-      label: "待办列表",
-      key: "todo",
-      icon: iconUrl.todo,
-    },
+    // {
+    //   label: "待办列表",
+    //   key: "todo",
+    //   icon: iconUrl.todo,
+    // },
     {
       label: "我的文章",
       key: "docs",

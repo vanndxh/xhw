@@ -1,9 +1,6 @@
 import React from "react";
 import { Image, ProgressBar } from "antd-mobile";
-import {
-  normalPoolRole,
-  rolePicUrl,
-} from "../../../../../PC/Genshin/constants";
+import { normalPoolRole, rolePicUrl } from "../../constants";
 import styles from "./index.less";
 
 interface Props {

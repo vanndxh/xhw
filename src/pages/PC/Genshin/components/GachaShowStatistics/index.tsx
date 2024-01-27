@@ -3,7 +3,7 @@
  */
 import React, { useMemo } from "react";
 import { Card } from "antd";
-import { calculateStatistics } from "@/utils/genshin";
+import { calculateStatistics } from "@/pages/PC/Genshin/util";
 import styles from "./index.less";
 
 interface Props {

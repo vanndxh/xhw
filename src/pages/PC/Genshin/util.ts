@@ -1,7 +1,7 @@
 /**
  * @file 原神板块相关工具函数
  */
-import { normalPoolRole } from "../pages/PC/Genshin/constants";
+import { normalPoolRole } from "./constants";
 
 /** 第一次处理数据--原数组至统计数据 */
 export const handleRawData = (rawData: any[]) => {

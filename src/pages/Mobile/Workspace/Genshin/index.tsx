@@ -9,9 +9,9 @@ import {
   getGachaUrl,
   tabItems,
 } from "../../../PC/Genshin/constants";
-import GachaShowTabItem from "./components/GachaShowTabItem";
-import GachaShowStatistics from "./components/GachaShowStatistics";
-import NoDataTip from "./components/NoDataTip";
+import GachaShowTabItem from "../../../PC/Genshin/components/GachaShowTabItem";
+import GachaShowStatistics from "../../../PC/Genshin/components/GachaShowStatistics";
+import NoDataTip from "../../../PC/Genshin/components/NoDataTip";
 import styles from "./index.less";
 import { postUV } from "@/services/api/api";
 
