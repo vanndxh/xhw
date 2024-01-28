@@ -17,6 +17,27 @@ export const normalPoolRole = [
   "提纳里",
 ];
 
+/** 池子枚举 */
+export enum GachaTypeKey {
+  ROLE = "ROLE",
+  WEAPON = "WEAPON",
+  NORMAL = "NORMAL",
+}
+export const GachaType = {
+  [GachaTypeKey.ROLE]: {
+    label: "角色",
+    code: "301",
+  },
+  [GachaTypeKey.WEAPON]: {
+    label: "武器",
+    code: "302",
+  },
+  [GachaTypeKey.NORMAL]: {
+    label: "常驻",
+    code: "200",
+  },
+};
+
 export const rolePicUrl = {
   已垫: iconUrl.question,
   提纳里:
@@ -66,25 +87,13 @@ export const rolePicUrl = {
     "https://patchwiki.biligame.com/images/ys/9/94/mkpw3ljc2eoea75lhkyccu6mbsbiqnr.png",
   七七: "https://patchwiki.biligame.com/images/ys/8/8b/049fpv6jcr66mln0nmbbfgigfrkgrzo.png",
   琴: "https://patchwiki.biligame.com/images/ys/1/1a/g3cl4mrxow8af265n2ajqtnuf99pkfa.png",
-};
-
-/** 池子枚举 */
-export enum GachaTypeKey {
-  ROLE = "ROLE",
-  WEAPON = "WEAPON",
-  NORMAL = "NORMAL",
-}
-export const GachaType = {
-  [GachaTypeKey.ROLE]: {
-    label: "角色",
-    code: "301",
-  },
-  [GachaTypeKey.WEAPON]: {
-    label: "武器",
-    code: "302",
-  },
-  [GachaTypeKey.NORMAL]: {
-    label: "常驻",
-    code: "200",
-  },
+  娜维娅:
+    "https://patchwiki.biligame.com/images/ys/0/04/3bbaccl7ziumc1f9vk1hoo1vpttkd2m.png",
+  芙宁娜:
+    "https://patchwiki.biligame.com/images/ys/1/10/pcfz7nh8676dqxxubrshq17jdu17xn9.png",
+  莱欧斯利:
+    "https://patchwiki.biligame.com/images/ys/d/d7/jvb2oapa38w7k6t4zd9y5x21hex5ku2.png",
+  那维莱特:
+    "https://patchwiki.biligame.com/images/ys/1/16/aism1oli44ck26p72n0gv2elnqq1av7.png",
+  林尼: "https://patchwiki.biligame.com/images/ys/d/d6/tbalaahap33je75krxzg29fmuidcxit.png",
 };
