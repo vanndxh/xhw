@@ -1,23 +1,21 @@
-.pc-genshin {
-  display: flex;
-  justify-content: space-between;
-  overflow: auto;
+.genshin {
+  overflow: hidden;
+  height: 100%;
+  padding: 16px;
 
-  &-left {
-    width: 60%;
-
-    &-inputline {
-      display: flex;
-      align-items: center;
-    }
-
-    &-tabs {
-      max-width: 400px;
-      margin-top: 10px;
-    }
+  .genshin-inputline {
+    display: flex;
+    align-items: center;
   }
 
-  &-right {
-    width: 30%;
+  .genshin-body {
+    margin-top: 10px;
+    height: calc(100% - 80px);
   }
+}
+
+.genshin-tip-copy {
+  color: #1677ff !important;
+  margin-left: 5px !important;
+  cursor: pointer;
 }

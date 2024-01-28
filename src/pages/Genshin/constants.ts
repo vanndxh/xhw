@@ -17,14 +17,6 @@ export const normalPoolRole = [
   "提纳里",
 ];
 
-/** 展示抽卡结果标签 */
-export const tabItems = [
-  { key: "role", title: "角色" },
-  { key: "weapon", title: "武器" },
-  { key: "normal", title: "常驻" },
-  { key: "statistics", title: "统计" },
-];
-
 export const rolePicUrl = {
   已垫: iconUrl.question,
   提纳里:

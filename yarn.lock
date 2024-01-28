@@ -2112,10 +2112,10 @@
   "resolved" "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz"
   "version" "1.2.4"
 
-"@types/react-dom@^18.0.0", "@types/react-dom@^18.0.5":
-  "integrity" "sha512-OWPWTUrY/NIrjsAPkAk1wW9LZeIjSvkXRhclsFO8CZcZGCOg2G0YZy4ft+rOyYxy8B7ui5iZzi9OkDebZ7/QSA=="
-  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.0.5.tgz"
-  "version" "18.0.5"
+"@types/react-dom@^18.0.0", "@types/react-dom@^18.2.7":
+  "integrity" "sha512-TJxDm6OfAX2KJWJdMEVTwWke5Sc/E/RlnPGvGfS0W7+6ocy2xhDVQVh/KvC2Uf7kACs+gDytdusDSdWfWkaNzw=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.18.tgz"
+  "version" "18.2.18"
   dependencies:
     "@types/react" "*"
 
@@ -2136,10 +2136,10 @@
     "@types/history" "^4.7.11"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.14":
-  "integrity" "sha512-x4gGuASSiWmo0xjDLpm5mPb52syZHJx02VKbqUKdLmKtAwIh63XClGsiTI1K6DO5q7ox4xAsQrU+Gl3+gGXF9Q=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-18.0.14.tgz"
-  "version" "18.0.14"
+"@types/react@*", "@types/react@^18.2.20":
+  "integrity" "sha512-qboRCl6Ie70DQQG9hhNREz81jqC1cs9EVNcjQ1AU+jH6NFfSAhVVbrrY/+nSF+Bsk4AOwm9Qa61InvMCyV+H3w=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-18.2.48.tgz"
+  "version" "18.2.48"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"

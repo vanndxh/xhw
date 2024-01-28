@@ -2,15 +2,15 @@
  * @file 原神抽卡记录导出
  */
 import { useState } from "react";
-import { Button, Card, Input, message, Tabs } from "antd";
+import { Button, Card, Input, message, Popover, Tabs, Tooltip } from "antd";
 import axios from "axios";
 
 import PageLayout from "@/components/PageLayout";
-import GachaShowTabItem from "./components/GachaShowTabItem";
-import GachaShowStatistics from "./components/GachaShowStatistics";
-import { handleRawData } from "./util";
+import GachaShow from "./components/GachaShow";
 import { GachaDataType, GachaType, GachaTypeKey } from "./constants";
+import { handleRawData } from "./util";
 import styles from "./index.module.less";
+import { CopyOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
 function PCGenshin() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -22,7 +22,6 @@ function PCGenshin() {
   const [loading, setLoading] = useState(false);
   /** 获取到的数据 */
   const [gachaData, setGachaData] = useState<GachaDataType>({});
-  const [activeIndex, setActiveIndex] = useState(0);
 
   /** 获取抽卡数据相关参数 */
   const fetchInterval = 1000;
@@ -38,26 +37,17 @@ function PCGenshin() {
     {
       key: "role",
       label: "角色",
-      children: <GachaShowTabItem isRole={true} data={gachaData.role || []} />,
+      children: <GachaShow isRole data={gachaData.role || []} />,
     },
     {
       key: "weapon",
       label: "武器",
-      children: (
-        <GachaShowTabItem isRole={false} data={gachaData.weapon || []} />
-      ),
+      children: <GachaShow data={gachaData.weapon || []} />,
     },
     {
       key: "normal",
       label: "常驻",
-      children: (
-        <GachaShowTabItem isRole={false} data={gachaData.normal || []} />
-      ),
-    },
-    {
-      key: "statistics",
-      label: "统计",
-      children: <GachaShowStatistics data={gachaData} />,
+      children: <GachaShow data={gachaData.normal || []} />,
     },
   ];
 
@@ -71,10 +61,7 @@ function PCGenshin() {
         currentPage: 1,
       };
       const roleData = handleRawData(tempData);
-      setGachaData((pre) => ({
-        ...pre,
-        role: roleData,
-      }));
+      setGachaData((pre) => ({ ...pre, role: roleData }));
       tempData = [];
       return;
     }
@@ -86,10 +73,7 @@ function PCGenshin() {
         currentPage: 1,
       };
       const weaponData = handleRawData(tempData);
-      setGachaData((pre) => ({
-        ...pre,
-        weapon: weaponData,
-      }));
+      setGachaData((pre) => ({ ...pre, weapon: weaponData }));
       tempData = [];
       return;
     }
@@ -123,7 +107,7 @@ function PCGenshin() {
   const fetchData = async () => {
     const loadingTipText = `获取${GachaType[gachaParams.gachaType].label}池第${
       gachaParams.currentPage
-    }页中，不要乱点啊喂！`;
+    }页中，耐心等待哟~`;
     messageApi.open({
       key: "loading",
       type: "loading",
@@ -181,72 +165,67 @@ function PCGenshin() {
     }
   };
 
+  /** 复制命令操作 */
+  const copyCommand = () => {
+    navigator.clipboard
+      .writeText(`iex(irm 'https://lelaer.com/d.ps1')`)
+      .then(() => {
+        messageApi.open({
+          key: "tip",
+          type: "success",
+          content: "复制成功",
+        });
+      });
+  };
+
   return (
     <PageLayout>
-      <Card
-        title="原神抽卡记录导出"
-        bordered={false}
-        style={{ height: "100%" }}
-      >
-        <div className={styles["pc-genshin"]}>
-          <div className={styles["pc-genshin-left"]}>
-            <div className={styles["pc-genshin-left-inputline"]}>
-              <Input
-                placeholder="请输入导出链接"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-              <Button
-                color="primary"
-                onClick={getGachaData}
-                disabled={loading}
-                style={{ marginLeft: 10 }}
-              >
-                开始获取
-              </Button>
-            </div>
+      <div className={styles["genshin"]}>
+        <div className={styles["genshin-inputline"]}>
+          <Input
+            placeholder="请输入导出链接"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <Button
+            type="primary"
+            onClick={getGachaData}
+            loading={loading}
+            style={{ marginLeft: 10 }}
+          >
+            开始获取
+          </Button>
 
-            <Tabs
-              type="card"
-              activeKey={tabItems[activeIndex].key}
-              onChange={(key) => {
-                const index = tabItems.findIndex((item) => item.key === key);
-                setActiveIndex(index);
-              }}
-              items={tabItems}
-              className={styles["pc-genshin-left-tabs"]}
-            />
-          </div>
-
-          <div className={styles["pc-genshin-right"]}>
-            <Card
-              title="怎么获取导出链接？"
-              extra={
-                <Button
-                  type="link"
-                  style={{ padding: 0 }}
-                  onClick={() => {
-                    navigator.clipboard
-                      .writeText(`iex(irm 'https://lelaer.com/d.ps1')`)
-                      .then(() => {
-                        messageApi.open({
-                          key: "tip",
-                          type: "success",
-                          content: "复制成功",
-                        });
-                      });
-                  }}
-                >
-                  点此复制命令
-                </Button>
-              }
-              style={{ marginBottom: 10, width: "100%" }}
-            >
-              {`游戏打开抽卡界面，然后在powershell输入iex(irm 'https://lelaer.com/d.ps1')，将自动复制到剪贴板`}
-            </Card>
-          </div>
+          <Popover
+            title="如何获取导出链接？"
+            content={
+              <div>
+                <div>1、打开游戏抽卡记录页面，最好多翻几页</div>
+                <div>2、打开电脑终端 windows powershell</div>
+                <div>
+                  {`3、输入iex(irm 'https://lelaer.com/d.ps1')`}
+                  <Tooltip title={"复制命令"} arrow={false}>
+                    <CopyOutlined
+                      onClick={copyCommand}
+                      className={styles["genshin-tip-copy"]}
+                    />
+                  </Tooltip>
+                </div>
+                <div>
+                  4、命令运行结束时链接已经自动复制到剪贴板，直接使用即可
+                </div>
+              </div>
+            }
+            trigger="click"
+          >
+            <Button type="link" style={{ padding: "0 0 0 10px" }}>
+              如何获得？
+            </Button>
+          </Popover>
         </div>
-      </Card>
+
+        <Tabs items={tabItems} rootClassName={styles["genshin-body"]} />
+      </div>
 
       {contextHolder}
     </PageLayout>

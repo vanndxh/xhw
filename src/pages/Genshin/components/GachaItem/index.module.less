@@ -1,0 +1,38 @@
+.gacha-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: 5px 0;
+  max-width: 500px;
+
+  .gacha-item-pic {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .gacha-item-name {
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  .gacha-item-progress {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 0;
+    margin-bottom: 0;
+    flex: 1;
+
+    :global {
+      .ant-progress-inner {
+        display: flex;
+      }
+    }
+  }
+
+  .gacha-item-count {
+    width: 20px;
+    margin-left: 20px;
+  }
+}
