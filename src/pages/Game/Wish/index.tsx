@@ -30,7 +30,7 @@ function Wish() {
       <div className={styles["wish-header"]}>
         <CloseOutlined
           className={styles["wish-header-close"]}
-          onClick={() => navigate("/game/index")}
+          onClick={() => navigate("/game/home")}
         />
 
         <div>原石：1500</div>

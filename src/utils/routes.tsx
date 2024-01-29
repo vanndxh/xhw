@@ -2,8 +2,7 @@ import Index from "@/pages/index";
 import Genshin from "@/pages/Genshin";
 import GPT from "@/pages/GPT";
 import Docs from "@/pages/Docs";
-import GameIndex from "@/pages/Game/GameIndex";
-import Wish from "@/pages/Game/Wish";
+import * as Game from "@/pages/Game";
 
 export const routes = [
   { path: "/", element: <Index /> },
@@ -13,8 +12,9 @@ export const routes = [
   {
     path: "/game",
     children: [
-      { path: "index", element: <GameIndex /> },
-      { path: "wish", element: <Wish /> },
+      { path: "home", element: <Game.Home /> },
+      { path: "wish", element: <Game.Wish /> },
+      { path: "role", element: <Game.Role /> },
     ],
   },
 ];

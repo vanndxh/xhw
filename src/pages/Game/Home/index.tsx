@@ -13,7 +13,7 @@ import { Button } from "antd";
 
 interface Props {}
 
-function GameIndex(props: Props) {
+export default function Home(props: Props) {
   const navigate = useNavigate();
   const actions = [
     {
@@ -28,6 +28,7 @@ function GameIndex(props: Props) {
     {
       label: "角色",
       icon: <UserOutlined style={{ fontSize: 24 }} />,
+      onClick: () => navigate("/game/role"),
     },
   ];
 
@@ -65,4 +66,3 @@ function GameIndex(props: Props) {
     </div>
   );
 }
-export default GameIndex;

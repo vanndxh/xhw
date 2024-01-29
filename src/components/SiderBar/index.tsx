@@ -63,7 +63,7 @@ export default function SiderBar() {
       <div className={styles["sider-bar-bottom"]}>
         <RadarChartOutlined
           className={styles["sider-bar-bottom-url"]}
-          onClick={() => navigate("/game/index")}
+          onClick={() => navigate("/game/home")}
         />
 
         <GithubOutlined
