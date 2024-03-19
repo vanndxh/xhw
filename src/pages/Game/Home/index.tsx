@@ -1,6 +1,7 @@
 /**
  * @file 游戏主页
  */
+import { Button } from "antd";
 import {
   UserOutlined,
   StarOutlined,
@@ -9,7 +10,6 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.less";
-import { Button } from "antd";
 
 interface Props {}
 
