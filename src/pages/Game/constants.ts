@@ -19,7 +19,7 @@ export const roleList = [
   {
     name: "万叶",
     id: 2,
-    picUrl: "https://patchwiki.biligame.com/images/ys/d/da/5gzl19235uvm0mxu3w45hqnb27f0mn6.png",
+    picUrl: "https://patchwiki.biligame.com/images/ys/3/3a/e1n6v73p785ne6kew41q9snh45zrup2.png",
     source: RoleSourceKey.GENSHIN,
   },
 ];

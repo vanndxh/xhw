@@ -2,19 +2,19 @@
  * @file 游戏主页
  */
 import { Button } from "antd";
-import {
-  UserOutlined,
-  StarOutlined,
-  SettingOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, StarOutlined, SettingOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.less";
+import { useEffect, useState } from "react";
+import { safeParse } from "@/utils/utils";
 
 interface Props {}
 
 export default function Home(props: Props) {
   const navigate = useNavigate();
+
+  const [userData, setUserData] = useState();
+
   const actions = [
     {
       label: "设置",
@@ -35,24 +35,35 @@ export default function Home(props: Props) {
   /** 打怪逻辑 */
   const handleFight = () => {};
 
+  useEffect(() => {
+    // 玩家数据初始化
+
+    if (!localStorage.getItem("userData")) {
+      const initData = {
+        pulls: 1000,
+        history: [],
+        infinite: false,
+        pullCount: 0,
+        fightCount: 0,
+        level: 0,
+      };
+      localStorage.setItem("userData", JSON.stringify(initData));
+    } else {
+      setUserData(safeParse(localStorage.getItem("userData")));
+    }
+  }, []);
+
   return (
     <div className={styles["game-index"]}>
       <div className={styles["game-index-header"]}>
         <div className={styles["game-index-header-title"]}>
-          <HomeOutlined
-            className={styles["game-index-header-title-icon"]}
-            onClick={() => navigate("/pc")}
-          />
+          <HomeOutlined className={styles["game-index-header-title-icon"]} onClick={() => navigate("/pc")} />
           <div style={{ fontWeight: "bold", fontSize: 18 }}>崩坏：原神铁道</div>
         </div>
 
         <div className={styles["game-index-header-action"]}>
           {actions.map((i) => (
-            <div
-              className={styles["game-index-header-action-item"]}
-              key={i.label}
-              onClick={i?.onClick}
-            >
+            <div className={styles["game-index-header-action-item"]} key={i.label} onClick={i?.onClick}>
               <div>{i.icon}</div>
               <div>{i.label}</div>
             </div>

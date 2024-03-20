@@ -2,21 +2,11 @@
  * @file chat gpt 国内镜像
  */
 import { useState } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  Empty,
-  Input,
-  message,
-  Modal,
-  Select,
-  Spin,
-} from "antd";
+import { Avatar, Button, Card, Empty, Input, message, Modal, Select, Spin } from "antd";
 import { Configuration, CreateChatCompletionRequest, OpenAIApi } from "openai";
 import { RestOutlined, SendOutlined, UserOutlined } from "@ant-design/icons";
 import PageLayout from "../../components/PageLayout";
-import { iconUrl } from "@/utils/constants";
+import { PicUrl } from "@/utils/constants";
 import styles from "./index.module.less";
 
 function GPT() {
@@ -63,11 +53,7 @@ function GPT() {
     } as CreateChatCompletionRequest);
     const returnMessage = res?.data?.choices?.[0]?.message;
     if (returnMessage) {
-      setHistory([
-        ...history,
-        { role: "user", content: questionValue },
-        returnMessage,
-      ]);
+      setHistory([...history, { role: "user", content: questionValue }, returnMessage]);
     }
     setLoading(false);
   };
@@ -81,33 +67,20 @@ function GPT() {
               {history?.map((i, index) => (
                 <div key={index} className={styles["gpt-history-item"]}>
                   {i?.role === "user" ? (
-                    <Avatar
-                      shape="square"
-                      size="small"
-                      icon={<UserOutlined />}
-                    />
+                    <Avatar shape="square" size="small" icon={<UserOutlined />} />
                   ) : (
-                    <Avatar shape="square" size="small" src={iconUrl.gpt} />
+                    <Avatar shape="square" size="small" src={PicUrl.gpt} />
                   )}
                   <span style={{ marginLeft: 10 }}>{i?.content}</span>
                 </div>
               ))}
             </Spin>
 
-            {!history?.length && (
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description="您还没提问~"
-              />
-            )}
+            {!history?.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="您还没提问~" />}
           </div>
 
           <div className={styles["gpt-input"]}>
-            <Select
-              defaultValue="gpt-3.5-turbo"
-              style={{ marginRight: 10, width: 180 }}
-              options={models}
-            />
+            <Select defaultValue="gpt-3.5-turbo" style={{ marginRight: 10, width: 180 }} options={models} />
             <Input
               value={questionValue}
               placeholder="请输入您的问题~"
@@ -116,12 +89,7 @@ function GPT() {
               }}
               onPressEnter={queryGptApi}
             />
-            <Button
-              onClick={queryGptApi}
-              style={{ marginLeft: 10 }}
-              loading={loading}
-              icon={<SendOutlined />}
-            />
+            <Button onClick={queryGptApi} style={{ marginLeft: 10 }} loading={loading} icon={<SendOutlined />} />
             <Button
               onClick={() => {
                 Modal.confirm({
