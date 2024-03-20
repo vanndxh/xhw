@@ -13,12 +13,14 @@ import RoleCard from "../components/RoleCard";
 import { PicUrl } from "@/utils/constants";
 import { getUserData, updateUserData } from "../utils";
 import { getRandomItemFromArray } from "@/utils/utils";
+import HistoryModal from "../HistoryModal";
 
 function Wish() {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState<ObjectType | undefined>();
   const [showData, setShowData] = useState<ObjectType[]>([]);
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   /** 抽卡数据模拟 */
   const handleWish = (pulls: number) => {
@@ -72,8 +74,11 @@ function Wish() {
       <div className={styles["wish-header"]}>
         <CloseOutlined className={styles["wish-header-close"]} onClick={() => navigate("/game/home")} />
 
-        <div>
+        <div style={{ display: "flex", alignItems: "center" }}>
           当前水位： {userData?.level || 0} 剩余抽数：{userData?.pulls || 0}
+          <Button onClick={() => setHistoryOpen(true)} style={{ marginLeft: 10 }}>
+            查看记录
+          </Button>
         </div>
       </div>
 
@@ -109,6 +114,8 @@ function Wish() {
           十连抽
         </Button>
       </div>
+
+      <HistoryModal open={historyOpen} onCancel={() => setHistoryOpen(false)} />
     </div>
   );
 }
