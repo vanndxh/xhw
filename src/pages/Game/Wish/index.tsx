@@ -7,13 +7,14 @@ import { CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
-import { roleList } from "../constants";
-import styles from "./index.module.less";
-import RoleCard from "../components/RoleCard";
-import { PicUrl } from "@/utils/constants";
-import { getUserData, updateUserData } from "../utils";
+import RoleCard, { RoleCardProps } from "../components/RoleCard";
+import HistoryModal from "../components/HistoryModal";
 import { getRandomItemFromArray } from "@/utils/utils";
-import HistoryModal from "../HistoryModal";
+import { getUserData, updateUserData } from "../utils";
+import { PicUrl } from "@/utils/constants";
+import { roleList } from "../constants";
+
+import styles from "./index.module.less";
 
 function Wish() {
   const navigate = useNavigate();
@@ -62,7 +63,9 @@ function Wish() {
     });
 
     // 渲染本次抽卡结果
-    setShowData(res);
+    setTimeout(() => {
+      setShowData(res);
+    }, 100);
   };
 
   useEffect(() => {
@@ -85,13 +88,7 @@ function Wish() {
       <div className={styles["wish-show"]}>
         {showData?.map((i, index) => (
           <div key={index} className={styles["wish-show-item"]}>
-            <RoleCard
-              {...(i as {
-                name: string;
-                picUrl: string;
-                isGold?: boolean;
-              })}
-            />
+            <RoleCard {...(i as RoleCardProps)} />
           </div>
         ))}
       </div>

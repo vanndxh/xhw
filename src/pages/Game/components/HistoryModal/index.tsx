@@ -2,8 +2,8 @@
  * @file 抽卡记录弹窗
  */
 import { Modal, Table } from "antd";
-import { getUserData } from "../utils";
-import { RoleSource } from "../constants";
+import { getUserData } from "../../utils";
+import { RoleSource } from "../../constants";
 
 interface Props {
   open: boolean;

@@ -1,19 +1,15 @@
 /**
  * @file 游戏主页
  */
-import { Button } from "antd";
+import { useEffect } from "react";
+import { Button, message } from "antd";
 import { UserOutlined, StarOutlined, SettingOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { getUserData, updateUserData } from "../utils";
 import styles from "./index.module.less";
-import { useEffect, useState } from "react";
-import { safeParse } from "@/utils/utils";
 
-interface Props {}
-
-export default function Home(props: Props) {
+export default function Home() {
   const navigate = useNavigate();
-
-  const [userData, setUserData] = useState();
 
   const actions = [
     {
@@ -33,12 +29,17 @@ export default function Home(props: Props) {
   ];
 
   /** 打怪逻辑 */
-  const handleFight = () => {};
+  const handleFight = () => {
+    message.config({ maxCount: 3 });
+    message.success(`恭喜你成功击败了怪物，获得抽数10，剩余总数${getUserData().pulls + 10}`);
+    updateUserData({
+      pulls: getUserData().pulls + 10,
+    });
+  };
 
   useEffect(() => {
     // 玩家数据初始化
-
-    if (!localStorage.getItem("userData")) {
+    if (!getUserData) {
       const initData = {
         pulls: 1000,
         history: [],
@@ -48,8 +49,6 @@ export default function Home(props: Props) {
         level: 0,
       };
       localStorage.setItem("userData", JSON.stringify(initData));
-    } else {
-      setUserData(safeParse(localStorage.getItem("userData")));
     }
   }, []);
 
@@ -57,7 +56,7 @@ export default function Home(props: Props) {
     <div className={styles["game-index"]}>
       <div className={styles["game-index-header"]}>
         <div className={styles["game-index-header-title"]}>
-          <HomeOutlined className={styles["game-index-header-title-icon"]} onClick={() => navigate("/pc")} />
+          <HomeOutlined className={styles["game-index-header-title-icon"]} onClick={() => navigate("/genshin")} />
           <div style={{ fontWeight: "bold", fontSize: 18 }}>崩坏：原神铁道</div>
         </div>
 

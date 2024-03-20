@@ -3,16 +3,16 @@
  * @description 用于抽卡、列表等页面
  */
 import { Image } from "antd";
-import styles from "./index.module.less";
 import { PicUrl } from "@/utils/constants";
+import styles from "./index.module.less";
 
-interface Props {
+export interface RoleCardProps {
   name: string;
   picUrl: string;
   isGold?: boolean;
 }
 
-export default function RoleCard(props: Props) {
+export default function RoleCard(props: RoleCardProps) {
   const { name = "", picUrl = "", isGold } = props;
   return (
     <div className={styles["role-card"]} style={{ border: `5px solid ${isGold ? "gold" : "blue"}` }}>
