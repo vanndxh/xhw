@@ -38,7 +38,7 @@ export default function HistoryModal(props: Props) {
   ];
   return (
     <Modal title="抽卡记录" width={800} open={open} onCancel={onCancel} footer={null}>
-      <Table dataSource={getUserData()?.history?.reverse()} columns={columns} size="middle" />
+      <Table dataSource={getUserData()?.history?.reverse()} columns={columns} size="middle" rowKey="time" />
     </Modal>
   );
 }

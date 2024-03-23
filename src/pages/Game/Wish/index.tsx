@@ -18,14 +18,14 @@ import styles from "./index.module.less";
 
 function Wish() {
   const navigate = useNavigate();
+  const userData = getUserData();
 
-  const [userData, setUserData] = useState<ObjectType | undefined>();
   const [showData, setShowData] = useState<ObjectType[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
 
   /** 抽卡数据模拟 */
   const handleWish = (pulls: number) => {
-    if (userData?.pulls < pulls) {
+    if (userData?.pulls < pulls && !userData?.infinite) {
       message.error("道具不足");
       return;
     }
@@ -65,7 +65,7 @@ function Wish() {
     updateUserData({
       history: [...userData?.history, ...res?.filter((i) => i?.isGold)],
       pullCount: userData?.pullCount + pulls,
-      pulls: userData?.pulls - pulls,
+      pulls: userData?.pulls - (userData?.infinite ? 0 : pulls),
       level: tempLevel - 1,
     });
 
@@ -74,10 +74,6 @@ function Wish() {
       setShowData(res);
     }, 100);
   };
-
-  useEffect(() => {
-    setUserData(getUserData());
-  }, [getUserData()]);
 
   return (
     <div className={styles["wish"]}>
