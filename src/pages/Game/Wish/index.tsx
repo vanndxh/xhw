@@ -46,7 +46,7 @@ function Wish() {
       const randomRole = getRandomItemFromArray(roleList);
       res.push(
         isGetGold
-          ? { ...randomRole, isGold: true, time: dayjs().format("YYYY-MM-DD HH:mm:ss") }
+          ? { ...randomRole, isGold: true, time: dayjs().format("YYYY-MM-DD HH:mm:ss"), pulls: tempLevel }
           : { name: "垃圾", picUrl: PicUrl.trashBin }
       );
 

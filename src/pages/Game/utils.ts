@@ -14,6 +14,8 @@ export type HistoryType = {
   time?: string;
   /** 来源 */
   source?: RoleSourceKey;
+  /** 多少抽出的 */
+  pulls?: number;
 };
 
 /** 用户数据类型 */

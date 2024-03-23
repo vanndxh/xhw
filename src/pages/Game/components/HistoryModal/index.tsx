@@ -25,6 +25,11 @@ export default function HistoryModal(props: Props) {
       key: "time",
     },
     {
+      title: "水位",
+      dataIndex: "pulls",
+      key: "pulls",
+    },
+    {
       title: "来源",
       dataIndex: "source",
       key: "source",
