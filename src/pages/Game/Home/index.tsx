@@ -50,6 +50,13 @@ export default function Home() {
       };
       localStorage.setItem("userData", JSON.stringify(initData));
     }
+
+    // 监听快捷键
+    window.addEventListener("keyup", (e) => {
+      if (e.code === "KeyC") {
+        navigate("/game/role");
+      }
+    });
   }, []);
 
   return (
