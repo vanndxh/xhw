@@ -11,14 +11,20 @@ export const RoleSource = {
 /** 角色列表 */
 export const roleList = [
   {
+    name: "莫娜",
+    id: "0001",
+    picUrl: "https://patchwiki.biligame.com/images/ys/c/ce/refnobe859mskudq9i634djaniepwvt.png",
+    source: RoleSourceKey.GENSHIN,
+  },
+  {
     name: "魈",
-    id: 1,
+    id: "1",
     picUrl: "https://patchwiki.biligame.com/images/ys/d/da/5gzl19235uvm0mxu3w45hqnb27f0mn6.png",
     source: RoleSourceKey.GENSHIN,
   },
   {
     name: "万叶",
-    id: 2,
+    id: "2",
     picUrl: "https://patchwiki.biligame.com/images/ys/3/3a/e1n6v73p785ne6kew41q9snh45zrup2.png",
     source: RoleSourceKey.GENSHIN,
   },

@@ -13,13 +13,18 @@ export interface RoleCardProps {
   badgeText?: string;
 }
 
+const goldColor = "gold";
+const blueColor = "#1677ff";
+
 export default function RoleCard(props: RoleCardProps) {
   const { name = "", picUrl = "", isGold, badgeText = "" } = props;
+  const finalColor = isGold ? goldColor : blueColor;
+
   return (
     <Badge count={badgeText}>
-      <div className={styles["role-card"]} style={{ border: `5px solid ${isGold ? "gold" : "blue"}` }}>
+      <div className={styles["role-card"]} style={{ border: `5px solid ${finalColor}` }}>
         <Image width={100} height={100} src={picUrl || PicUrl.question} preview={false} style={{ borderRadius: 24 }} />
-        <div className={styles["role-card-name"]} style={{ color: isGold ? "gold" : "blue" }}>
+        <div className={styles["role-card-name"]} style={{ color: finalColor }}>
           {name}
         </div>
       </div>

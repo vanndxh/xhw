@@ -2,8 +2,8 @@
  * @file 游戏 - 抽卡模拟器
  */
 import { useEffect, useState } from "react";
-import { Button, message } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { Breadcrumb, Button, message, Space, Tooltip, Typography } from "antd";
+import { BarChartOutlined, DollarOutlined, HomeOutlined, PlusOutlined, StockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
@@ -44,9 +44,16 @@ function Wish() {
 
       // 4.根据是否出金给数组塞入合适内容
       const randomRole = getRandomItemFromArray(roleList);
+      const isNewRole = userData?.history?.findIndex((i) => i?.id === randomRole.id) === -1;
       res.push(
         isGetGold
-          ? { ...randomRole, isGold: true, time: dayjs().format("YYYY-MM-DD HH:mm:ss"), pulls: tempLevel }
+          ? {
+              ...randomRole,
+              isGold: true,
+              time: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+              pulls: tempLevel,
+              badgeText: isNewRole ? "NEW" : "",
+            }
           : { name: "垃圾", picUrl: PicUrl.trashBin }
       );
 
@@ -75,14 +82,29 @@ function Wish() {
   return (
     <div className={styles["wish"]}>
       <div className={styles["wish-header"]}>
-        <CloseOutlined className={styles["wish-header-close"]} onClick={() => navigate("/game/home")} />
+        <Breadcrumb
+          items={[{ href: "/game/home", title: <HomeOutlined style={{ fontSize: 16 }} /> }, { title: "角色祈愿" }]}
+          style={{ fontSize: 16 }}
+        />
 
-        <div style={{ display: "flex", alignItems: "center" }}>
-          当前水位： {userData?.level || 0} 剩余抽数：{userData?.pulls || 0}
-          <Button onClick={() => setHistoryOpen(true)} style={{ marginLeft: 10 }}>
+        <Space className={styles["wish-header-infos"]}>
+          <Tooltip title="当前水位" arrow={false}>
+            <Button icon={<StockOutlined />}>
+              <Typography.Text strong>{userData?.level || 0}</Typography.Text>
+            </Button>
+          </Tooltip>
+
+          <Tooltip title="剩余抽数" arrow={false}>
+            <Button icon={<DollarOutlined />} onClick={() => navigate("/game/home")}>
+              <Typography.Text strong>{userData?.pulls || 0}</Typography.Text>
+              <PlusOutlined />
+            </Button>
+          </Tooltip>
+
+          <Button icon={<BarChartOutlined />} onClick={() => setHistoryOpen(true)}>
             查看记录
           </Button>
-        </div>
+        </Space>
       </div>
 
       <div className={styles["wish-show"]}>

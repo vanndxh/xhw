@@ -9,7 +9,7 @@ export type HistoryType = {
   /** 名称 */
   name?: string;
   /** id */
-  id?: number;
+  id?: string;
   /** 抽卡时间 */
   time?: string;
   /** 来源 */
@@ -40,4 +40,9 @@ export const getUserData = () => safeParse(localStorage.getItem("userData"));
 /** 更新用户数据，可以是部分 */
 export const updateUserData = (data: UserDataType) => {
   localStorage.setItem("userData", JSON.stringify({ ...getUserData(), ...data }));
+};
+
+/** 用户是否拥有某角色 */
+export const getIsHaveRole = (id: string) => {
+  return getUserData()?.history?.filter((h) => h.id === id)?.length !== 0;
 };
