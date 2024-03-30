@@ -60,6 +60,10 @@ function Role() {
       firstGetTime: targetHistory?.[0]?.time,
       // 共获得几次
       totalTimes: targetHistory?.length,
+      // 平均每次获得抽数
+      avgPulls: (
+        targetHistory?.map((i) => i?.pulls)?.reduce((pre, cur) => pre + cur, 0) / targetHistory?.length
+      ).toFixed(1),
     };
   }, [curRoleId]);
 
@@ -104,7 +108,11 @@ function Role() {
                     span={4}
                     key={i.id}
                     className={styles["role-list-item"]}
-                    onClick={() => setCurRoleId(curRoleId === i.id ? undefined : i.id)}
+                    onClick={() => {
+                      if (isHaveRole) {
+                        setCurRoleId(curRoleId === i.id ? undefined : i.id);
+                      }
+                    }}
                     style={{
                       filter: isHaveRole ? "none" : "grayscale(1)",
                       cursor: isHaveRole ? "pointer" : "not-allowed",
@@ -129,8 +137,12 @@ function Role() {
                   children: targetRoleData?.firstGetTime,
                 },
                 {
-                  label: "共获得几次",
+                  label: "共获得次数",
                   children: targetRoleData?.totalTimes,
+                },
+                {
+                  label: "平均每次获得抽数",
+                  children: targetRoleData?.avgPulls,
                 },
               ]}
               column={1}

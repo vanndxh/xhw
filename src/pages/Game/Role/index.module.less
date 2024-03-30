@@ -5,6 +5,7 @@
   flex-direction: column;
   height: calc(100vh - 48px);
   padding: 24px;
+  overflow: hidden;
 
   .role-header {
     width: 100%;
@@ -14,7 +15,7 @@
 
   .role-body {
     width: 100%;
-    flex: 1;
+    height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +38,7 @@
       .role-list-box {
         overflow: auto;
         width: 100%;
-        flex: 1;
+        height: calc(100% - 52px);
 
         .role-list-item {
           display: flex;

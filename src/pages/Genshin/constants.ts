@@ -32,7 +32,7 @@ export const GachaType = {
 
 export const rolePicUrl = {
   已垫: PicUrl.question,
-  提纳里: "https://patchwiki.biligame.com/images/ys/e/e5/9bq657i9ork1vn2uzv3fpd7p5q8dlqc.png",
+  提纳里: "",
   白术: "https://patchwiki.biligame.com/images/ys/thumb/1/14/rkydprgsuw6uaxbm4wotnaj8dw2v30a.png/60px-%E7%99%BD%E6%9C%AF%E5%A4%B4%E5%83%8F.png",
   妮露: "https://patchwiki.biligame.com/images/ys/e/e1/94sj2gmd3pywnqv7ep9fdn5xrkfxaum.png",
   赛诺: "https://patchwiki.biligame.com/images/ys/7/72/4yr49hl7qyuzcku5hnjrls2zrswcen5.png",
