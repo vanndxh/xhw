@@ -11,6 +11,9 @@ import styles from "./index.module.less";
 
 export default function Home() {
   const navigate = useNavigate();
+  message.config({ maxCount: 3 });
+  const [messageApi, contextHolder] = message.useMessage();
+
   const [settingOpen, setSettingOpen] = useState(false);
 
   const actions = [
@@ -33,8 +36,7 @@ export default function Home() {
 
   /** 打怪逻辑 */
   const handleFight = () => {
-    message.config({ maxCount: 3 });
-    message.success(`恭喜你成功击败了怪物，获得抽数10，剩余总数${getUserData().pulls + 10}`);
+    messageApi.success(`恭喜你成功击败了怪物，获得抽数10，剩余总数${getUserData().pulls + 10}`);
     updateUserData({
       pulls: getUserData().pulls + 10,
     });
@@ -85,6 +87,7 @@ export default function Home() {
       </div>
 
       <SettingModal open={settingOpen} onCancel={() => setSettingOpen(false)} />
+      {contextHolder}
     </div>
   );
 }

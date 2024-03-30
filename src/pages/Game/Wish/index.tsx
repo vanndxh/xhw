@@ -1,8 +1,8 @@
 /**
- * @file 游戏 - 抽卡模拟器
+ * @file 角色祈愿
  */
-import { useEffect, useState } from "react";
-import { Breadcrumb, Button, message, Space, Tooltip, Typography } from "antd";
+import { useState } from "react";
+import { Breadcrumb, Button, message, Select, Space, Tooltip, Typography } from "antd";
 import { BarChartOutlined, DollarOutlined, HomeOutlined, PlusOutlined, StockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -22,6 +22,7 @@ function Wish() {
 
   const [showData, setShowData] = useState<ObjectType[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [targetRole, setTargetRole] = useState();
 
   /** 抽卡数据模拟 */
   const handleWish = (pulls: number) => {
@@ -42,13 +43,17 @@ function Wish() {
       // 3.概率跟随机数比，确认当前抽是否获得五星
       const isGetGold = Math.random() * 100 < percent;
 
-      // 4.根据是否出金给数组塞入合适内容
+      // 4.根据是否出金给数组塞入合适内容：如果有定轨，则有50%概率为定轨角色，反之直接随机
       const randomRole = getRandomItemFromArray(roleList);
-      const isNewRole = userData?.history?.findIndex((i) => i?.id === randomRole.id) === -1;
+      const target = roleList.find((i) => i.name === targetRole);
+      const targetFinal = Math.random() > 0.5 ? target : randomRole;
+      const finalRole = targetRole ? targetFinal : randomRole;
+
+      const isNewRole = userData?.history?.findIndex((i) => i?.id === finalRole.id) === -1;
       res.push(
         isGetGold
           ? {
-              ...randomRole,
+              ...finalRole,
               isGold: true,
               time: dayjs().format("YYYY-MM-DD HH:mm:ss"),
               pulls: tempLevel,
@@ -84,6 +89,16 @@ function Wish() {
         />
 
         <Space className={styles["wish-header-infos"]}>
+          <Select
+            value={targetRole}
+            onChange={(val) => setTargetRole(val)}
+            options={roleList.map((i) => ({ label: i.name, value: i.name }))}
+            allowClear
+            showSearch
+            placeholder="请选择定轨角色，不选表示随机"
+            style={{ width: 240 }}
+          />
+
           <Tooltip title="当前水位" arrow={false}>
             <Button icon={<StockOutlined />}>
               <Typography.Text strong>{userData?.level || 0}</Typography.Text>
