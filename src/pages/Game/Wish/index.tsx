@@ -127,20 +127,10 @@ function Wish() {
       </div>
 
       <div className={styles["wish-buttons"]}>
-        <Button
-          className={styles["wish-buttons-single"]}
-          onClick={() => {
-            handleWish(1);
-          }}
-        >
+        <Button className={styles["wish-buttons-single"]} onClick={() => handleWish(1)}>
           单抽
         </Button>
-        <Button
-          className={styles["wish-buttons-ten"]}
-          onClick={() => {
-            handleWish(10);
-          }}
-        >
+        <Button className={styles["wish-buttons-ten"]} onClick={() => handleWish(10)}>
           十连抽
         </Button>
       </div>

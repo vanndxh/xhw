@@ -17,6 +17,11 @@ export default function SiderBar() {
       icon: PicUrl.genshin,
     },
     {
+      label: "抽卡模拟游戏",
+      key: "game/home",
+      icon: PicUrl.trashBin,
+    },
+    {
       label: "GPT国内镜像",
       key: "gpt",
       icon: PicUrl.gpt,
@@ -57,20 +62,14 @@ export default function SiderBar() {
       </div>
 
       <div className={styles["sider-bar-bottom"]}>
-        <RadarChartOutlined className={styles["sider-bar-bottom-url"]} onClick={() => navigate("/game/home")} />
-
         <GithubOutlined
           className={styles["sider-bar-bottom-url"]}
-          onClick={() => {
-            window.open("https://github.com/vanndxh");
-          }}
+          onClick={() => window.open("https://github.com/vanndxh", "_blank", "noopener,noreferrer")}
         />
 
         <YuqueOutlined
           className={styles["sider-bar-bottom-url"]}
-          onClick={() => {
-            window.open("https://www.yuque.com/vanndxh/coderv");
-          }}
+          onClick={() => window.open("https://www.yuque.com/vanndxh/coderv", "_blank", "noopener,noreferrer")}
         />
       </div>
     </div>

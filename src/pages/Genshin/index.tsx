@@ -2,15 +2,16 @@
  * @file 原神抽卡记录导出
  */
 import { useState } from "react";
-import { Button, Card, Input, message, Popover, Tabs, Tooltip } from "antd";
+import { Button, Input, message, Popover, Tabs, Tooltip } from "antd";
+import { CopyOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 import PageLayout from "@/components/PageLayout";
 import GachaShow from "./components/GachaShow";
 import { GachaDataType, GachaType, GachaTypeKey } from "./constants";
 import { handleRawData } from "./util";
+
 import styles from "./index.module.less";
-import { CopyOutlined, InfoCircleOutlined } from "@ant-design/icons";
 
 function PCGenshin() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -115,12 +116,19 @@ function PCGenshin() {
       duration: fetchInterval / 1000,
     });
 
-    const getGachaUrl = "/api/mihoyo/event/gacha_info/api/getGachaLog?";
-    const fetchUrl = `${getGachaUrl}${
-      inputValue?.split("?")?.[1].split("#")?.[0]
-    }&gacha_type=${GachaType[gachaParams.gachaType].code}&page=${
-      gachaParams.currentPage
-    }&size=20&end_id=${gachaParams.endId}`;
+    const getGachaUrl = "/api/mihoyo/event/gacha_info/api/getGachaLog";
+    const token = inputValue?.split("?")?.[1].split("#")?.[0];
+    const params = {
+      gacha_type: GachaType[gachaParams.gachaType].code,
+      page: gachaParams.currentPage,
+      size: 20,
+      end_id: gachaParams.endId,
+    };
+    const queryString = Object.keys(params)
+      .map((i) => `&${i}=${params[i]}`)
+      .join("");
+    const fetchUrl = `${getGachaUrl}?${token}${queryString}`;
+
     const res = await axios.get(fetchUrl, { baseURL: "" });
 
     /** 请求失败 */
@@ -167,32 +175,21 @@ function PCGenshin() {
 
   /** 复制命令操作 */
   const copyCommand = () => {
-    navigator.clipboard
-      .writeText(`iex(irm 'https://lelaer.com/d.ps1')`)
-      .then(() => {
-        messageApi.open({
-          key: "tip",
-          type: "success",
-          content: "复制成功",
-        });
+    navigator.clipboard.writeText(`iex(irm 'https://lelaer.com/d.ps1')`).then(() => {
+      messageApi.open({
+        key: "tip",
+        type: "success",
+        content: "复制成功",
       });
+    });
   };
 
   return (
     <PageLayout>
       <div className={styles["genshin"]}>
-        <div className={styles["genshin-inputline"]}>
-          <Input
-            placeholder="请输入导出链接"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <Button
-            type="primary"
-            onClick={getGachaData}
-            loading={loading}
-            style={{ marginLeft: 10 }}
-          >
+        <div className={styles["genshin-input-line"]}>
+          <Input placeholder="请输入导出链接" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+          <Button type="primary" onClick={getGachaData} loading={loading} style={{ marginLeft: 10 }}>
             开始获取
           </Button>
 
@@ -205,15 +202,10 @@ function PCGenshin() {
                 <div>
                   {`3、输入iex(irm 'https://lelaer.com/d.ps1')`}
                   <Tooltip title={"复制命令"} arrow={false}>
-                    <CopyOutlined
-                      onClick={copyCommand}
-                      className={styles["genshin-tip-copy"]}
-                    />
+                    <CopyOutlined onClick={copyCommand} className={styles["genshin-tip-copy"]} />
                   </Tooltip>
                 </div>
-                <div>
-                  4、命令运行结束时链接已经自动复制到剪贴板，直接使用即可
-                </div>
+                <div>4、命令运行结束时链接已经自动复制到剪贴板，直接使用即可</div>
               </div>
             }
             trigger="click"

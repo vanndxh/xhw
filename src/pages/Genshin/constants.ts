@@ -1,5 +1,3 @@
-import { PicUrl } from "@/utils/constants";
-
 export type GachaDataType = {
   role?: ObjectType[];
   weapon?: ObjectType[];
@@ -28,45 +26,4 @@ export const GachaType = {
     label: "常驻",
     code: "200",
   },
-};
-
-export const rolePicUrl = {
-  已垫: PicUrl.question,
-  提纳里: "",
-  白术: "https://patchwiki.biligame.com/images/ys/thumb/1/14/rkydprgsuw6uaxbm4wotnaj8dw2v30a.png/60px-%E7%99%BD%E6%9C%AF%E5%A4%B4%E5%83%8F.png",
-  妮露: "https://patchwiki.biligame.com/images/ys/e/e1/94sj2gmd3pywnqv7ep9fdn5xrkfxaum.png",
-  赛诺: "https://patchwiki.biligame.com/images/ys/7/72/4yr49hl7qyuzcku5hnjrls2zrswcen5.png",
-  艾尔海森: "https://patchwiki.biligame.com/images/ys/e/e2/nugjaod5qmffz3tbtt8is50d8hf1u5r.png",
-  流浪者: "https://patchwiki.biligame.com/images/ys/6/69/ottjnyh4hg2kid1zqfiqlqext5w5v84.png",
-  枫原万叶: "https://patchwiki.biligame.com/images/ys/6/6a/e1n6v73p785ne6kew41q9snh45zrup2.png",
-  纳西妲: "https://patchwiki.biligame.com/images/ys/7/7e/g5x8lguvxfq0hkv211yfecjdvm0xhe7.png",
-  迪希雅: "https://patchwiki.biligame.com/images/ys/9/98/n64mnzi2yy03qpzld3in619wijfqyj6.png",
-  夜兰: "https://patchwiki.biligame.com/images/ys/4/42/e49y27vv8lhk0a9h199pgc0ramj3dk4.png",
-  神里绫人: "https://patchwiki.biligame.com/images/ys/c/c7/sdgu6bh00rod7lypt9l9c9xlxojtjhl.png",
-  八重神子: "https://patchwiki.biligame.com/images/ys/a/a4/0plzsmjpgzzpldn00zqijgfybgx2pac.png",
-  申鹤: "https://patchwiki.biligame.com/images/ys/6/65/793kuoybdf409lnzwevsmd8ipnel1d2.png",
-  荒泷一斗: "https://patchwiki.biligame.com/images/ys/5/55/5sdwiryq6bjb3tjxxtg1e8njdmggirp.png",
-  珊瑚宫心海: "https://patchwiki.biligame.com/images/ys/b/bf/kyfltllg1qaoki7pwpefy7xh8022duy.png",
-  雷电将军: "https://patchwiki.biligame.com/images/ys/1/11/e9o4gu6ztf7zytnvvkeoerbevkjfwjr.png",
-  宵宫: "https://patchwiki.biligame.com/images/ys/b/bc/pz347ut911ktapyemd3ewiyx1dwv3te.png",
-  神里绫华: "https://patchwiki.biligame.com/images/ys/4/4c/8h931m3f8nkkvjfq3f03c8a9h0f6x69.png",
-  优菈: "https://patchwiki.biligame.com/images/ys/1/1b/jf6qfoaq6q48jx6lvqb88dgl4xta141.png",
-  胡桃: "https://patchwiki.biligame.com/images/ys/1/19/6x5q4v3ovlgtd5pk7xlqxjdqv1gvf0a.png",
-  魈: "https://patchwiki.biligame.com/images/ys/d/da/5gzl19235uvm0mxu3w45hqnb27f0mn6.png",
-  甘雨: "https://patchwiki.biligame.com/images/ys/3/3c/qr9mmt4ryhcuovbx82pazu3xv7wr19p.png",
-  阿贝多: "https://patchwiki.biligame.com/images/ys/2/21/k1zod68cqa6e89r0poxm9ihfmqfmgvw.png",
-  钟离: "https://patchwiki.biligame.com/images/ys/7/7c/eewy674lo37jwuq9qozyszhz8vo0d8j.png",
-  达达利亚: "https://patchwiki.biligame.com/images/ys/a/af/4v48u6t4v9mfnwmabch9ojskqa1x61a.png",
-  可莉: "https://patchwiki.biligame.com/images/ys/b/b1/rlnhn26076peuvah42o85o2pha5m7am.png",
-  温迪: "https://patchwiki.biligame.com/images/ys/5/58/487eqx6pk6si5abhemvrdkyexskvvbg.png",
-  莫娜: "https://patchwiki.biligame.com/images/ys/c/ce/refnobe859mskudq9i634djaniepwvt.png",
-  刻晴: "https://patchwiki.biligame.com/images/ys/6/64/goj6bb8yj190midok60n2fbkk872090.png",
-  迪卢克: "https://patchwiki.biligame.com/images/ys/9/94/mkpw3ljc2eoea75lhkyccu6mbsbiqnr.png",
-  七七: "https://patchwiki.biligame.com/images/ys/8/8b/049fpv6jcr66mln0nmbbfgigfrkgrzo.png",
-  琴: "https://patchwiki.biligame.com/images/ys/1/1a/g3cl4mrxow8af265n2ajqtnuf99pkfa.png",
-  娜维娅: "https://patchwiki.biligame.com/images/ys/0/04/3bbaccl7ziumc1f9vk1hoo1vpttkd2m.png",
-  芙宁娜: "https://patchwiki.biligame.com/images/ys/1/10/pcfz7nh8676dqxxubrshq17jdu17xn9.png",
-  莱欧斯利: "https://patchwiki.biligame.com/images/ys/d/d7/jvb2oapa38w7k6t4zd9y5x21hex5ku2.png",
-  那维莱特: "https://patchwiki.biligame.com/images/ys/1/16/aism1oli44ck26p72n0gv2elnqq1av7.png",
-  林尼: "https://patchwiki.biligame.com/images/ys/d/d6/tbalaahap33je75krxzg29fmuidcxit.png",
 };
