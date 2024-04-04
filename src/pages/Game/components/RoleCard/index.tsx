@@ -4,6 +4,7 @@
  */
 import { Badge, Image } from "antd";
 import { PicUrl } from "@/utils/constants";
+import { blueColor, goldColor } from "../../constants";
 import styles from "./index.module.less";
 
 export interface RoleCardProps {
@@ -12,9 +13,6 @@ export interface RoleCardProps {
   isGold?: boolean;
   badgeText?: string;
 }
-
-const goldColor = "gold";
-const blueColor = "#1677ff";
 
 export default function RoleCard(props: RoleCardProps) {
   const { name = "", picUrl = "", isGold, badgeText = "" } = props;

@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import { Button, message } from "antd";
 import { UserOutlined, StarOutlined, SettingOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+
 import SettingModal from "../components/SettingModal";
 import { getUserData, updateUserData } from "../utils";
+import { blueColor, goldColor, initUserData, purpleColor } from "../constants";
+
 import styles from "./index.module.less";
 
 export default function Home() {
@@ -35,24 +38,40 @@ export default function Home() {
 
   /** 打怪逻辑 */
   const handleFight = () => {
-    message.success(`恭喜你成功击败了怪物，获得抽数10，剩余总数${getUserData().pulls + 10}`);
+    const percent = Math.random();
+    let res = 1;
+    if (percent < 0.1) {
+      res = 100;
+    } else if (percent < 0.9) {
+      res = 10;
+    }
+
+    const getEnemy = (count) => {
+      if (count === 1) {
+        return <span style={{ color: blueColor }}>普通小怪</span>;
+      }
+      if (count === 10) {
+        return <span style={{ color: purpleColor }}>精英怪</span>;
+      }
+      if (count === 100) {
+        return <span style={{ color: goldColor }}>BOSS</span>;
+      }
+    };
+
+    message.success(
+      <span>
+        恭喜你成功击败了{getEnemy(res)}，获得抽数{res}，剩余总数{getUserData().pulls + res}
+      </span>
+    );
     updateUserData({
-      pulls: getUserData().pulls + 10,
+      pulls: getUserData().pulls + res,
     });
   };
 
   useEffect(() => {
     // 玩家数据初始化
     if (!getUserData()) {
-      const initData = {
-        pulls: 1000,
-        history: [],
-        infinite: false,
-        pullCount: 0,
-        fightCount: 0,
-        level: 0,
-      };
-      localStorage.setItem("userData", JSON.stringify(initData));
+      localStorage.setItem("userData", JSON.stringify(initUserData));
     }
 
     // 监听快捷键
