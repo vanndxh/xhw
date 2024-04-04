@@ -46,21 +46,15 @@ export default function Home() {
       res = 10;
     }
 
-    const getEnemy = (count) => {
-      if (count === 1) {
-        return <span style={{ color: blueColor }}>普通小怪</span>;
-      }
-      if (count === 10) {
-        return <span style={{ color: purpleColor }}>精英怪</span>;
-      }
-      if (count === 100) {
-        return <span style={{ color: goldColor }}>BOSS</span>;
-      }
+    const enemyMap = {
+      1: <span style={{ color: blueColor }}>普通小怪</span>,
+      10: <span style={{ color: purpleColor }}>精英怪</span>,
+      100: <span style={{ color: goldColor }}>BOSS</span>,
     };
 
     message.success(
       <span>
-        恭喜你成功击败了{getEnemy(res)}，获得抽数{res}，剩余总数{getUserData().pulls + res}
+        恭喜你成功击败了{enemyMap[res]}，获得抽数{res}，剩余总数{getUserData().pulls + res}
       </span>
     );
     updateUserData({

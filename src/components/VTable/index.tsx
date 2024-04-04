@@ -1,4 +1,8 @@
-import React, { ReactElement, useState } from "react";
+/**
+ * @file 自定义筛选项+分页器的完整表格组件
+ * @description 练手封装，无实际使用
+ */
+import { ReactElement, useState } from "react";
 import { Button, Form, Pagination, Table, Col, Row, Badge } from "antd";
 import { DownCircleOutlined, UpCircleOutlined } from "@ant-design/icons";
 import styles from "./index.module.less";

@@ -1,3 +1,6 @@
+/**
+ * @file 毛玻璃组件
+ */
 import React from "react";
 
 interface Props {

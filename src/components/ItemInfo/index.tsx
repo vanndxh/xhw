@@ -1,7 +1,6 @@
 /**
  * @file 经典信息展示组件
  * @description 左icon，右两行信息展示
- * @author vanndxh
  */
 import { Image } from "antd";
 import styles from "./index.less";

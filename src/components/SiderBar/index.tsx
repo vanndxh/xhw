@@ -2,10 +2,12 @@
  * @file 边导航栏
  */
 import { Menu, Image } from "antd";
-import { GithubOutlined, RadarChartOutlined, YuqueOutlined } from "@ant-design/icons";
+import { GithubOutlined, YuqueOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import xhw from "@/assets/xhw.jpeg";
+
 import { PicUrl } from "@/utils/constants";
+import xhw from "@/assets/xhw.jpeg";
+
 import styles from "./index.module.less";
 
 export default function SiderBar() {
@@ -27,7 +29,7 @@ export default function SiderBar() {
       icon: PicUrl.gpt,
     },
     {
-      label: "我的文章",
+      label: "学习笔记",
       key: "docs",
       icon: PicUrl.yuque,
     },

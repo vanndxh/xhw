@@ -85,7 +85,7 @@ function Role() {
     <div className={styles["role"]}>
       <Breadcrumb
         items={[{ href: "/game/home", title: <HomeOutlined style={{ fontSize: 16 }} /> }, { title: "角色列表" }]}
-        style={{ fontSize: 16, width: "100%", marginBottom: 20 }}
+        style={{ fontSize: 16, width: "100%" }}
       />
 
       <div className={styles["role-body"]}>
