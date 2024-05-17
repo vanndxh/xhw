@@ -2,7 +2,8 @@
  * @file 抽卡记录弹窗
  */
 import { Modal, Table } from "antd";
-import { getUserData } from "../../utils";
+import { useSnapshot } from "valtio";
+import { userData } from "../../state";
 import { RoleSource } from "../../constants";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 
 export default function HistoryModal(props: Props) {
   const { open, onCancel } = props;
+  const { history } = useSnapshot(userData);
 
   const columns = [
     {
@@ -36,9 +38,10 @@ export default function HistoryModal(props: Props) {
       render: (text) => RoleSource[text],
     },
   ];
+
   return (
     <Modal title="抽卡记录" width={800} open={open} onCancel={onCancel} footer={null}>
-      <Table dataSource={getUserData()?.history?.reverse()} columns={columns} size="middle" rowKey="time" />
+      <Table dataSource={[...history]?.reverse()} columns={columns} size="middle" rowKey="time" />
     </Modal>
   );
 }

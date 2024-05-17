@@ -3,7 +3,8 @@
  */
 import { useState } from "react";
 import { Button, ConfigProvider, Form, Input, Modal, Switch, message } from "antd";
-import { getUserData, updateUserData } from "../../utils";
+import { useSnapshot } from "valtio";
+import { userData } from "../../state";
 
 interface Props {
   open: boolean;
@@ -13,7 +14,8 @@ interface Props {
 export default function SettingModal(props: Props) {
   const { open, onCancel } = props;
 
-  const [infiniteValue, setInfiniteValue] = useState(getUserData()?.infinite);
+  const { infinite } = useSnapshot(userData);
+
   const [inputValue, setInputValue] = useState<string | undefined>();
 
   const fields = [
@@ -24,10 +26,9 @@ export default function SettingModal(props: Props) {
         <Switch
           checkedChildren="开启"
           unCheckedChildren="关闭"
-          checked={infiniteValue}
-          onChange={(val) => {
-            updateUserData({ infinite: val });
-            setInfiniteValue(!infiniteValue);
+          checked={infinite}
+          onChange={() => {
+            userData.infinite = !infinite;
             message.success("设置成功");
           }}
         />

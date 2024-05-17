@@ -1,19 +1,21 @@
 /**
  * @file 游戏主页
  */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, message } from "antd";
 import { UserOutlined, StarOutlined, SettingOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useSnapshot } from "valtio";
 
+import { userData } from "../state";
 import SettingModal from "../components/SettingModal";
-import { getUserData, updateUserData } from "../utils";
-import { blueColor, goldColor, initUserData, purpleColor } from "../constants";
+import { blueColor, goldColor, purpleColor } from "../constants";
 
 import styles from "./index.module.less";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { pulls } = useSnapshot(userData);
   message.config({ maxCount: 3 });
 
   const [settingOpen, setSettingOpen] = useState(false);
@@ -54,27 +56,20 @@ export default function Home() {
 
     message.success(
       <span>
-        恭喜你成功击败了{enemyMap[res]}，获得抽数{res}，剩余总数{getUserData().pulls + res}
+        恭喜你成功击败了{enemyMap[res]}，获得抽数{res}，剩余总数{pulls + res}
       </span>
     );
-    updateUserData({
-      pulls: getUserData().pulls + res,
-    });
+    userData.pulls += res;
   };
 
-  useEffect(() => {
-    // 玩家数据初始化
-    if (!getUserData()) {
-      localStorage.setItem("userData", JSON.stringify(initUserData));
-    }
-
-    // 监听快捷键
-    // window.addEventListener("keyup", (e) => {
-    //   if (e.code === "KeyC") {
-    //     navigate("/game/role");
-    //   }
-    // });
-  }, []);
+  // 监听快捷键
+  // useEffect(() => {
+  // window.addEventListener("keyup", (e) => {
+  //   if (e.code === "KeyC") {
+  //     navigate("/game/role");
+  //   }
+  // });
+  // }, []);
 
   return (
     <div className={styles["game-index"]}>

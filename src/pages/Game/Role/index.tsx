@@ -4,19 +4,24 @@
 import { useEffect, useMemo, useState } from "react";
 import { Breadcrumb, Col, Row, Select, Descriptions, ConfigProvider } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
+import { useSnapshot } from "valtio";
 
+import { userData } from "../state";
 import RoleCard from "../components/RoleCard";
-import { getIsHaveRole, getUserData } from "../utils";
 import { roleList } from "../constants";
 
 import styles from "./index.module.less";
 
 function Role() {
-  const userData = getUserData();
+  const { history } = useSnapshot(userData);
 
   const [filterMap, setFilterMap] = useState<ObjectType>({});
   const [curRoleId, setCurRoleId] = useState<string | undefined>();
   const [dataShow, setDataShow] = useState(roleList);
+
+  const getIsHaveRole = (id) => {
+    return history?.filter((h) => h.id === id)?.length !== 0;
+  };
 
   const filters = [
     {
@@ -53,7 +58,8 @@ function Role() {
     },
   ];
   const targetRoleData = useMemo(() => {
-    const targetHistory = userData?.history?.filter((i) => i?.id === curRoleId);
+    const targetHistory = history?.filter((i) => i?.id === curRoleId) || [];
+    const sum = targetHistory?.map((i) => i?.pulls || 0)?.reduce((pre, cur) => pre + cur, 0);
     return {
       ...(roleList.find((i) => i.id === curRoleId) || {}),
       // 第一次获得时间
@@ -61,9 +67,7 @@ function Role() {
       // 共获得几次
       totalTimes: targetHistory?.length,
       // 平均每次获得抽数
-      avgPulls: (
-        targetHistory?.map((i) => i?.pulls)?.reduce((pre, cur) => pre + cur, 0) / targetHistory?.length
-      ).toFixed(1),
+      avgPulls: (sum / targetHistory?.length).toFixed(1),
     };
   }, [curRoleId]);
 
@@ -130,7 +134,7 @@ function Role() {
           <ConfigProvider theme={{ components: { Descriptions: { itemPaddingBottom: 5 } } }}>
             <Descriptions
               title={targetRoleData?.name}
-              style={{ padding: 0 }}
+              style={{ padding: 0, whiteSpace: "nowrap" }}
               items={[
                 {
                   label: "第一次获得时间",

@@ -6,11 +6,12 @@ import { Breadcrumb, Button, message, Select, Space, Tooltip, Typography } from 
 import { BarChartOutlined, DollarOutlined, HomeOutlined, PlusOutlined, StockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { useSnapshot } from "valtio";
 
+import { userData } from "../state";
 import RoleCard, { RoleCardProps } from "../components/RoleCard";
 import HistoryModal from "../components/HistoryModal";
 import { getRandomItemFromArray } from "@/utils/utils";
-import { getUserData, updateUserData } from "../utils";
 import { PicUrl } from "@/utils/constants";
 import { roleList } from "../constants";
 
@@ -18,15 +19,15 @@ import styles from "./index.module.less";
 
 function Wish() {
   const navigate = useNavigate();
-  const userData = getUserData();
+  const { pulls, infinite, level, history, pullCount } = useSnapshot(userData);
 
   const [showData, setShowData] = useState<ObjectType[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [targetRole, setTargetRole] = useState();
 
   /** 抽卡数据模拟 */
-  const handleWish = (pulls: number) => {
-    if (userData?.pulls < pulls && !userData?.infinite) {
+  const handleWish = (ps: number) => {
+    if (pulls < ps && !infinite) {
       message.error("道具不足");
       return;
     }
@@ -35,9 +36,9 @@ function Wish() {
 
     const res: ObjectType[] = [];
     // 1.获取当前水位(之前抽数+1)
-    let tempLevel = userData?.level + 1;
+    let tempLevel = level + 1;
 
-    for (let i = 0; i < pulls; i++) {
+    for (let i = 0; i < ps; i++) {
       // 2.当前抽概率：基础概率0.6，73抽之后每抽增加6，89抽时为6*(89-73)+0.6=96.6，90抽时102.6>100，即为保底
       const percent = tempLevel > 73 ? 6 * (tempLevel - 73) + 0.6 : 0.6;
       // 3.概率跟随机数比，确认当前抽是否获得五星
@@ -49,7 +50,7 @@ function Wish() {
       const targetFinal = Math.random() > 0.5 ? target : randomRole;
       const finalRole = targetRole ? targetFinal : randomRole;
 
-      const isNewRole = userData?.history?.findIndex((i) => i?.id === finalRole.id) === -1;
+      const isNewRole = history?.findIndex((i) => i?.id === finalRole.id) === -1;
       res.push(
         isGetGold
           ? {
@@ -67,12 +68,10 @@ function Wish() {
     }
 
     // 将本次抽卡数据更新本地
-    updateUserData({
-      history: [...userData?.history, ...res?.filter((i) => i?.isGold)],
-      pullCount: userData?.pullCount + pulls,
-      pulls: userData?.pulls - (userData?.infinite ? 0 : pulls),
-      level: tempLevel - 1,
-    });
+    userData.history = [...history, ...res?.filter((i) => i?.isGold)];
+    userData.pullCount = pullCount + ps;
+    userData.pulls = pulls - (infinite ? 0 : ps);
+    userData.level = tempLevel - 1;
 
     // 渲染本次抽卡结果
     setTimeout(() => {
@@ -101,13 +100,13 @@ function Wish() {
 
           <Tooltip title="当前水位" arrow={false}>
             <Button icon={<StockOutlined />}>
-              <Typography.Text strong>{userData?.level || 0}</Typography.Text>
+              <Typography.Text strong>{level || 0}</Typography.Text>
             </Button>
           </Tooltip>
 
           <Tooltip title="剩余抽数" arrow={false}>
             <Button icon={<DollarOutlined />} onClick={() => navigate("/game/home")}>
-              <Typography.Text strong>{userData?.pulls || 0}</Typography.Text>
+              <Typography.Text strong>{pulls || 0}</Typography.Text>
               <PlusOutlined />
             </Button>
           </Tooltip>

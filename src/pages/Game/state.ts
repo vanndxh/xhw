@@ -22,17 +22,17 @@ export type HistoryType = {
 /** 用户数据类型 */
 export type UserDataType = {
   /** 剩余总抽数 */
-  pulls?: number;
+  pulls: number;
   /** 抽卡记录 */
-  history?: HistoryType[];
+  history: HistoryType[];
   /** 是否抽卡次数无限 */
-  infinite?: boolean;
+  infinite: boolean;
   /** 总抽数 */
-  pullCount?: number;
+  pullCount: number;
   /** 总战斗次数 */
-  fightCount?: number;
+  fightCount: number;
   /** 当前水位线 */
-  level?: number;
+  level: number;
 };
 /** 用户数据初始化 */
 export const initUserData = {
@@ -46,8 +46,6 @@ export const initUserData = {
 
 export const userData = proxy<UserDataType>(initUserData);
 
-console.log("userData", userData);
-
 /** 根据localStorage更新用户数据 */
 const storedState = safeParse(localStorage.getItem("userData"));
 if (storedState) {
@@ -56,5 +54,5 @@ if (storedState) {
 
 /** 将userData保存到localStorage */
 subscribe(userData, () => {
-  localStorage.setItem("test_userData", JSON.stringify(userData));
+  localStorage.setItem("userData", JSON.stringify(userData));
 });
