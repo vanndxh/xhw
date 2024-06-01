@@ -1,8 +1,8 @@
 /**
  * @file 角色祈愿
  */
-import { useState } from "react";
-import { Breadcrumb, Button, message, Select, Space, Tooltip, Typography } from "antd";
+import { useRef, useState } from "react";
+import { Breadcrumb, Button, message, Select, Space, Tooltip } from "antd";
 import { BarChartOutlined, DollarOutlined, HomeOutlined, PlusOutlined, StockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -20,9 +20,9 @@ import styles from "./index.module.less";
 function Wish() {
   const navigate = useNavigate();
   const { pulls, infinite, level, history, pullCount } = useSnapshot(userData);
+  const actionRef = useRef<{ show: () => void }>();
 
   const [showData, setShowData] = useState<ObjectType[]>([]);
-  const [historyOpen, setHistoryOpen] = useState(false);
   const [targetRole, setTargetRole] = useState();
 
   /** 抽卡数据模拟 */
@@ -100,18 +100,18 @@ function Wish() {
 
           <Tooltip title="当前水位" arrow={false}>
             <Button icon={<StockOutlined />}>
-              <Typography.Text strong>{level || 0}</Typography.Text>
+              <span style={{ fontWeight: "bold" }}>{level || 0}</span>
             </Button>
           </Tooltip>
 
           <Tooltip title="剩余抽数" arrow={false}>
             <Button icon={<DollarOutlined />} onClick={() => navigate("/game/home")}>
-              <Typography.Text strong>{pulls || 0}</Typography.Text>
+              <span style={{ fontWeight: "bold" }}>{pulls || 0}</span>
               <PlusOutlined />
             </Button>
           </Tooltip>
 
-          <Button icon={<BarChartOutlined />} onClick={() => setHistoryOpen(true)}>
+          <Button icon={<BarChartOutlined />} onClick={() => actionRef?.current?.show()}>
             查看记录
           </Button>
         </Space>
@@ -134,7 +134,7 @@ function Wish() {
         </Button>
       </div>
 
-      <HistoryModal open={historyOpen} onCancel={() => setHistoryOpen(false)} />
+      <HistoryModal actionRef={actionRef} />
     </div>
   );
 }

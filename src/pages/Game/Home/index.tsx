@@ -1,7 +1,7 @@
 /**
  * @file 游戏主页
  */
-import { useState } from "react";
+import { useRef } from "react";
 import { Button, message } from "antd";
 import { UserOutlined, StarOutlined, SettingOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -17,14 +17,13 @@ export default function Home() {
   const navigate = useNavigate();
   const { pulls } = useSnapshot(userData);
   message.config({ maxCount: 3 });
-
-  const [settingOpen, setSettingOpen] = useState(false);
+  const actionRef = useRef<{ show: () => void }>();
 
   const actions = [
     {
       label: "设置",
       icon: <SettingOutlined style={{ fontSize: 24 }} />,
-      onClick: () => setSettingOpen(true),
+      onClick: () => actionRef?.current?.show(),
     },
     {
       label: "祈愿",
@@ -90,10 +89,10 @@ export default function Home() {
       </div>
 
       <div className={styles["game-index-body"]}>
-        <Button onClick={handleFight}>打怪（攒抽数）</Button>
+        <Button onClick={handleFight}>打怪</Button>
       </div>
 
-      <SettingModal open={settingOpen} onCancel={() => setSettingOpen(false)} />
+      <SettingModal actionRef={actionRef} />
     </div>
   );
 }

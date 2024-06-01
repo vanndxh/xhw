@@ -2,7 +2,7 @@
  * @file 原神抽卡记录导出
  */
 import { useState } from "react";
-import { Button, Input, message, Popover, Tabs, Tooltip } from "antd";
+import { Alert, Button, Input, message, Popover, Tabs, Tooltip } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import axios from "axios";
 
@@ -33,24 +33,6 @@ function PCGenshin() {
   };
   let tempData: ObjectType[] = [];
   let timer;
-
-  const tabItems = [
-    {
-      key: "role",
-      label: "角色",
-      children: <GachaShow isRole data={gachaData.role || []} />,
-    },
-    {
-      key: "weapon",
-      label: "武器",
-      children: <GachaShow data={gachaData.weapon || []} />,
-    },
-    {
-      key: "normal",
-      label: "常驻",
-      children: <GachaShow data={gachaData.normal || []} />,
-    },
-  ];
 
   /** 一个卡池请求结束后操作 */
   const handleFinish = () => {
@@ -187,9 +169,11 @@ function PCGenshin() {
   return (
     <PageLayout>
       <div className={styles["genshin"]}>
+        <Alert message="由于官方接口更新，该功能暂时停用" type="warning" showIcon style={{ marginBottom: 10 }} />
+
         <div className={styles["genshin-input-line"]}>
           <Input placeholder="请输入导出链接" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-          <Button type="primary" onClick={getGachaData} loading={loading} style={{ marginLeft: 10 }}>
+          <Button type="primary" onClick={getGachaData} loading={loading} style={{ marginLeft: 10 }} disabled>
             开始获取
           </Button>
 
@@ -216,7 +200,16 @@ function PCGenshin() {
           </Popover>
         </div>
 
-        <Tabs items={tabItems} rootClassName={styles["genshin-body"]} />
+        <Tabs
+          items={Object.keys(GachaType).map((i) => ({
+            ...GachaType[i],
+            key: GachaType[i].lowercase,
+            children: (
+              <GachaShow isRole={GachaType[i].lowercase === "role"} data={gachaData[GachaType[i].lowercase] || []} />
+            ),
+          }))}
+          rootClassName={styles["genshin-body"]}
+        />
       </div>
 
       {contextHolder}

@@ -8,16 +8,6 @@ export const RoleSource = {
   [RoleSourceKey.RAILWAY]: "崩坏：星穹铁道",
 };
 
-/** 用户数据初始化 */
-export const initUserData = {
-  pulls: 1000,
-  history: [],
-  infinite: false,
-  pullCount: 0,
-  fightCount: 0,
-  level: 0,
-};
-
 /** 颜色 */
 export const blueColor = "#1677ff";
 export const purpleColor = "purple";

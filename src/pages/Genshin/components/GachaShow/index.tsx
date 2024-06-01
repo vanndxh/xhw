@@ -21,6 +21,7 @@ function GachaShow(props: Props) {
     const goldCount = data?.[0]?.name === "已垫" ? data?.length - 1 : data?.length;
     const pullCount = data?.reduce((pre, cur) => pre + cur.count, 0);
     const limitCount = data?.reduce((pre, cur) => ([...normalPoolRole, "已垫"].includes(cur.name) ? pre : pre + 1), 0);
+
     return [
       { label: "总金数", children: goldCount },
       { label: "总抽数", children: pullCount },

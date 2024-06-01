@@ -19,6 +19,7 @@ export type HistoryType = {
   /** 多少抽出的 */
   pulls?: number;
 };
+
 /** 用户数据类型 */
 export type UserDataType = {
   /** 剩余总抽数 */
@@ -34,6 +35,7 @@ export type UserDataType = {
   /** 当前水位线 */
   level: number;
 };
+
 /** 用户数据初始化 */
 export const initUserData = {
   pulls: 1000,

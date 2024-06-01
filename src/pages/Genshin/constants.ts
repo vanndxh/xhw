@@ -17,13 +17,16 @@ export const GachaType = {
   [GachaTypeKey.ROLE]: {
     label: "角色",
     code: "301",
+    lowercase: "role",
   },
   [GachaTypeKey.WEAPON]: {
     label: "武器",
     code: "302",
+    lowercase: "weapon",
   },
   [GachaTypeKey.NORMAL]: {
     label: "常驻",
     code: "200",
+    lowercase: "normal",
   },
 };

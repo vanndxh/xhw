@@ -1,21 +1,20 @@
 /**
  * @file 设置弹窗
  */
-import { useState } from "react";
+import { useImperativeHandle, useState } from "react";
 import { Button, ConfigProvider, Form, Input, Modal, Switch, message } from "antd";
 import { useSnapshot } from "valtio";
 import { userData } from "../../state";
 
 interface Props {
-  open: boolean;
-  onCancel: () => void;
+  actionRef: React.MutableRefObject<{ show: () => void } | undefined>;
 }
 
 export default function SettingModal(props: Props) {
-  const { open, onCancel } = props;
-
+  const { actionRef } = props;
   const { infinite } = useSnapshot(userData);
 
+  const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string | undefined>();
 
   const fields = [
@@ -81,8 +80,12 @@ export default function SettingModal(props: Props) {
     },
   ];
 
+  useImperativeHandle(actionRef, () => ({
+    show: () => setOpen(true),
+  }));
+
   return (
-    <Modal title="设置" open={open} onCancel={onCancel} width={600} footer={null}>
+    <Modal title="设置" open={open} onCancel={() => setOpen(false)} width={600} footer={null}>
       <ConfigProvider theme={{ components: { Form: { itemMarginBottom: 5 } } }}>
         <Form>
           {fields.map((i) => (
