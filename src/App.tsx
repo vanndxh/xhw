@@ -1,14 +1,13 @@
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { routes } from "./utils/routes";
 
-function App() {
-  const RouteElement = () => useRoutes(routes);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
-  return (
-    <BrowserRouter>
-      <RouteElement />
-    </BrowserRouter>
-  );
-}
+const RouteElement = () => useRoutes(routes);
 
-export default App;
+root.render(
+  <BrowserRouter>
+    <RouteElement />
+  </BrowserRouter>
+);
