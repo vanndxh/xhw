@@ -28,11 +28,6 @@ export default function SiderBar() {
       key: "gpt",
       icon: PicUrl.gpt,
     },
-    {
-      label: "学习笔记",
-      key: "docs",
-      icon: PicUrl.yuque,
-    },
   ];
 
   return (

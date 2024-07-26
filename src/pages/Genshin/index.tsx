@@ -198,6 +198,14 @@ function PCGenshin() {
               如何获得？
             </Button>
           </Popover>
+
+          <Button
+            onClick={() => {
+              window.open("yuanshengame://", "_blank");
+            }}
+          >
+            原神，启动！
+          </Button>
         </div>
 
         <Tabs
