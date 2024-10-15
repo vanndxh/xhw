@@ -3,7 +3,7 @@
  * @description 左icon，右两行信息展示
  */
 import { Image } from "antd";
-import styles from "./index.less";
+import styles from "./index.module.less";
 
 interface Props {
   /** icon链接 */

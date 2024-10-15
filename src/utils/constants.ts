@@ -7,4 +7,5 @@ export const PicUrl = {
   yuque: "https://pic3.zhimg.com/50/v2-8139fe41c4f1c40bb5ecd0be8e25d35e_qhd.jpg",
   trashBin:
     "https://patchwiki.biligame.com/images/sr/thumb/f/f7/dpes8v24ax5sod5323arf26b5ch43g5.png/180px-%E5%9E%83%E5%9C%BE%E6%A1%B6.png",
+  markdown: "https://tse3-mm.cn.bing.net/th/id/OIP-C.lW8pfBgTh_2SVUah9rOAxAHaHa?rs=1&pid=ImgDetMain",
 };

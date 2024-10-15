@@ -14,8 +14,6 @@
 - 原神抽卡记录导出
 - chat gpt 镜像
 
-[项目开发笔记](https://www.yuque.com/vanndxh/coderv/xhwpro)
-
 ## 快速开始
 
 后端 `yarn api`
@@ -25,8 +23,6 @@
 ## 联系作者
 
 - email [1025196468@qq.com](mailto:1025196468@qq.com)
-
-- yuque https://www.yuque.com/vanndxh
 
 ## License
 

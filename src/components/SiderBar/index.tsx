@@ -28,6 +28,11 @@ export default function SiderBar() {
       key: "gpt",
       icon: PicUrl.gpt,
     },
+    {
+      label: "Markdown在线解析",
+      key: "markdown",
+      icon: PicUrl.markdown,
+    },
   ];
 
   return (
