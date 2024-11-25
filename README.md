@@ -16,12 +16,6 @@
 - 抽卡小游戏
 - Markdown 在线解析
 
-## 快速开始
-
-后端 `yarn api`
-
-前端 `yarn start`
-
 ## 联系作者
 
 - email [1025196468@qq.com](mailto:1025196468@qq.com)

@@ -18,9 +18,8 @@ import { routes } from "./utils/routes";
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 const RouteElement = () => useRoutes(routes);
-
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <BrowserRouter>
     <RouteElement />
