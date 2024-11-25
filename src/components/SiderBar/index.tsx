@@ -1,10 +1,9 @@
 /**
  * @file 边导航栏
  */
-import { Menu, Image } from "antd";
-import { GithubOutlined, YuqueOutlined } from "@ant-design/icons";
+import { Menu, Image, Popover, message } from "antd";
+import { CopyOutlined, GithubOutlined, MailOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-
 import { PicUrl } from "@/utils/constants";
 import xhw from "@/assets/xhw.jpeg";
 
@@ -64,15 +63,35 @@ export default function SiderBar() {
       </div>
 
       <div className={styles["sider-bar-bottom"]}>
-        <GithubOutlined
-          className={styles["sider-bar-bottom-url"]}
-          onClick={() => window.open("https://github.com/vanndxh", "_blank", "noopener,noreferrer")}
-        />
+        <Popover
+          placement="rightBottom"
+          title={"关于作者"}
+          content={
+            <>
+              <div>
+                <GithubOutlined style={{ marginRight: 5 }} />
+                <a href="https://github.com/vanndxh" target="_blank" rel="noopener noreferrer">
+                  https://github.com/vanndxh
+                </a>
+              </div>
 
-        <YuqueOutlined
-          className={styles["sider-bar-bottom-url"]}
-          onClick={() => window.open("https://www.yuque.com/vanndxh/coderv", "_blank", "noopener,noreferrer")}
-        />
+              <div>
+                <MailOutlined style={{ marginRight: 5 }} />
+                <span>1025196468@qq.com</span>
+                <CopyOutlined
+                  onClick={() => {
+                    navigator.clipboard.writeText(`1025196468@qq.com`).then(() => {
+                      message.success("复制成功");
+                    });
+                  }}
+                  style={{ color: "#1677ff", marginLeft: 5 }}
+                />
+              </div>
+            </>
+          }
+        >
+          <span className={styles["sider-bar-bottom-text"]}>关于作者</span>
+        </Popover>
       </div>
     </div>
   );

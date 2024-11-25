@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { routes } from "./utils/routes";
+import "./index.less";
 
 /**
  * 全局注册prettyLog函数
