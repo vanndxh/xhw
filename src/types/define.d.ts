@@ -1,3 +1,5 @@
+declare module "*.jpeg";
+
 declare module "*.less" {
   const content: { [className: string]: string };
   export default content;
@@ -6,3 +8,5 @@ declare module "*.less" {
 declare type ObjectType = Record<string, any>;
 
 declare const prettyLog: Function;
+
+

@@ -21,21 +21,6 @@
     },
     "noImplicitAny": false
   },
-  "include": [
-    "./src/services/api.d.ts",
-    "./src/**/*",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./mock/*",
-    "src/types/define.d.ts",
-    "./src/**/*.less"
-  ],
-  "exclude": [
-    "./node_modules",
-    "./build",
-    "./dist",
-    "./src/.umi/*",
-    "./src/**/__tests__/*",
-    "./tests/**/*"
-  ]
+  "include": ["./src/**/*", "./mock/*", "./src/types/define.d.ts", "./src/**/*.less"],
+  "exclude": ["./node_modules", "./build", "./dist", "./src/.umi/*", "./src/**/__tests__/*", "./tests/**/*"]
 }

@@ -65,7 +65,6 @@ export default function SiderBar() {
       <div className={styles["sider-bar-bottom"]}>
         <Popover
           placement="rightBottom"
-          title={"关于作者"}
           content={
             <>
               <div>
