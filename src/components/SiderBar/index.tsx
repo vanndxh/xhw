@@ -43,7 +43,7 @@ export default function SiderBar() {
         <Menu
           onClick={(e) => {
             navigate(`/${e?.key}`);
-            clearInterval("all");
+            clearInterval("all" as any);
           }}
           selectedKeys={[window.location.pathname?.slice(1)]}
           mode="inline"

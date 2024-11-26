@@ -17,9 +17,9 @@ function AutoPrint(props: Props) {
   /** 是否展示右侧光标 */
   const [isShowCursor, setIsShowCursor] = useState(true);
   /** 文本展示timer */
-  const [textTimer, setTextTimer] = useState<number | NodeJS.Timer>(0);
+  const [textTimer, setTextTimer] = useState<number>(0);
   /** 展示右侧光标的timer */
-  const [cursorTimer, setCursorTimer] = useState<number | NodeJS.Timer>(0);
+  const [cursorTimer, setCursorTimer] = useState<number>(0);
 
   useEffect(() => {
     const newTextTimer = setInterval(() => {
@@ -44,15 +44,10 @@ function AutoPrint(props: Props) {
   return (
     <div className={styles["auto-print"]}>
       {/** 左边文字部分 */}
-      <div className={styles["auto-print-left"]}>
-        {text?.substring(0, showNumber)}
-      </div>
+      <div className={styles["auto-print-left"]}>{text?.substring(0, showNumber)}</div>
 
       {/** 右边光标部分 */}
-      <div
-        className={styles["auto-print-right"]}
-        style={{ display: isShowCursor ? "" : "none" }}
-      ></div>
+      <div className={styles["auto-print-right"]} style={{ display: isShowCursor ? "" : "none" }}></div>
     </div>
   );
 }
