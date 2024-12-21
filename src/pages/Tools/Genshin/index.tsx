@@ -5,12 +5,10 @@ import { useState } from "react";
 import { Alert, Button, Input, message, Popover, Tabs, Tooltip } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import axios from "axios";
-
-import PageLayout from "@/components/PageLayout";
 import GachaShow from "./components/GachaShow";
 import { GachaDataType, GachaType, GachaTypeKey } from "./constants";
 import { handleRawData } from "./util";
-
+import { openNewPage } from "@/utils/utils";
 import styles from "./index.module.less";
 
 function PCGenshin() {
@@ -167,7 +165,7 @@ function PCGenshin() {
   };
 
   return (
-    <PageLayout>
+    <>
       <div className={styles["genshin"]}>
         <Alert message="由于官方接口更新，该功能暂时停用" type="warning" showIcon style={{ marginBottom: 10 }} />
 
@@ -201,7 +199,7 @@ function PCGenshin() {
 
           <Button
             onClick={() => {
-              window.open("yuanshengame://", "_blank");
+              openNewPage("yuanshengame://");
             }}
           >
             原神，启动！
@@ -221,7 +219,7 @@ function PCGenshin() {
       </div>
 
       {contextHolder}
-    </PageLayout>
+    </>
   );
 }
 export default PCGenshin;

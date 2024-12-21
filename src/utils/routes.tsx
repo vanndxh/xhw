@@ -1,14 +1,22 @@
 import Index from "@/pages/index";
-import Genshin from "@/pages/Genshin";
-import GPT from "@/pages/GPT";
-import MarkdownParse from "@/pages/MarkdownParse";
+import Genshin from "@/pages/Tools/Genshin";
+import GPT from "@/pages/Tools/GPT";
+import MarkdownParse from "@/pages/Tools/MarkdownParse";
+import ToolsLayout from "@/pages/Tools";
 import * as Game from "@/pages/Game";
 
 export const routes = [
   { path: "/", element: <Index /> },
-  { path: "genshin", element: <Genshin /> },
-  { path: "gpt", element: <GPT /> },
-  { path: "markdown", element: <MarkdownParse /> },
+  {
+    path: "/tools",
+    element: <ToolsLayout />,
+    children: [
+      { path: "", redirect: "genshin" },
+      { path: "genshin", element: <Genshin /> },
+      { path: "gpt", element: <GPT /> },
+      { path: "markdown", element: <MarkdownParse /> },
+    ],
+  },
   {
     path: "/game",
     children: [
