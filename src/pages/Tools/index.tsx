@@ -7,7 +7,7 @@ import { Menu, Image, message, Space } from "antd";
 import { GithubOutlined, MailOutlined } from "@ant-design/icons";
 import { openNewPage } from "@/utils/utils";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import xhw from "@/assets/xhw.jpeg";
+import xhw from "./xhw.jpeg";
 import styles from "./index.module.less";
 
 function ToolsLayout() {
@@ -19,11 +19,6 @@ function ToolsLayout() {
       icon: PicUrl.genshin,
     },
     {
-      label: "抽卡模拟游戏",
-      key: "/game/home",
-      icon: PicUrl.trashBin,
-    },
-    {
       label: "GPT国内镜像",
       key: "/tools/gpt",
       icon: PicUrl.gpt,
@@ -32,6 +27,11 @@ function ToolsLayout() {
       label: "Markdown在线解析",
       key: "/tools/markdown",
       icon: PicUrl.markdown,
+    },
+    {
+      label: "抽卡小游戏",
+      key: "/game/home",
+      icon: PicUrl.trashBin,
     },
   ];
 

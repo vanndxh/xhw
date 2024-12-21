@@ -13,7 +13,7 @@ export default function Index() {
   // );
 
   useEffect(() => {
-    navigate("/genshin");
+    navigate("/tools/genshin");
   }, [navigate]);
 
   return <div />;
