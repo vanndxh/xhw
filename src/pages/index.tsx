@@ -7,7 +7,7 @@ import { Menu, Image, message, Space } from "antd";
 import { GithubOutlined, MailOutlined } from "@ant-design/icons";
 import { openNewPage } from "@/utils/utils";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import xhw from "./xhw.jpeg";
+import xhw from "../assets/xhw.jpeg";
 import styles from "./index.module.less";
 
 export default function Index() {

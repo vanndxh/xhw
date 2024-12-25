@@ -4,4 +4,8 @@ import { pluginReact } from "@rsbuild/plugin-react";
 
 export default defineConfig({
   plugins: [pluginLess(), pluginReact()],
+  html: {
+    title: "小黑屋Pro",
+    favicon: "./src/assets/profile.png",
+  },
 });
