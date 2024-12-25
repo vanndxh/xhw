@@ -3,15 +3,19 @@
  */
 import { Outlet, useNavigate } from "react-router-dom";
 import { PicUrl } from "@/utils/constants";
-import { Menu, Image, message, Space } from "antd";
-import { GithubOutlined, MailOutlined } from "@ant-design/icons";
+import { Menu, Image, message, Space, Layout } from "antd";
+import { GithubOutlined, LeftOutlined, MailOutlined, RightOutlined } from "@ant-design/icons";
 import { openNewPage } from "@/utils/utils";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import xhw from "../assets/xhw.jpeg";
+import { useState } from "react";
 import styles from "./index.module.less";
+
+const { Sider, Content } = Layout;
 
 export default function Index() {
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
 
   const items = [
     {
@@ -42,36 +46,34 @@ export default function Index() {
   // );
 
   return (
-    <div className={styles["layout"]}>
-      <div className={styles["layout-sider"]}>
-        <div>
-          <div className={styles["layout-sider-logo"]}>
-            <Image src={xhw} width={120} height={80} preview={false} />
-          </div>
-          <Menu
-            onClick={(e) => {
-              navigate(e?.key);
-              clearInterval("all" as any);
-            }}
-            selectedKeys={[window.location.pathname]}
-            mode="inline"
-            items={items?.map((i) => ({
-              ...i,
-              icon: (
-                <Image
-                  src={i?.icon}
-                  preview={false}
-                  height={20}
-                  width={20}
-                  rootClassName={styles["layout-sider-menu-icon"]}
-                />
-              ),
-            }))}
-          />
+    <Layout className={styles["layout"]}>
+      <Sider
+        className={styles["layout-sider"]}
+        theme="light"
+        width={256}
+        collapsedWidth={60}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={setCollapsed}
+      >
+        <div className={styles["layout-sider-logo"]}>
+          <Image src={xhw} preview={false} height={collapsed ? 0 : 80} />
         </div>
 
-        <div className={styles["layout-sider-bottom"]}>
-          <Space>
+        <Menu
+          onClick={(e) => {
+            navigate(e?.key);
+            clearInterval("all" as any);
+          }}
+          selectedKeys={[window.location.pathname]}
+          items={items?.map((i) => ({
+            ...i,
+            icon: <Image src={i?.icon} preview={false} />,
+          }))}
+        />
+
+        {!collapsed && (
+          <Space className={styles["layout-sider-bottom"]}>
             <GithubOutlined
               className={styles["layout-sider-bottom-icon"]}
               onClick={() => {
@@ -82,12 +84,16 @@ export default function Index() {
               <MailOutlined className={styles["layout-sider-bottom-icon"]} />
             </CopyToClipboard>
           </Space>
-        </div>
-      </div>
+        )}
 
-      <div className={styles["layout-content"]}>
+        <div className={styles["layout-sider-trigger"]} onClick={() => setCollapsed(!collapsed)}>
+          {collapsed ? <RightOutlined /> : <LeftOutlined />}
+        </div>
+      </Sider>
+
+      <Content style={{ background: "#fff" }}>
         <Outlet />
-      </div>
-    </div>
+      </Content>
+    </Layout>
   );
 }
