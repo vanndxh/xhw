@@ -21,6 +21,6 @@
     },
     "noImplicitAny": false
   },
-  "include": ["./src/**/*", "./mock/*", "./src/types/define.d.ts", "./src/**/*.less"],
+  "include": ["./src/**/*", "./mock/*", "./src/types/define.d.ts", "./src/**/*.less", "config/routes.tsx"],
   "exclude": ["./node_modules", "./build", "./dist", "./src/.umi/*", "./src/**/__tests__/*", "./tests/**/*"]
 }

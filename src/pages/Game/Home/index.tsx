@@ -74,7 +74,7 @@ export default function Home() {
     <div className={styles["game-index"]}>
       <div className={styles["game-index-header"]}>
         <div className={styles["game-index-header-title"]}>
-          <HomeOutlined className={styles["game-index-header-title-icon"]} onClick={() => navigate("/tools/genshin")} />
+          <HomeOutlined className={styles["game-index-header-title-icon"]} onClick={() => navigate("/game/home")} />
           <div style={{ fontWeight: "bold", fontSize: 18 }}>崩坏：原神铁道</div>
         </div>
 
