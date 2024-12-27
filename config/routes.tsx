@@ -3,6 +3,7 @@ import Genshin from "@/pages/Genshin";
 import GPT from "@/pages/GPT";
 import MarkdownParse from "@/pages/MarkdownParse";
 import * as Game from "@/pages/Game";
+import Docs from "@/pages/Docs";
 
 export const routes = [
   {
@@ -13,6 +14,7 @@ export const routes = [
       { path: "genshin", element: <Genshin /> },
       { path: "gpt", element: <GPT /> },
       { path: "markdown", element: <MarkdownParse /> },
+      { path: "docs", element: <Docs /> },
       {
         path: "/game",
         children: [

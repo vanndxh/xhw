@@ -1,0 +1,92 @@
+## 数据来源
+
+大模型的数据来源自然是各大模型提供的 api，以 chatGPT 为例，官方准备了[文档](https://platform.openai.com/docs/api-reference)，具体步骤如下
+
+- `npm install openai`安装 openai
+
+- https://platform.openai.com/account/api-keys 准备 api-keys
+
+- https://platform.openai.com/account/org-settings 准备 organization
+
+```javascript
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+  organization: "你的organization",
+  apiKey: "你的apiKey",
+});
+const openai = new OpenAIApi(configuration);
+const res = await openai.createChatCompletion({
+  model: "gpt-3.5-turbo",
+  messages: [
+    ...history,
+    {
+      role: "user",
+      content: questionValue,
+    },
+  ],
+});
+```
+
+需要注意的是，大模型目前的算力不足以直接获得完整的结果，所以接口是流式接口，具体操作为修改请求类型为 stream，数据会一条条传输过来，由于数据过来不稳定，所以最好在前端加一个缓冲队列，数据先推入队列，再按一定速率展示到页面上，用户体验会比较好
+
+## 数据渲染
+
+大模型返回的数据是 markdown 格式的，我们可以按需要对结果进行自定义渲染，经过调研，[react-markdown](https://github.com/remarkjs/react-markdown)是一个比较优秀的库，使用简单且方便自定义
+
+具体来说，react-markdown 的底层是 shiki，使用时需要注意 shiki 的初始化问题，容易造成性能问题，如果需要对某些内容进行修改，额可以通过 transformer 对特定标签进行拦截修改
+
+```tsx
+<Markdown
+  components={{
+    // Map `h1` (`# heading`) to use `h2`s.
+    h1: "h2",
+    // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
+    em(props) {
+      const { node, ...rest } = props;
+      return <i style={{ color: "red" }} {...rest} />;
+    },
+  }}
+/>
+```
+
+## 自动滚动
+
+如果是大模型对话列表，就会涉及滚动问题，当大模型数据不断产出，需要实现自动滚动，展示最新内容
+
+最简单的方法就是在列表的最下面加一个元素，当需要触发滚动时，只需要把这个元素滚动进视野即可
+
+```tsx
+ref.scrollIntoView();
+```
+
+当下方有新内容产生时，就需要触发滚动，但是需要注意，如果用户手动向上滚动超过一定距离，就需要记录当前时间戳，之后的一定时间就不要继续滚动
+
+这个过程中比较难处理的是上方提到的距离，由于新内容产生也会导致“向上一定距离”，就也会触发这个逻辑的判断，若阈值设置过大，则用户无法方便的停止自动滚动；若过小，则会因为大量新内容的快速产生而错误停止。
+
+## 国内镜像/内网穿透
+
+由于到目前为止用户还是需要自己开梯子，所以我们需要提供一个服务器，服务器外套一层代理，这样的话，用户就只需要直接访问国内的这个域名/请求就行，那么我们就有两个方案
+
+- 买个云服务器，配置云服务器的请求进行代理（显然我没钱买服务器
+- 直接把本机当成服务“机”，开启 clash，直接能用
+
+下面我们使用内网穿透来完成
+
+内网穿透是一种通过公网访问内网的技术，通俗来说就是**将内网服务器通过外网映射到公网上**，让公网用户可以直接访问内网资源。内网穿透可以用于很多场景，例如开发调试、远程办公、物联网设备访问等等。
+
+**法 1：手动配置**
+
+这种方法需要注意，必须你的光猫被分配了一个公网 ip，最简单的查看是否为公网 ip 的方式就是查看本机 ip，然后看这个 ip 是否为 10、100、127、172、192 开头，如果是，则为内网 ip
+
+如果有公网 ip，就可以在路由器内配置，直接反向代理，但是要记得配置电脑防火墙：防火墙 - 高级设置 - 入站规则 - 新建规则
+
+**法 2：ngrok**
+
+官网地址：https://dashboard.ngrok.com/get-started/setup
+
+如官网所示，只有三步
+
+1. 解压，windows/mac 正常解压即可
+2. 绑定 authkey
+3. 开始运行，只需要给出端口，输入命令`ngrok http <port>`

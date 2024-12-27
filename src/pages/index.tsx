@@ -34,6 +34,11 @@ export default function Index() {
       icon: PicUrl.markdown,
     },
     {
+      label: "文章",
+      key: "/docs",
+      icon: PicUrl.markdown,
+    },
+    {
       label: "抽卡小游戏",
       key: "/game/home",
       icon: PicUrl.trashBin,

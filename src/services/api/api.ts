@@ -4,8 +4,8 @@
 import axios from "axios";
 
 /** 请求的基础地址 */
-// axios.defaults.baseURL = "http://localhost:8088";
-axios.defaults.baseURL = "https://vanndxh.ltd:8088";
+axios.defaults.baseURL = "http://localhost:8088";
+// axios.defaults.baseURL = "https://vanndxh.ltd:8088";
 
 /** global */
 export const postUV = (page: string) => {
@@ -18,6 +18,13 @@ export const getUv = () => {
 };
 export const getLikeAmount = () => {
   return axios.get("/global/like").then((res) => {
+    return res?.data;
+  });
+};
+
+/** doc */
+export const getMarkdownDocs = () => {
+  return axios.get("/doc/getMarkdownDocs").then((res) => {
     return res?.data;
   });
 };

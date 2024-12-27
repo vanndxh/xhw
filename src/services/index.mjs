@@ -2,18 +2,19 @@
  * @file 接口封装+请求配置+数据库初始化
  */
 import fs from "fs";
-import https from "https";
+// import https from "https";
 import express from "express";
 import { dbInit } from "./database/db.mjs";
 
 import * as Global from "./api/Global.mjs";
+import * as Doc from "./api/Doc.mjs";
 
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 /** 数据库初始化 */
-dbInit();
+// dbInit();
 
 /** 解决跨域问题 */
 app.use((req, res, next) => {
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 app.post("/global/uv", Global.postUv);
 app.get("/global/uv", Global.getUv);
 app.get("/global/like", Global.getLikeAmount);
+app.get("/doc/getMarkdownDocs", Doc.getMarkdownDocs);
 
 /** http启动 */
 const server = app.listen(8088, function () {
