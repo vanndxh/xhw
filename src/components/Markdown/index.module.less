@@ -1,0 +1,38 @@
+.code-block {
+  position: relative;
+
+  &:hover {
+    .code-action {
+      display: flex;
+    }
+  }
+
+  .code-highlight {
+    border-radius: 8px;
+  }
+
+  .code-action {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    display: none;
+  }
+}
+
+.inline-code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0px 4px;
+  margin: 0 2px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.react-markdown {
+  width: "100%";
+  overflow: hidden;
+
+  .katex-html {
+    display: none;
+  }
+}

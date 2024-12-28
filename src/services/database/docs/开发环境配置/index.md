@@ -164,7 +164,6 @@ alias gp='git push'
 
 ### 代码片段
 
-
 左下角设置 - User Snippets，菜单里可以选择之前已经有的/新建新的代码片段文件
 
 从上到下分别为`已有当前项目`、`已有全局`、`新建全局`、`新建当前项目`，打开/新建文件之后，可以在对象中进行编辑
@@ -350,12 +349,7 @@ alias gp='git push'
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.quiet": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "launch": {
     "configurations": [],
     "compounds": []
@@ -468,13 +462,13 @@ Identity added: id_rsa (your_email@example.com)
 
 在终端使用(或者直接去目录下打开文件
 
-```
+```bash
 $ cat ~/.ssh/id_rsa.pub
 ```
 
 看到：
 
-```
+```bash
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDJ6c4cXmpyJr/anagkKz4K+RCFYSJlkFvdNY6JBmKeomrQYfChpDZFxjUkj72XfSAhGyJjPcn4pTHHLCHOS2jzstrvE0Cq19p/mbbvwsq5GGqmzsTYqOeqpTIeEKnXlv/PXkh/mXJVOWhui8esIQk4bU1Ss2wIEVMSRI+9n8RgyBcpbiq4m/SDrUy1HJNHO3pyjcf7k6XUjfxeTRWMVtj7IH3yQbgrZQo90VHsVhkmTeyvaCv8tJLi/j+t9E1/kOWPbpTFTmaAe190SuPVwpQjyRH/Z8UWVdCYxgeZ9l9JN3MTyHfRWz6FuDJdoQze94mU1NwEP8AftHNVTsMT2qvbAYK3Mcr6/j1R1vAeq4mbgn1dp79RGW0cKOSx336WuFsfebMV7QLZ1RnW5xF6VgghMd4x9Hk8kmLL6s8I7ZfbjNCgyAhL9d5N01lsz8hdMv1BHzaZp+yk0EXUy8fxFvaSYaUpQuKb8eL6DesBJJ8FH4GVb6+V7J7OsXhG8QiKdDsDbfGDJs/Aq0Ew14cuHlD9y/1A44b+Kt6WwmcISGG85SM+YUcPuay8gEFzNQ/Tzgw4bJznw0RHHVuvtpmjvlBUxXRTSICvrrAJ19/yXoHcZtiPncpDHVnyIy6IVAg23MCeUbrIPIPKQXVHG/5ouRk0YbkFbl6kSq/Yurb35N7tDQ== your_email@example.com
 ```
 

@@ -61,6 +61,7 @@ export default function Docs() {
           onChange={(e) => setSearchText(e.target.value)}
           allowClear
           placeholder="搜点什么.."
+          style={{ marginBottom: 12 }}
         />
         <Menu
           onClick={(e) => setCurrentDoc(e.key)}

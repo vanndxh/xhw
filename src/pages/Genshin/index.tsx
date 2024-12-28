@@ -167,8 +167,6 @@ function PCGenshin() {
   return (
     <>
       <div className={styles["genshin"]}>
-        <Alert message="由于官方接口更新，该功能暂时停用" type="warning" showIcon style={{ marginBottom: 10 }} />
-
         <div className={styles["genshin-input-line"]}>
           <Input placeholder="请输入导出链接" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
           <Button type="primary" onClick={getGachaData} loading={loading} style={{ marginLeft: 10 }} disabled>
