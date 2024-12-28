@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import Markdown from "@/components/Markdown";
 import { getMarkdownDocs } from "@/services/api/api";
-import { Anchor, Divider, Menu } from "antd";
+import { Anchor, Divider, Input, Menu } from "antd";
 import styles from "./index.module.less";
+import { SearchOutlined } from "@ant-design/icons";
 
 export default function Docs() {
-  const docTitleList = ["Docker部署Go后端", "xhw-pro开发笔记", "前端面试手册", "大模型对话技术", "开发环境配置"];
+  const docTitleList = ["xhw-pro开发笔记", "前端面试手册", "开发环境配置", "大模型对话技术", "Docker部署Go后端"];
   const [docList, setDocList] = useState<ObjectType[]>([]);
   const [currentDoc, setCurrentDoc] = useState(docTitleList[0]);
+  const [searchText, setSearchText] = useState("");
+
   const curMarkdown = docList?.find((i) => i.title === currentDoc);
   const anchorList = curMarkdown?.content
     // 统计anchor时不计算代码块
@@ -51,11 +54,21 @@ export default function Docs() {
 
   return (
     <div className={styles["docs"]}>
-      <Menu
-        onClick={(e) => setCurrentDoc(e.key)}
-        selectedKeys={[currentDoc]}
-        items={docTitleList.map((i) => ({ key: i, label: i }))}
-      />
+      <div className={styles["docs-menu"]}>
+        <Input
+          prefix={<SearchOutlined />}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          allowClear
+          placeholder="搜点什么.."
+        />
+        <Menu
+          onClick={(e) => setCurrentDoc(e.key)}
+          selectedKeys={[currentDoc]}
+          items={docTitleList.filter((t) => t.includes(searchText)).map((i) => ({ key: i, label: i }))}
+        />
+      </div>
+
       <div className={styles["docs-markdown-wrapper"]}>
         <div className={styles["docs-markdown"]}>
           <div className={styles["docs-markdown-title"]}>{curMarkdown?.title}</div>

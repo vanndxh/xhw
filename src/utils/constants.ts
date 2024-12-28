@@ -7,4 +7,5 @@ export const PicUrl = {
   trashBin:
     "https://patchwiki.biligame.com/images/sr/thumb/f/f7/dpes8v24ax5sod5323arf26b5ch43g5.png/180px-%E5%9E%83%E5%9C%BE%E6%A1%B6.png",
   markdown: "https://tse3-mm.cn.bing.net/th/id/OIP-C.lW8pfBgTh_2SVUah9rOAxAHaHa?rs=1&pid=ImgDetMain",
+  doc: "https://img.ixintu.com/download/jpg/20200822/b1efe3bd28cc38f5bb1e6cad44d672d2_512_512.jpg!con",
 };

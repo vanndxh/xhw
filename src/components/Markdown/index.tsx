@@ -10,6 +10,9 @@ import remarkDirectiveReHype from "remark-directive-rehype";
 import { styled } from "styled-components";
 
 const StyledReactMarkdown = styled(ReactMarkdown)`
+  width: "100%";
+  overflow: hidden;
+
   .katex-html {
     display: none;
   }

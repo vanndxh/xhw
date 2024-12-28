@@ -36,7 +36,7 @@ export default function Index() {
     {
       label: "文章",
       key: "/docs",
-      icon: PicUrl.markdown,
+      icon: PicUrl.doc,
     },
     {
       label: "抽卡小游戏",
