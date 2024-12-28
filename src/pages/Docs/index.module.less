@@ -3,14 +3,31 @@
   padding: 12px;
   display: flex;
 
-  .docs-markdown {
-    flex: 1;
+  .docs-markdown-wrapper {
+    width: 100%;
+    position: relative;
     overflow: auto;
-    padding: 24px;
 
-    .docs-markdown-title {
-      font-size: 32px;
-      font-weight: 700;
+    .docs-markdown {
+      flex: 1;
+      padding: 24px;
+      width: 60%;
+      position: absolute;
+      left: 40%;
+      transform: translateX(-50%);
+
+      .docs-markdown-title {
+        font-size: 32px;
+        font-weight: 700;
+      }
+    }
+
+    .docs-anchor {
+      position: absolute;
+      right: 0;
+      width: 18%;
+      max-height: 80%;
+      overflow: auto;
     }
   }
 }

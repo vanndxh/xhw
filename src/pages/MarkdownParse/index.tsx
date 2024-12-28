@@ -4,7 +4,7 @@
 import React, { useRef, useState } from "react";
 import { Input } from "antd";
 import { useSize } from "ahooks";
-import MarkdownRender from "@/components/MarkdownRender";
+import Markdown from "@/components/Markdown";
 
 import styles from "./index.module.less";
 
@@ -27,7 +27,7 @@ export default function MarkdownParse() {
       </div>
 
       <div className={styles["markdown-show"]} style={{ height: `calc(100vh - ${inputHeight + 80}px)` }}>
-        <MarkdownRender>{markdownValue}</MarkdownRender>
+        <Markdown>{markdownValue}</Markdown>
       </div>
     </div>
   );

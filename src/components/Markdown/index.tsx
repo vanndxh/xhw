@@ -19,12 +19,44 @@ interface Props {
   children: string;
 }
 
-export default function MarkdownRender(props: Props) {
+export default function Markdown(props: Props) {
   const { children } = props;
 
   const remarkPlugins = [remarkGfm, remarkMath, remarkDirective, remarkDirectiveReHype];
   const rehypePlugins = [rehypeKatex];
-  const components = {};
+
+  const components = {
+    h1: ({ node, ...props }) => (
+      <h1 id={props.children} {...props}>
+        {props.children}
+      </h1>
+    ),
+    h2: ({ node, ...props }) => (
+      <h2 id={props.children} {...props}>
+        {props.children}
+      </h2>
+    ),
+    h3: ({ node, ...props }) => (
+      <h3 id={props.children} {...props}>
+        {props.children}
+      </h3>
+    ),
+    h4: ({ node, ...props }) => (
+      <h4 id={props.children} {...props}>
+        {props.children}
+      </h4>
+    ),
+    h5: ({ node, ...props }) => (
+      <h5 id={props.children} {...props}>
+        {props.children}
+      </h5>
+    ),
+    h6: ({ node, ...props }) => (
+      <h6 id={props.children} {...props}>
+        {props.children}
+      </h6>
+    ),
+  } as any;
 
   return (
     <StyledReactMarkdown remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins} components={components}>
