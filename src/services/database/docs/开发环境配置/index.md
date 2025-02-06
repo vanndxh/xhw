@@ -146,7 +146,7 @@ $ source ~/.zshrc
 
 当使用 git bash 作为 terminal 时，可以在 c\user\username\下可以找到.bash_profile，编辑即可完成快捷键
 
-```
+```bash
 alias ga='git add .'
 alias gc='git commit -m'
 alias gp='git push'

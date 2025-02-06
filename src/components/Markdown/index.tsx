@@ -9,7 +9,7 @@ import remarkDirective from "remark-directive";
 import remarkDirectiveReHype from "remark-directive-rehype";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Button, message, Space, Tag } from "antd";
+import { Button, Image, message, Space, Tag } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import styles from "./index.module.less";
 
@@ -24,16 +24,21 @@ export default function Markdown(props: Props) {
   const rehypePlugins = [rehypeKatex];
 
   const components = {
-    code: ({ node, inline, className, children, ...props }) => {
-      const match = /language-(\w+)/.exec(className || "");
-      return !inline && match ? (
+    // img: (props) => {
+    //   return <Image src={props?.src} style={{ maxHeight: 200, maxWidth: "100%" }} />;
+    // },
+    code: ({ className, children, ...props }) => {
+      const inline = !children?.includes("\n");
+      const language = /language-(\w+)/.exec(className || "")?.[1] || "plaintext";
+
+      return !inline ? (
         <div className={styles["code-block"]}>
-          <SyntaxHighlighter language={match[1]} PreTag="div" {...props} className={styles["code-highlight"]}>
+          <SyntaxHighlighter language={language} PreTag="div" {...props} className={styles["code-highlight"]}>
             {String(children).replace(/\n$/, "")}
           </SyntaxHighlighter>
 
           <Space size={0} className={styles["code-action"]}>
-            <Tag style={{ margin: 0 }}>{match[1]}</Tag>
+            <Tag style={{ margin: 0 }}>{language}</Tag>
             <CopyToClipboard text={String(children).replace(/\n$/, "")} onCopy={() => message.success("复制成功")}>
               <Button icon={<CopyOutlined />} size="small" style={{ borderRadius: 4 }} />
             </CopyToClipboard>
@@ -72,6 +77,9 @@ export default function Markdown(props: Props) {
       <h6 id={props.children} {...props}>
         {props.children}
       </h6>
+    ),
+    blockquote: (props) => (
+      <div style={{ color: "gray", borderLeft: "4px solid rgba(0,0,0,0.1)", padding: "0 16px" }}>{props.children}</div>
     ),
   } as any;
 

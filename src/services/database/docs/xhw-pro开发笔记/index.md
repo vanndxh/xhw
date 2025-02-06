@@ -86,11 +86,7 @@ const setRouteActive = (value: string) => {
   navigate(value);
 };
 
-<TabBar
-  safeArea={true}
-  activeKey={location.pathname}
-  onChange={(value) => setRouteActive(value)}
->
+<TabBar safeArea={true} activeKey={location.pathname} onChange={(value) => setRouteActive(value)}>
   {tabs.map((item) => (
     <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
   ))}
@@ -342,18 +338,13 @@ import fs from "fs";
  * @path /mine/setting/likeAmount
  */
 export const getLikeAmount = (req, res) => {
-  const likeData = JSON.parse(
-    fs.readFileSync("./src/services/database/like.json")
-  );
+  const likeData = JSON.parse(fs.readFileSync("./src/services/database/like.json"));
   const newLikeData = {
     ...likeData,
     amount: likeData.amount + 1,
   };
   if (req.query.isAdd == 1) {
-    fs.writeFileSync(
-      "./src/services/database/like.json",
-      JSON.stringify(newLikeData)
-    );
+    fs.writeFileSync("./src/services/database/like.json", JSON.stringify(newLikeData));
   }
 
   res.send({
@@ -388,7 +379,6 @@ getLikeAmount(true).then((res) => {
 ```
 
 ### 1.6 网站升级 http2
-
 
 首先要有证书，直接去买服务器的地方（腾讯云/阿里云）申请免费证书，然后下载，解压之后文件夹内有 4 个文件，然后如果服务器装了宝塔面板，直接进入宝塔面板-网站-设置-ssl，在页面内根据提示装入证书即可使用
 
@@ -432,19 +422,16 @@ export const dbInit = () => {
 export const postUv = (req, res) => {
   const page = req?.body?.page || "home";
 
-  db.query(
-    `insert into uv values ('${page}', '${new Date().toLocaleString()}')`,
-    (error, results, fields) => {
-      if (error) {
-        throw error;
-      } else {
-        res.json({
-          code: 200,
-          message: "记录用户uv成功",
-        });
-      }
+  db.query(`insert into uv values ('${page}', '${new Date().toLocaleString()}')`, (error, results, fields) => {
+    if (error) {
+      throw error;
+    } else {
+      res.json({
+        code: 200,
+        message: "记录用户uv成功",
+      });
     }
-  );
+  });
 };
 ```
 
@@ -534,7 +521,7 @@ npm i --save-dev lint-staged husky pre-commit
 
 执行完这一步，根目录会有一个 .husky 目录，后续也可以在这个文件中对其他 git hook 进行配置
 
-### 1.11 webpack迁移rsbuild
+### 1.11 webpack 迁移 rsbuild
 
 [Webpack - Rsbuild](https://rsbuild.dev/zh/guide/migration/webpack)
 
@@ -542,7 +529,7 @@ npm i --save-dev lint-staged husky pre-commit
 
 ### 1.12 清理无用依赖
 
-全局安装depcheck
+全局安装 depcheck
 
 ```bash
 npm i -g depcheck
@@ -554,7 +541,7 @@ npm i -g depcheck
 depcheck .
 ```
 
-根据返回的列表直接清理即可，若存在missing，则表示是幽灵依赖，建议安装
+根据返回的列表直接清理即可，若存在 missing，则表示是幽灵依赖，建议安装
 
 ## 2 网站内容开发
 
@@ -584,7 +571,7 @@ depcheck .
         "item_type": "武器",
         "rank_type": "3",
         "id": "1657681560143666714"
-      },
+      }
     ],
     "region": "cn_gf01"
   }
@@ -603,7 +590,15 @@ depcheck .
 
 目前体验下来，感觉[recharts](https://recharts.org/en-US/)体验最好，是类组件式开发，用起来很舒服
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/25537391/1662602934582-8eb7c4c9-fef2-4f2f-ac9c-cca47422e471.png#averageHue=%23f8f8f8&clientId=ufead14ca-ee20-4&from=paste&height=159&id=SqKnY&originHeight=318&originWidth=1086&originalType=binary&ratio=1&rotation=0&showTitle=false&size=79954&status=done&style=none&taskId=u1cfa374f-feae-48bc-aab9-d34387077bc&title=&width=543)
+```tsx
+<LineChart width={500} height={300} data={data}>
+  <XAxis dataKey="name" />
+  <YAxis />
+  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+  <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+  <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+</LineChart>
+```
 
 ### 2.3 实现 sql 语句函数化
 
@@ -667,13 +662,10 @@ module.exports = vsql;
 在 navigator 中获取到用户设备信息，然后对关键词进行判断，用正则表达式进行 match
 
 ```tsx
-const isMobile = /mobile|android|iphone|ipad|phone/i.test(
-  window.navigator.userAgent.toLowerCase()
-);
+const isMobile = /mobile|android|iphone|ipad|phone/i.test(window.navigator.userAgent.toLowerCase());
 ```
 
 ### 2.5 毛玻璃效果组件封装
-
 
 一直感觉毛玻璃效果很好看，于是决定封成一个组件，方便项目中使用，主要实现就是依靠`backdrop-filter`效果，来个最简单的例子
 
@@ -709,8 +701,7 @@ interface Props {
 }
 
 function TransparentCard(props: Props) {
-  const { children, width, height, blurDegree, borderRadius, bgOpacity } =
-    props;
+  const { children, width, height, blurDegree, borderRadius, bgOpacity } = props;
 
   return (
     <div
@@ -722,10 +713,7 @@ function TransparentCard(props: Props) {
         height: height ? height : "auto",
         backdropFilter: blurDegree ? `blur(${blurDegree}px)` : "blur(8px)",
         borderRadius: borderRadius ? `${borderRadius}px` : "0",
-        background:
-          bgOpacity || bgOpacity === 0
-            ? `rgba(255, 255, 255, ${bgOpacity})`
-            : `rgba(255, 255, 255, 0.5)`,
+        background: bgOpacity || bgOpacity === 0 ? `rgba(255, 255, 255, ${bgOpacity})` : `rgba(255, 255, 255, 0.5)`,
       }}
     >
       {children}
@@ -740,13 +728,7 @@ export default TransparentCard;
 使用样例 ⬇️
 
 ```tsx
-<TransparentCard
-  width="40%"
-  height="70px"
-  borderRadius={16}
-  bgOpacity={0.1}
-  blurDegree={3}
->
+<TransparentCard width="40%" height="70px" borderRadius={16} bgOpacity={0.1} blurDegree={3}>
   1
 </TransparentCard>
 ```
@@ -838,10 +820,7 @@ export default TransparentCard;
 - 方案二：使网站兼容 http 请求，参考下方代码
 
 ```html
-<meta
-  http-equiv="Content-Security-Policy"
-  content="upgrade-insecure-requests"
-/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 ```
 
 ### 3.4 数据流升级
