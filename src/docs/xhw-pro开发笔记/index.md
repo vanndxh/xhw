@@ -283,7 +283,7 @@ app.use((req, res, next) => {
 使用：
 
 ```typescript
-axios.get("http://127.0.0.1:8088/test").then((res: any) => console.log(res));
+axios.get("http://127.0.0.1:8088/test").then((res: any) => console.info(res));
 ```
 
 #### 接口模块化封装
@@ -406,7 +406,7 @@ export const dbInit = () => {
     "CREATE TABLE IF NOT EXISTS `uv`(`page` VARCHAR(40) NOT NULL,`time` VARCHAR(40) NOT NULL)ENGINE=InnoDB DEFAULT CHARSET=utf8;",
     (error, results, fields) => {
       if (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   );

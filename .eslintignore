@@ -7,4 +7,4 @@
 
 # main
 /src/**/*.less
-/src/services/database/docs/*
+/src/docs/*

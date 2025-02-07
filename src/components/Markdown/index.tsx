@@ -11,6 +11,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Button, Image, message, Space, Tag } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
+
 import styles from "./index.module.less";
 
 interface Props {
@@ -24,9 +25,13 @@ export default function Markdown(props: Props) {
   const rehypePlugins = [rehypeKatex];
 
   const components = {
-    // img: (props) => {
-    //   return <Image src={props?.src} style={{ maxHeight: 200, maxWidth: "100%" }} />;
-    // },
+    img: ({ src }) => {
+      const isAbsoluteUrl = src?.includes("http");
+      const urlFromGitHub = `https://raw.githubusercontent.com/vanndxh/xhw-pro/refs/heads/master/src/docs${src?.slice(
+        2
+      )}`;
+      return <Image src={isAbsoluteUrl ? src : urlFromGitHub} style={{ maxHeight: 1000, maxWidth: "100%" }} />;
+    },
     code: ({ className, children, ...props }) => {
       const inline = !children?.includes("\n");
       const language = /language-(\w+)/.exec(className || "")?.[1] || "plaintext";
