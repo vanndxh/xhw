@@ -55,8 +55,7 @@ CMD ["/build/app"]
 const postgresHost = "xhw_postgres"
 
 var err error
-psgInfo := fmt.Sprintf("host=%s user=%s port=%s password=%s dbname=%s sslmode=disable",
-                       postgresHost, "postgres", "5432", "pgsql1101", "postgres")
+psgInfo := fmt.Sprintf("host=%s user=%s port=%s password=%s dbname=%s sslmode=disable",postgresHost, "postgres", "5432", "pgsql1101", "postgres")
 DB, err = gorm.Open("postgres", psgInfo)
 DB.LogMode(true)
 if err != nil {
@@ -93,7 +92,7 @@ depends_on:
 - pg
 
 volumes: # 数据卷
-  pg-data:
+pg-data:
 ```
 
 注意：docker-compose.yml 里的数据库信息与 database.go 里的信息需一致
@@ -114,7 +113,7 @@ docker-compose up
 
 为了方便前端的使用，在网站的配置文件中，加入下面这条，实现前端请求的反向代理
 
-```bash
+```
 location /go/ {
   proxy_pass http://127.0.0.1:8088/api/V1/;
 }

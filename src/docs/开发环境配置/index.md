@@ -1,12 +1,12 @@
-## 环境准备
+## 1 环境准备
 
-### node/npm
+### 1.1 包管理相关
+
+#### Node/NPM
 
 [官网](http://nodejs.cn)直接下载所需要的版本即可
 
-### yarn
-
-yarn === npm i
+#### Yarn
 
 ```bash
 # 直接全局安装
@@ -14,16 +14,12 @@ npm i yarn -g
 
 # 查看npm安装的所有包
 npm list -g [--depth 0]
+
+# 若为 mac，还需配置以下
+export PATH=/{对应npm的路径}/bin:$PATH
 ```
 
-若为 mac，还需配置以下
-
-```bash
-# 这条代码为npm路径，若因为其他原因可新增/修改此行如下
-export PATH=/ ... 找到对应npm的路径 ... /bin:$PATH
-```
-
-### pnpm
+#### pnpm
 
 ```bash
 # 安装
@@ -33,7 +29,19 @@ npm i -g pnpm
 pnpm config set registry https://registry.npmmirror.com
 ```
 
-### git
+#### nvm
+
+nvm 是一个 node.js 版本管理工具，可以按需安装
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+# 若为 mac 系统，完成之后需要在个人文件夹下找到隐藏文件.zshrc并编辑
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=/{对应npm的路径}/bin:$PATH
+```
+
+### 1.2 Git
 
 win 可以直接下载包然后安装
 mac 版 git 理论上需要安装 homebrew 等三方平台后才能下载，[homebrew 官网](https://brew.sh/)下载完 brew 后可直接安装 git
@@ -41,6 +49,7 @@ mac 版 git 理论上需要安装 homebrew 等三方平台后才能下载，[hom
 ```bash
 # 安装brew（这步会很麻烦，如果失败多试几次）
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 # 安装git
 brew install git
 ```
@@ -49,24 +58,7 @@ brew 如果无法正常下载，也可以通过别的设备隔空投送，效果
 又或者在终端直接输入 git，mac 会自动提示 git 安装，直接安装即可
 在使用之前 git 还需要配置 ssh，参考下方详情
 
-### nvm
-
-nvm 是一个 node.js 版本管理工具，可以按需安装
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-```
-
-若为 mac 系统，完成之后会导致 zsh 文件错乱，需要覆盖源文件
-个人文件夹下找到隐藏文件.zshrc，用文本编辑器打开，第一行用以下代码覆盖
-
-```bash
-export PATH=/opt/homebrew/bin:$PATH
-# 这条代码为npm路径，若因为其他原因可新增/修改此行如下
-export PATH=/ ... 找到对应npm的路径 ... /bin:$PATH
-```
-
-### create-react-app
+### 1.3 create-react-app
 
 创建 react 项目所需
 
@@ -78,7 +70,7 @@ npm i -g create-react-app
 npx create-react-app project-name [--template typescript]
 ```
 
-### [mac] .Ds_Store 的解决
+### 1.4 .Ds_Store 的解决
 
 ```bash
 # 列出所有文件
@@ -98,39 +90,41 @@ defaults write com.apple.finder AppleShowAllFiles TRUE
 defaults delete com.apple.desktopservices DSDontWriteNetworkStores
 ```
 
-## 开发工具配置 - VsCode
 
-### 插件推荐
 
-- `Auto Rename Tag`当修改左半 tag 时自动修改右半 tag，webstorm 自带功能
-- `Code Runner`在线运行 js 等多种语言代码
-- `Error Lens`把报错直接显示在行末，方便修改
-- `Git History`展示 git 历史记录，对比历史文件等等功能
-- `Git Lens`标注当前行的 git 信息
-- `Material Icon Theme`改 icon 用的，能好看点
-- `Path Intellisense`路径自动填充
-- `Prettier - Code formatter`代码格式化
-- `TODO Highlight`高亮`TODO:`方便定位修改
-- `TONGYI Lingma`不用 copilot 怎么写代码啊
+## 2 VsCode配置
 
-### 自动保存
+### 2.1 插件推荐
+
+| 插件名称                  | 描述                                                   |
+| :------------------------ | ------------------------------------------------------ |
+| Auto Rename Tag           | 当修改左半 tag 时自动修改右半 tag，WebStorm 自带功能。 |
+| Code Runner               | 在线运行 JS 等多种语言代码。                           |
+| Error Lens                | 把报错直接显示在行末，方便修改。                       |
+| Git History               | 展示 Git 历史记录，对比历史文件等。                    |
+| Git Lens                  | 标注当前行的 Git 信息。                                |
+| Material Icon Theme       | 修改图标，让界面更美观。                               |
+| Path Intellisense         | 路径自动填充。                                         |
+| Prettier - Code formatter | 代码格式化工具。                                       |
+| TODO Highlight            | 高亮显示 TODO，方便定位和修改。                        |
+| TONGYI Lingma             | 提供代码辅助功能，类似于 Copilot。                     |
+
+### 2.2 自动保存
 
 搜索 autosave -- 修改选项如下
 
 - auto save 时机：afterDelay
 - auto save delay：500
 
-### terminal 优化
+### 2.3 Terminal 优化
 
-#### mac
+#### Mac
 
 安装参考[oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) github 官网，或者直接运行下面这行代码
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
-
-**如何配置 zsh terminal 全局快捷键？**
 
 找到个人文件夹，找到.zshrc 文件进行配置，-g 为全局可选项
 
@@ -142,7 +136,7 @@ $ echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.zshrc
 $ source ~/.zshrc
 ```
 
-#### windows
+#### Windows
 
 当使用 git bash 作为 terminal 时，可以在 c\user\username\下可以找到.bash_profile，编辑即可完成快捷键
 
@@ -156,13 +150,7 @@ alias gp='git push'
 
 可以使用`get-executionpolicy`查看当前状态，随后以管理员身份打开，运行`set-executionpolicy remotesigned`
 
-### 切分支后代码报错
-
-用`ctrl + shift + p`组合键打开快捷操作，输入 reload window 搜索，并点击设置进行配置
-
-然后就可以使用`command + r`进行刷新，不用重新加载整个项目或重启 vs
-
-### 代码片段
+### 2.4 代码片段
 
 左下角设置 - User Snippets，菜单里可以选择之前已经有的/新建新的代码片段文件
 
@@ -194,7 +182,7 @@ alias gp='git push'
 }
 ```
 
-### 完整 json 配置
+### 2.5 完整 json 配置
 
 ```json
 {
@@ -360,9 +348,9 @@ alias gp='git push'
 }
 ```
 
-## git 配置 ssh
+## 3 Git 配置 ssh
 
-### 检查现有的 ssh 密钥
+### 3.1 检查现有的 ssh 密钥
 
 Windows 打开 GitBash，Linux 下打开终端，输入：
 
@@ -385,9 +373,7 @@ drwxr-xr-x 1 197121    0 Apr 16 23:36 ../
 
 如果你不想用原来的密钥或者没有密钥的话也不用着急，看下一步如何生成新的 ssh 密钥。
 
-### 创建新的 ssh 密钥
-
-#### 生成新的 ssh 密钥
+### 3.2 创建新的 ssh 密钥
 
 在 Windows 的 GitBash 或 Linux 终端输入：
 
@@ -423,7 +409,7 @@ The key's randomart image is:
 
 代表密钥生成成功。
 
-#### 将 SSH 密钥添加到 ssh-agent
+### 3.3 将 SSH 密钥添加到 ssh-agent
 
 终端输入：
 
@@ -456,9 +442,7 @@ Identity added: id_rsa (your_email@example.com)
 
 添加成功！
 
-### 将密钥添加到 github 账户
-
-#### 复制你的公钥
+### 3.4 将密钥添加到 github 账户
 
 在终端使用(或者直接去目录下打开文件
 
@@ -474,8 +458,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDJ6c4cXmpyJr/anagkKz4K+RCFYSJlkFvdNY6JBmKe
 
 全给复制下来！
 
-#### 将公钥添加到 github 账户
-
 然后去 gihub：
 
 - 右上角下拉面板选择 **Settings**；
@@ -486,7 +468,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDJ6c4cXmpyJr/anagkKz4K+RCFYSJlkFvdNY6JBmKe
 
 可能会输入密码，添加完成！
 
-### 测试 ssh 连接
+### 3.5 测试 ssh 连接
 
 在终端中输入：
 
