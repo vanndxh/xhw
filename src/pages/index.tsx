@@ -27,6 +27,7 @@ export default function Index() {
       label: "GPT国内镜像",
       key: "/gpt",
       icon: PicUrl.gpt,
+      disabled: true,
     },
     {
       label: "Markdown在线解析",
@@ -73,7 +74,8 @@ export default function Index() {
           selectedKeys={[window.location.pathname]}
           items={items?.map((i) => ({
             ...i,
-            icon: <Image src={i?.icon} preview={false} />,
+            icon: <Image src={i?.icon} preview={false} style={{ opacity: i?.disabled ? 0.5 : 1 }} />,
+            disabled: i?.disabled,
           }))}
         />
 
