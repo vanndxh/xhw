@@ -3,7 +3,7 @@
  */
 import { Outlet, useNavigate } from "react-router-dom";
 import { PicUrl } from "@/utils/constants";
-import { Menu, Image, message, Space, Layout } from "antd";
+import { Menu, Image, message, Space, Layout, Button } from "antd";
 import { GithubOutlined, LeftOutlined, MailOutlined, RightOutlined } from "@ant-design/icons";
 import { openNewPage } from "@/utils/utils";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -81,14 +81,9 @@ export default function Index() {
 
         {!collapsed && (
           <Space className={styles["layout-sider-bottom"]}>
-            <GithubOutlined
-              className={styles["layout-sider-bottom-icon"]}
-              onClick={() => {
-                openNewPage("https://github.com/vanndxh");
-              }}
-            />
+            <Button type="text" icon={<GithubOutlined />} onClick={() => openNewPage("https://github.com/vanndxh")} />
             <CopyToClipboard text="1025196468@qq.com" onCopy={() => message.success("复制成功")}>
-              <MailOutlined className={styles["layout-sider-bottom-icon"]} />
+              <Button type="text" icon={<MailOutlined />} />
             </CopyToClipboard>
           </Space>
         )}

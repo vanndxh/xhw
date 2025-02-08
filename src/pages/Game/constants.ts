@@ -20,18 +20,21 @@ export const roleList = [
     id: "0001",
     picUrl: "https://patchwiki.biligame.com/images/ys/c/ce/refnobe859mskudq9i634djaniepwvt.png",
     source: RoleSourceKey.GENSHIN,
+    englishName: "mona",
   },
   {
     name: "琴",
     id: "0002",
     picUrl: "https://patchwiki.biligame.com/images/ys/1/1a/g3cl4mrxow8af265n2ajqtnuf99pkfa.png",
     source: RoleSourceKey.GENSHIN,
+    englishName: "qin",
   },
   {
     name: "七七",
     id: "0003",
     picUrl: "https://patchwiki.biligame.com/images/ys/8/8b/049fpv6jcr66mln0nmbbfgigfrkgrzo.png",
     source: RoleSourceKey.GENSHIN,
+    englishName: "qiqi",
   },
   {
     name: "刻晴",
@@ -249,6 +252,20 @@ export const roleList = [
     id: "0039",
     picUrl: "https://patchwiki.biligame.com/images/ys/a/a6/4k6rkt55pw85t14akl09o42f800iac7.png",
     source: RoleSourceKey.GENSHIN,
+  },
+  {
+    name: "玛薇卡",
+    id: "0040",
+    picUrl: "https://patchwiki.biligame.com/images/ys/c/ce/refnobe859mskudq9i634djaniepwvt.png",
+    source: RoleSourceKey.GENSHIN,
+    englishName: "maweika",
+  },
+  {
+    name: "茜特菈莉",
+    id: "0041",
+    picUrl: "https://patchwiki.biligame.com/images/ys/c/ce/refnobe859mskudq9i634djaniepwvt.png",
+    source: RoleSourceKey.GENSHIN,
+    englishName: "maweika",
   },
 ];
 

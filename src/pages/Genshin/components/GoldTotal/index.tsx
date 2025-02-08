@@ -1,8 +1,8 @@
 /**
  * @file 一个卡池的出金展示
  */
-import { ConfigProvider, Descriptions } from "antd";
-import GachaItem from "../GachaItem";
+import { ConfigProvider, Descriptions, Divider } from "antd";
+import GoldLine from "../GoldLine";
 import { roleList } from "@/pages/Game/constants";
 import { PicUrl } from "@/utils/constants";
 import { normalPoolRole } from "../../constants";
@@ -14,7 +14,7 @@ interface Props {
   data: ObjectType[];
 }
 
-function GachaShow(props: Props) {
+function GoldTotal(props: Props) {
   const { isRole, data } = props;
 
   const getStatistics = () => {
@@ -37,23 +37,25 @@ function GachaShow(props: Props) {
 
   return (
     <div className={styles["gacha-show"]}>
-      <div className={styles["gacha-show-list"]}>
-        {data?.map((i, index) => (
-          <GachaItem
-            picUrl={i?.name === "已垫" ? PicUrl.question : roleList.find((j) => i?.name === j?.name)?.picUrl || ""}
+      {data?.map((i, index) => {
+        const targetObj = roleList.find((j) => i?.name === j?.name);
+        const picUrlFromOut = `https://t1.xianx.com.cn/xstatic/img/c/s/${targetObj?.englishName}.jpg`;
+        return (
+          <GoldLine
+            picUrl={i?.name === "已垫" ? PicUrl.question : picUrlFromOut || targetObj?.picUrl || ""}
             name={i?.name}
             count={i?.count}
             key={index}
           />
-        ))}
-      </div>
+        );
+      })}
 
-      <div className={styles["gacha-show-statistics"]}>
-        <ConfigProvider theme={{ components: { Descriptions: { itemPaddingBottom: 0 } } }}>
-          <Descriptions title="本周期统计" items={getStatistics()} column={1} />
-        </ConfigProvider>
-      </div>
+      <Divider />
+
+      <ConfigProvider theme={{ components: { Descriptions: { itemPaddingBottom: 0 } } }}>
+        <Descriptions size="small" items={getStatistics()} column={1} bordered />
+      </ConfigProvider>
     </div>
   );
 }
-export default GachaShow;
+export default GoldTotal;

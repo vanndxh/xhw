@@ -12,6 +12,7 @@ export const handleRawData = (rawData) => {
       finalData.push({
         name: preName,
         count: count + 1,
+        gacha_type: i.gacha_type,
       });
       count = 0;
       preName = i.name;
@@ -25,6 +26,7 @@ export const handleRawData = (rawData) => {
     finalData.push({
       name: preName,
       count: count + 1,
+      gacha_type: rawData[0].gacha_type,
     });
   }
 

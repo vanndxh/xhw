@@ -15,7 +15,7 @@ interface Props {
   count: number;
 }
 
-function GachaItem(props: Props) {
+function GoldLine(props: Props) {
   const { picUrl, name, count } = props;
 
   /** 根据抽卡数决定进度条颜色 */
@@ -37,13 +37,7 @@ function GachaItem(props: Props) {
 
   return (
     <div className={styles["gacha-item"]}>
-      <Image
-        src={picUrl}
-        width={20}
-        height={20}
-        rootClassName={styles["gacha-item-pic"]}
-        preview={false}
-      />
+      <Image src={picUrl} width={20} height={20} rootClassName={styles["gacha-item-pic"]} preview={false} />
       <div className={styles["gacha-item-name"]}>{name}</div>
       <Progress
         percent={(count / 90) * 100}
@@ -55,4 +49,4 @@ function GachaItem(props: Props) {
     </div>
   );
 }
-export default GachaItem;
+export default GoldLine;

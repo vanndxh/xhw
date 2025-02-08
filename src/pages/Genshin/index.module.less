@@ -2,15 +2,30 @@
   overflow: hidden;
   height: 100%;
   padding: 16px;
-
-  .genshin-input-line {
-    display: flex;
-    align-items: center;
-  }
+  position: relative;
 
   .genshin-body {
+    width: 100%;
     margin-top: 10px;
-    height: calc(100% - 80px);
+    transition: all 0.3s;
+    overflow: hidden;
+
+    .genshin-body-item {
+      height: 100%;
+      flex: 1;
+    }
+  }
+
+  .genshin-input-line {
+    margin: auto;
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    width: 100%;
+    transition: all 0.3s;
   }
 }
 

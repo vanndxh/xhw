@@ -12,21 +12,23 @@ export enum GachaTypeKey {
   ROLE = "ROLE",
   WEAPON = "WEAPON",
   NORMAL = "NORMAL",
+  MIX = "MIX",
 }
 export const GachaType = {
   [GachaTypeKey.ROLE]: {
     label: "角色",
     code: "301",
-    lowercase: "role",
   },
   [GachaTypeKey.WEAPON]: {
     label: "武器",
     code: "302",
-    lowercase: "weapon",
   },
   [GachaTypeKey.NORMAL]: {
     label: "常驻",
     code: "200",
-    lowercase: "normal",
+  },
+  [GachaTypeKey.MIX]: {
+    label: "集录",
+    code: "500",
   },
 };
