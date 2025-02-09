@@ -104,21 +104,16 @@ function PCGenshin() {
   const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
 
   /** 获取抽卡数据相关参数 */
-  const fetchInterval = 1000;
   let gachaParams = {
     endId: "0",
     currentPage: 1,
     gachaType: GachaTypeKey.ROLE,
   };
   let tempData: ObjectType[] = [];
-  let timer;
 
   /** 接口请求操作 */
   const fetchData = async () => {
-    message.loading(
-      `获取${GachaType[gachaParams.gachaType].label}池第${gachaParams.currentPage}页中，耐心等待哟~`,
-      fetchInterval / 1000
-    );
+    message.loading(`获取${GachaType[gachaParams.gachaType].label}池第${gachaParams.currentPage}页中，耐心等待哟~`, 1);
 
     const token = inputValue?.split("?")?.[1].split("#")?.[0];
     const params = {
@@ -137,7 +132,6 @@ function PCGenshin() {
     /** 1.请求失败 */
     if (!res?.data?.data) {
       message.error(res?.data?.message || "请求失败");
-      clearInterval(timer);
       setLoading(false);
       return;
     }
@@ -150,6 +144,9 @@ function PCGenshin() {
         currentPage: gachaParams.currentPage + 1,
       };
       tempData = [...[...tempData, ...res?.data?.data?.list]];
+      setTimeout(() => {
+        fetchData();
+      }, 800);
       return;
     }
 
@@ -191,9 +188,12 @@ function PCGenshin() {
     }, 100);
 
     if (curIndex === gachaList?.length - 1) {
-      clearInterval(timer);
       setLoading(false);
       message.success("获取成功！");
+    } else {
+      setTimeout(() => {
+        fetchData();
+      }, 800);
     }
   };
 
@@ -225,7 +225,12 @@ function PCGenshin() {
             原神，启动！
           </Button>
 
-          <Input placeholder="请输入导出链接" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+          <Input
+            placeholder="请输入导出链接"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            disabled={loading}
+          />
 
           {inputValue ? (
             <Button
@@ -234,13 +239,7 @@ function PCGenshin() {
               onClick={() => {
                 setLoading(true);
                 setAllGoldData([]);
-                if (timer === undefined) {
-                  timer = setInterval(() => {
-                    fetchData();
-                  }, fetchInterval);
-                } else {
-                  clearInterval(timer);
-                }
+                fetchData();
               }}
               loading={loading}
               style={{ height: 42 }}
