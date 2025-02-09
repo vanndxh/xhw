@@ -9,7 +9,6 @@ import axios from "axios";
 
 import GoldTotal from "./components/GoldTotal";
 import { openNewPage } from "@/utils/utils";
-import { handleRawData } from "./util";
 import { GachaType, GachaTypeKey } from "./constants";
 
 import styles from "./index.module.less";
@@ -102,7 +101,7 @@ function PCGenshin() {
 
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [allGoldData, setAllGoldData] = useState<ObjectType[]>(mockData || []);
+  const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
 
   /** 获取抽卡数据相关参数 */
   const fetchInterval = 1000;
@@ -159,13 +158,37 @@ function PCGenshin() {
     const curIndex = gachaList.findIndex((i) => i === gachaParams.gachaType);
     const nextGacha = gachaList[curIndex + 1] || gachaList[0];
 
+    const handleRawData = (rawData) => {
+      return rawData?.reduce((acc, current) => {
+        if (current.rank_type === "5") {
+          acc.push({
+            name: current.name,
+            count: 1,
+            gacha_type: current.gacha_type,
+          });
+        } else {
+          if (acc.length === 0) {
+            acc.push({
+              name: "已垫",
+              count: 0,
+              gacha_type: rawData[0]?.gacha_type,
+            });
+          }
+          acc[acc.length - 1].count += 1;
+        }
+        return acc;
+      }, []);
+    };
+
     setAllGoldData((prev) => [...prev, ...handleRawData(tempData)]);
     gachaParams = {
       gachaType: nextGacha as GachaTypeKey,
       endId: "0",
       currentPage: 1,
     };
-    tempData = [];
+    setTimeout(() => {
+      tempData = [];
+    }, 100);
 
     if (curIndex === gachaList?.length - 1) {
       clearInterval(timer);
