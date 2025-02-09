@@ -233,6 +233,7 @@ function PCGenshin() {
               icon={<SendOutlined />}
               onClick={() => {
                 setLoading(true);
+                setAllGoldData([]);
                 if (timer === undefined) {
                   timer = setInterval(() => {
                     fetchData();

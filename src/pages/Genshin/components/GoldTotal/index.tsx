@@ -21,8 +21,9 @@ function GoldTotal(props: Props) {
     const goldCount = data?.[0]?.name === "已垫" ? data?.length - 1 : data?.length;
     const pullCount = data?.reduce((pre, cur) => pre + cur.count, 0);
     const limitCount = data?.reduce((pre, cur) => ([...normalPoolRole, "已垫"].includes(cur.name) ? pre : pre + 1), 0);
-    const avgGold = goldCount ? (pullCount / goldCount).toFixed(1) : "-";
-    const avgLimit = limitCount ? (pullCount / limitCount).toFixed(2) : "-";
+    const goldPull = data?.reduce((pre, cur) => (cur.name !== "已垫" ? pre + cur.count : pre), 0);
+    const avgGold = goldCount ? (goldPull / goldCount).toFixed(1) : "-";
+    const avgLimit = limitCount ? (goldPull / limitCount).toFixed(2) : "-";
     const waiPercent = goldCount ? (((goldCount - limitCount) / goldCount) * 100).toFixed(1) : "-";
 
     const getColor = (value, threshold) => {
