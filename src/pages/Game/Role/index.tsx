@@ -8,7 +8,7 @@ import { useSnapshot } from "valtio";
 
 import { userData } from "../state";
 import RoleCard from "../components/RoleCard";
-import { roleList } from "../constants";
+import { roleList } from "@/pages/Genshin/constants";
 
 import styles from "./index.module.less";
 
@@ -16,7 +16,7 @@ function Role() {
   const { history } = useSnapshot(userData);
 
   const [filterMap, setFilterMap] = useState<ObjectType>({});
-  const [curRoleId, setCurRoleId] = useState<string | undefined>();
+  const [curRole, setCurRole] = useState<string | undefined>();
   const [dataShow, setDataShow] = useState(roleList);
 
   const getIsHaveRole = (id) => {
@@ -58,10 +58,10 @@ function Role() {
     },
   ];
   const targetRoleData = useMemo(() => {
-    const targetHistory = history?.filter((i) => i?.id === curRoleId) || [];
+    const targetHistory = history?.filter((i) => i?.id === curRole) || [];
     const sum = targetHistory?.map((i) => i?.pulls || 0)?.reduce((pre, cur) => pre + cur, 0);
     return {
-      ...(roleList.find((i) => i.id === curRoleId) || {}),
+      ...(roleList.find((i) => i.englishName === curRole) || {}),
       // 第一次获得时间
       firstGetTime: targetHistory?.[0]?.time,
       // 共获得几次
@@ -69,7 +69,7 @@ function Role() {
       // 平均每次获得抽数
       avgPulls: (sum / targetHistory?.length).toFixed(1),
     };
-  }, [curRoleId]);
+  }, [curRole]);
 
   useEffect(() => {
     // name 筛选
@@ -77,10 +77,10 @@ function Role() {
 
     // 分类筛选
     if (filterMap?.classification === "HAVE") {
-      filteredList = filteredList.filter((i) => getIsHaveRole(i.id));
+      filteredList = filteredList.filter((i) => getIsHaveRole(i.englishName));
     }
     if (filterMap?.classification === "NOT_HAVE") {
-      filteredList = filteredList.filter((i) => !getIsHaveRole(i.id));
+      filteredList = filteredList.filter((i) => !getIsHaveRole(i.englishName));
     }
     setDataShow(filteredList);
   }, [filterMap]);
@@ -106,15 +106,15 @@ function Role() {
           <div className={styles["role-list-box"]}>
             <Row>
               {dataShow.map((i) => {
-                const isHaveRole = getIsHaveRole(i.id);
+                const isHaveRole = getIsHaveRole(i.englishName);
                 return (
                   <Col
                     span={4}
-                    key={i.id}
+                    key={i.englishName}
                     className={styles["role-list-item"]}
                     onClick={() => {
                       if (isHaveRole) {
-                        setCurRoleId(curRoleId === i.id ? undefined : i.id);
+                        setCurRole(curRole === i.englishName ? undefined : i.englishName);
                       }
                     }}
                     style={{
@@ -122,7 +122,7 @@ function Role() {
                       cursor: isHaveRole ? "pointer" : "not-allowed",
                     }}
                   >
-                    <RoleCard {...i} isGold />
+                    {/* <RoleCard {...i} isGold /> */}
                   </Col>
                 );
               })}
@@ -130,10 +130,10 @@ function Role() {
           </div>
         </div>
 
-        <div className={styles["role-detail"]} style={{ width: curRoleId ? 400 : 0, opacity: curRoleId ? 1 : 0 }}>
+        <div className={styles["role-detail"]} style={{ width: curRole ? 400 : 0, opacity: curRole ? 1 : 0 }}>
           <ConfigProvider theme={{ components: { Descriptions: { itemPaddingBottom: 5 } } }}>
             <Descriptions
-              title={targetRoleData?.name}
+              title={"targetRoleData?."}
               style={{ padding: 0, whiteSpace: "nowrap" }}
               items={[
                 {

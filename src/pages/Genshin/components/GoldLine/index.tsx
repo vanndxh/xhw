@@ -4,6 +4,9 @@
 import React from "react";
 import { Progress, Image } from "antd";
 import { ProgressGradient } from "antd/es/progress/progress";
+import { FrownOutlined } from "@ant-design/icons";
+import { normalPoolRole } from "../../constants";
+
 import styles from "./index.module.less";
 
 interface Props {
@@ -46,6 +49,9 @@ function GoldLine(props: Props) {
         showInfo={false}
       />
       <div className={styles["gacha-item-count"]}>{count}</div>
+      <div style={{ width: 20 }}>
+        {normalPoolRole.includes(name as string) && <FrownOutlined style={{ color: "red" }} />}
+      </div>
     </div>
   );
 }

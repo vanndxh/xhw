@@ -3,7 +3,6 @@
  */
 
 import { safeParse } from "@/utils/utils";
-import { RoleSourceKey } from "./constants";
 import { proxy, subscribe } from "valtio";
 
 /** 抽卡记录数据类型 */
@@ -14,8 +13,6 @@ export type HistoryType = {
   id?: string;
   /** 抽卡时间 */
   time?: string;
-  /** 来源 */
-  source?: RoleSourceKey;
   /** 多少抽出的 */
   pulls?: number;
 };

@@ -13,7 +13,7 @@ import RoleCard, { RoleCardProps } from "../components/RoleCard";
 import HistoryModal from "../components/HistoryModal";
 import { getRandomItemFromArray } from "@/utils/utils";
 import { PicUrl } from "@/utils/constants";
-import { roleList } from "../constants";
+import { roleList } from "@/pages/Genshin/constants";
 
 import styles from "./index.module.less";
 

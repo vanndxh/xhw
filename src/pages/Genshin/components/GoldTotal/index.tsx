@@ -1,11 +1,11 @@
 /**
  * @file 一个卡池的出金展示
  */
-import { ConfigProvider, Descriptions, Divider } from "antd";
+import { ConfigProvider, Descriptions, Divider, Space, Tooltip } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+
 import GoldLine from "../GoldLine";
-import { roleList } from "@/pages/Game/constants";
-import { PicUrl } from "@/utils/constants";
-import { normalPoolRole } from "../../constants";
+import { normalPoolRole, roleList } from "../../constants";
 
 import styles from "./index.module.less";
 
@@ -21,17 +21,55 @@ function GoldTotal(props: Props) {
     const goldCount = data?.[0]?.name === "已垫" ? data?.length - 1 : data?.length;
     const pullCount = data?.reduce((pre, cur) => pre + cur.count, 0);
     const limitCount = data?.reduce((pre, cur) => ([...normalPoolRole, "已垫"].includes(cur.name) ? pre : pre + 1), 0);
+    const avgGold = goldCount ? (pullCount / goldCount).toFixed(1) : "-";
+    const avgLimit = limitCount ? (pullCount / limitCount).toFixed(2) : "-";
+    const waiPercent = goldCount ? (((goldCount - limitCount) / goldCount) * 100).toFixed(1) : "-";
+
+    const getColor = (value, threshold) => {
+      if (value === "-") {
+        return "#000";
+      }
+      return value > threshold ? "red" : "green";
+    };
 
     return [
-      { label: "总金数", children: goldCount },
-      { label: "总抽数", children: pullCount },
-      { label: "每金抽数", children: data?.length ? (pullCount / goldCount).toFixed(2) : 0 },
-      { label: "限定角色数", children: limitCount, hide: !isRole },
       {
-        label: "每限定角色抽数",
-        children: data?.length ? (pullCount / limitCount).toFixed(2) : 0,
+        label: (
+          <Space size={4}>
+            平均每金抽数
+            <Tooltip placement="top" title={"数学期望：62"} arrow={false}>
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </Space>
+        ),
+        children: <div style={{ fontWeight: "bold", color: getColor(avgGold, 62) }}>{avgGold}</div>,
+      },
+      {
+        label: (
+          <Space size={4}>
+            平均每限定抽数
+            <Tooltip placement="top" title={"数学期望：93"} arrow={false}>
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </Space>
+        ),
+        children: <div style={{ color: getColor(avgLimit, 93) }}>{avgLimit}</div>,
         hide: !isRole,
       },
+      {
+        label: (
+          <Space size={4}>
+            歪概率
+            <Tooltip placement="top" title={"数学期望：45%"} arrow={false}>
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </Space>
+        ),
+        children: <div style={{ color: getColor(waiPercent, 45) }}>{waiPercent}%</div>,
+        hide: !isRole,
+      },
+      { label: "限定角色数", children: limitCount, hide: !isRole },
+      { label: "总抽数/总金数", children: `${pullCount}/${goldCount}` },
     ]?.filter((i) => !i?.hide);
   };
 
@@ -42,7 +80,7 @@ function GoldTotal(props: Props) {
         const picUrlFromOut = `https://t1.xianx.com.cn/xstatic/img/c/s/${targetObj?.englishName}.jpg`;
         return (
           <GoldLine
-            picUrl={i?.name === "已垫" ? PicUrl.question : picUrlFromOut || targetObj?.picUrl || ""}
+            picUrl={i?.name === "已垫" ? "https://t1.xianx.com.cn/xstatic/img/rarity/5.png" : picUrlFromOut || ""}
             name={i?.name}
             count={i?.count}
             key={index}

@@ -13,6 +13,12 @@
     .genshin-body-item {
       height: 100%;
       flex: 1;
+
+      :global {
+        .ant-card-body {
+          height: calc(100% - 60px);
+        }
+      }
     }
   }
 

@@ -17,9 +17,92 @@ import styles from "./index.module.less";
 function PCGenshin() {
   message.config({ maxCount: 1 });
 
+  const mockData = [
+    {
+      name: "已垫",
+      count: 6,
+      gacha_type: "301",
+    },
+    {
+      name: "玛薇卡",
+      count: 75,
+      gacha_type: "400",
+    },
+    {
+      name: "茜特菈莉",
+      count: 68,
+      gacha_type: "301",
+    },
+    {
+      name: "恰斯卡",
+      count: 78,
+      gacha_type: "301",
+    },
+    {
+      name: "七七",
+      count: 78,
+      gacha_type: "301",
+    },
+    {
+      name: "希诺宁",
+      count: 64,
+      gacha_type: "301",
+    },
+    {
+      name: "基尼奇",
+      count: 78,
+      gacha_type: "301",
+    },
+    {
+      name: "玛拉妮",
+      count: 71,
+      gacha_type: "301",
+    },
+    {
+      name: "艾梅莉埃",
+      count: 80,
+      gacha_type: "301",
+    },
+    {
+      name: "莫娜",
+      count: 83,
+      gacha_type: "301",
+    },
+    {
+      name: "克洛琳德",
+      count: 77,
+      gacha_type: "400",
+    },
+    {
+      name: "提纳里",
+      count: 40,
+      gacha_type: "301",
+    },
+    {
+      name: "阿蕾奇诺",
+      count: 45,
+      gacha_type: "301",
+    },
+    {
+      name: "七七",
+      count: 77,
+      gacha_type: "301",
+    },
+    {
+      name: "千织",
+      count: 72,
+      gacha_type: "301",
+    },
+    {
+      name: "已垫",
+      count: 7,
+      gacha_type: "302",
+    },
+  ];
+
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
+  const [allGoldData, setAllGoldData] = useState<ObjectType[]>(mockData || []);
 
   /** 获取抽卡数据相关参数 */
   const fetchInterval = 1000;
@@ -92,80 +175,83 @@ function PCGenshin() {
   };
 
   return (
-    <>
-      <div className={styles["genshin"]}>
-        <Flex
-          className={styles["genshin-body"]}
-          gap={16}
-          style={{ height: allGoldData.length ? "calc(100% - 60px)" : 0 }}
-        >
-          {Object.keys(GachaType).map((i) => (
-            <Card title={GachaType[i].label} key={GachaType[i].code} className={styles["genshin-body-item"]}>
-              <GoldTotal
-                isRole={GachaType[i].label === "角色"}
-                data={allGoldData?.filter((j) => j.gacha_type === GachaType[i].code)}
-              />
-            </Card>
-          ))}
-        </Flex>
-
-        <div className={styles["genshin-input-line"]} style={{ bottom: allGoldData.length ? 0 : "50%" }}>
-          <Space.Compact style={{ width: allGoldData.length ? "100%" : "60%", transition: "all 0.3s" }}>
-            <Button color="gold" variant="solid" onClick={() => openNewPage("yuanshengame://")} style={{ height: 42 }}>
-              原神，启动！
-            </Button>
-
-            <Input placeholder="请输入导出链接" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-
-            {inputValue ? (
-              <Button
-                type="primary"
-                icon={<SendOutlined />}
-                onClick={() => {
-                  setLoading(true);
-                  if (timer === undefined) {
-                    timer = setInterval(() => {
-                      fetchData();
-                    }, fetchInterval);
-                  } else {
-                    clearInterval(timer);
-                  }
-                }}
-                loading={loading}
-                style={{ height: 42 }}
-              >
-                开始获取
-              </Button>
-            ) : (
-              <Popover
-                title="如何获取导出链接？"
-                content={
-                  <div>
-                    <div>1、打开游戏抽卡记录页面，最好多翻几页</div>
-                    <div>2、打开电脑终端 windows powershell</div>
-                    <div>
-                      {`3、输入iex(irm 'https://img.lelaer.com/cn.ps1')`}
-                      <CopyToClipboard
-                        text={`iex(irm 'https://img.lelaer.com/cn.ps1')`}
-                        onCopy={() => message.success("复制成功")}
-                      >
-                        <CopyOutlined className={styles["genshin-tip-copy"]} />
-                      </CopyToClipboard>
-                    </div>
-                    <div>4、命令运行结束时链接已经自动复制到剪贴板，直接使用即可</div>
-                  </div>
+    <div className={styles["genshin"]}>
+      <Flex
+        className={styles["genshin-body"]}
+        gap={16}
+        style={{ height: allGoldData.length ? "calc(100% - 60px)" : 0 }}
+      >
+        {Object.keys(GachaType).map((i) => (
+          <Card title={GachaType[i].label} key={GachaType[i].code} className={styles["genshin-body-item"]}>
+            <GoldTotal
+              isRole={GachaType[i].label === "角色"}
+              data={allGoldData?.filter((j) => {
+                if (GachaType[i].label === "角色") {
+                  return ["301", "400"].includes(j.gacha_type);
                 }
-                trigger="click"
-              >
-                <Button style={{ height: 42 }} type="primary">
-                  如何获得？
-                </Button>
-              </Popover>
-            )}
-          </Space.Compact>
-        </div>
+                return j.gacha_type === GachaType[i].code;
+              })}
+            />
+          </Card>
+        ))}
+      </Flex>
+
+      <div className={styles["genshin-input-line"]} style={{ bottom: allGoldData.length ? 0 : "50%" }}>
+        <Space.Compact style={{ width: allGoldData.length ? "100%" : "60%", transition: "all 0.3s" }}>
+          <Button color="gold" variant="solid" onClick={() => openNewPage("yuanshengame://")} style={{ height: 42 }}>
+            原神，启动！
+          </Button>
+
+          <Input placeholder="请输入导出链接" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+
+          {inputValue ? (
+            <Button
+              type="primary"
+              icon={<SendOutlined />}
+              onClick={() => {
+                setLoading(true);
+                if (timer === undefined) {
+                  timer = setInterval(() => {
+                    fetchData();
+                  }, fetchInterval);
+                } else {
+                  clearInterval(timer);
+                }
+              }}
+              loading={loading}
+              style={{ height: 42 }}
+            >
+              开始获取
+            </Button>
+          ) : (
+            <Popover
+              title="如何获取导出链接？"
+              content={
+                <div>
+                  <div>1、打开游戏抽卡记录页面，最好多翻几页</div>
+                  <div>2、打开电脑终端 windows powershell</div>
+                  <div>
+                    {`3、输入iex(irm 'https://img.lelaer.com/cn.ps1')`}
+                    <CopyToClipboard
+                      text={`iex(irm 'https://img.lelaer.com/cn.ps1')`}
+                      onCopy={() => message.success("复制成功")}
+                    >
+                      <CopyOutlined className={styles["genshin-tip-copy"]} />
+                    </CopyToClipboard>
+                  </div>
+                  <div>4、命令运行结束时链接已经自动复制到剪贴板，直接使用即可</div>
+                </div>
+              }
+              trigger="click"
+            >
+              <Button style={{ height: 42 }} type="primary">
+                如何获得？
+              </Button>
+            </Popover>
+          )}
+        </Space.Compact>
       </div>
-    </>
+    </div>
   );
 }
 export default PCGenshin;

@@ -6,7 +6,6 @@ import { Modal, Table } from "antd";
 import { useSnapshot } from "valtio";
 
 import { userData } from "../../state";
-import { RoleSource } from "../../constants";
 
 interface Props {
   actionRef: React.MutableRefObject<{ show: () => void } | undefined>;
@@ -33,12 +32,6 @@ export default function HistoryModal(props: Props) {
       title: "水位",
       dataIndex: "pulls",
       key: "pulls",
-    },
-    {
-      title: "来源",
-      dataIndex: "source",
-      key: "source",
-      render: (text) => RoleSource[text],
     },
   ];
 
