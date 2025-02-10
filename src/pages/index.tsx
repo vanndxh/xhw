@@ -1,14 +1,25 @@
 /**
  * @file 首页 - 重定向
  */
-import { Outlet, useNavigate } from "react-router-dom";
-import { PicUrl } from "@/utils/constants";
-import { Menu, Image, message, Space, Layout, Button } from "antd";
-import { GithubOutlined, LeftOutlined, MailOutlined, RightOutlined } from "@ant-design/icons";
-import { openNewPage } from "@/utils/utils";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import xhw from "../assets/xhw.jpeg";
 import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { Menu, Image, message, Layout, Button, Flex } from "antd";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import {
+  FileMarkdownOutlined,
+  FileTextOutlined,
+  GiftOutlined,
+  GithubOutlined,
+  LeftOutlined,
+  MailOutlined,
+  OpenAIOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
+
+import { PicUrl } from "@/utils/constants";
+import { openNewPage } from "@/utils/utils";
+import xhw from "../assets/xhw.jpeg";
+
 import styles from "./index.module.less";
 
 const { Sider, Content } = Layout;
@@ -24,32 +35,27 @@ export default function Index() {
       icon: PicUrl.genshin,
     },
     {
-      label: "GPT国内镜像",
+      label: "ChatGPT国内镜像",
       key: "/gpt",
-      icon: PicUrl.gpt,
+      icon: <OpenAIOutlined />,
       disabled: true,
     },
     {
       label: "Markdown在线解析",
       key: "/markdown",
-      icon: PicUrl.markdown,
+      icon: <FileMarkdownOutlined />,
     },
     {
       label: "文章",
       key: "/docs",
-      icon: PicUrl.doc,
+      icon: <FileTextOutlined />,
     },
     {
       label: "抽卡小游戏",
       key: "/game/home",
-      icon: PicUrl.trashBin,
+      icon: <GiftOutlined />,
     },
   ];
-
-  /** 以前该项目内有pc/移动端分流逻辑，现已删除，代码保留一下 */
-  // const isMobile = /mobile|android|iphone|ipad|phone/i.test(
-  //   window.navigator.userAgent.toLowerCase()
-  // );
 
   return (
     <Layout className={styles["layout"]}>
@@ -74,18 +80,23 @@ export default function Index() {
           selectedKeys={[window.location.pathname]}
           items={items?.map((i) => ({
             ...i,
-            icon: <Image src={i?.icon} preview={false} style={{ opacity: i?.disabled ? 0.5 : 1 }} />,
+            icon:
+              typeof i?.icon === "string" ? (
+                <Image src={i.icon} preview={false} style={{ opacity: i?.disabled ? 0.5 : 1 }} />
+              ) : (
+                i.icon
+              ),
             disabled: i?.disabled,
           }))}
         />
 
         {!collapsed && (
-          <Space className={styles["layout-sider-bottom"]}>
+          <Flex className={styles["layout-sider-bottom"]}>
             <Button type="text" icon={<GithubOutlined />} onClick={() => openNewPage("https://github.com/vanndxh")} />
             <CopyToClipboard text="1025196468@qq.com" onCopy={() => message.success("复制成功")}>
               <Button type="text" icon={<MailOutlined />} />
             </CopyToClipboard>
-          </Space>
+          </Flex>
         )}
 
         <div className={styles["layout-sider-trigger"]} onClick={() => setCollapsed(!collapsed)}>

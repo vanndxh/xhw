@@ -18,7 +18,7 @@ export default function MarkdownParse() {
           value={markdownValue}
           onChange={(e) => setMarkdownValue(e.target.value)}
           className={styles["markdown-input"]}
-          style={{ height: "100%" }}
+          style={{ height: "100%", resize: "none" }}
         />
       </div>
 
