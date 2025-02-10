@@ -19,8 +19,8 @@ export default function RoleCard(props: RoleCardProps) {
 
   return (
     <Badge count={badgeText}>
-      <div className={styles["role-card"]} style={{ border: `5px solid ${finalColor}` }}>
-        <Image width={100} height={100} src={picUrl} preview={false} style={{ borderRadius: 24 }} />
+      <div className={styles["role-card"]} style={{ border: `3px solid ${finalColor}` }}>
+        <Image width={100} height={100} src={picUrl} preview={false} />
         <div className={styles["role-card-name"]} style={{ color: finalColor }}>
           {name}
         </div>

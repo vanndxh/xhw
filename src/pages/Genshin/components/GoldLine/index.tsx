@@ -2,10 +2,10 @@
  * @file 一条出金记录的展示
  */
 import React from "react";
-import { Progress, Image } from "antd";
+import { Progress, Image, Tag } from "antd";
 import { ProgressGradient } from "antd/es/progress/progress";
 import { FrownOutlined } from "@ant-design/icons";
-import { normalPoolRole } from "../../constants";
+import { roleList } from "../../constants";
 
 import styles from "./index.module.less";
 
@@ -20,6 +20,9 @@ interface Props {
 
 function GoldLine(props: Props) {
   const { picUrl, name, count } = props;
+  const targetObj = roleList.find((i) => i.name === name);
+  const { version, isNormal } = targetObj || {};
+  const showTag = !isNormal && name !== "已垫";
 
   /** 根据抽卡数决定进度条颜色 */
   const getProgressColor = (c): ProgressGradient => {
@@ -40,6 +43,7 @@ function GoldLine(props: Props) {
 
   return (
     <div className={styles["gacha-item"]}>
+      <div style={{ width: 40 }}>{showTag && <Tag style={{ margin: 0 }}>{version}</Tag>}</div>
       <Image src={picUrl} width={20} height={20} rootClassName={styles["gacha-item-pic"]} preview={false} />
       <div className={styles["gacha-item-name"]}>{name}</div>
       <Progress
@@ -50,7 +54,7 @@ function GoldLine(props: Props) {
       />
       <div className={styles["gacha-item-count"]}>{count}</div>
       <div style={{ width: 20 }}>
-        {normalPoolRole.includes(name as string) && <FrownOutlined style={{ color: "red" }} />}
+        {roleList.find((i) => i.name === name)?.isNormal && <FrownOutlined style={{ color: "red" }} />}
       </div>
     </div>
   );

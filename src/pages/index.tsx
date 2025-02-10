@@ -51,7 +51,7 @@ export default function Index() {
       icon: <FileTextOutlined />,
     },
     {
-      label: "抽卡小游戏",
+      label: "抽卡模拟器",
       key: "/game/home",
       icon: <GiftOutlined />,
     },

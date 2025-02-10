@@ -20,7 +20,6 @@ export const routes = [
         path: "/game",
         children: [
           { path: "home", element: <Game.Home /> },
-          { path: "wish", element: <Game.Wish /> },
           { path: "role", element: <Game.Role /> },
         ],
       },

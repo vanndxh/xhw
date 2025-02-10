@@ -5,7 +5,7 @@ import { ConfigProvider, Descriptions, Divider, Space, Tooltip } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 import GoldLine from "../GoldLine";
-import { normalPoolRole, roleList } from "../../constants";
+import { roleList } from "../../constants";
 
 import styles from "./index.module.less";
 
@@ -20,7 +20,10 @@ function GoldTotal(props: Props) {
   const getStatistics = () => {
     const goldCount = data?.[0]?.name === "已垫" ? data?.length - 1 : data?.length;
     const pullCount = data?.reduce((pre, cur) => pre + cur.count, 0);
-    const limitCount = data?.reduce((pre, cur) => ([...normalPoolRole, "已垫"].includes(cur.name) ? pre : pre + 1), 0);
+    const limitCount = data?.reduce((pre, cur) => {
+      const isNormal = cur.name === "已垫" || roleList.find((i) => cur.name === i.name)?.isNormal;
+      return isNormal ? pre : pre + 1;
+    }, 0);
     const goldPull = data?.reduce((pre, cur) => (cur.name !== "已垫" ? pre + cur.count : pre), 0);
     const avgGold = goldCount ? (goldPull / goldCount).toFixed(1) : "-";
     const avgLimit = limitCount ? (goldPull / limitCount).toFixed(2) : "-";

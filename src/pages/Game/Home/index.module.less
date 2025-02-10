@@ -1,52 +1,40 @@
-.game-index {
+.game {
   padding: 24px;
+  position: relative;
+  height: 100vh;
 
-  .game-index-header {
+  .game-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .game-index-header-title {
-      display: flex;
-      align-items: center;
-
-      .game-index-header-title-icon {
-        padding: 10px;
-        border-radius: 50%;
-        margin-right: 5px;
-        cursor: pointer;
-        font-size: 24px;
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.1);
-        }
-      }
-    }
-
-    .game-index-header-action {
-      display: flex;
-      align-items: center;
-
-      .game-index-header-action-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        cursor: pointer;
-        padding: 10px;
-        border-radius: 12px;
-
-        &:hover {
-          background: rgba(0, 0, 0, 0.1);
-        }
-      }
-    }
   }
 
-  .game-index-body {
-    height: 500px;
+  .game-show {
+    height: calc(100vh - 160px);
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .game-footer {
+    position: absolute;
+    bottom: 0;
+    padding: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .game-footer-item {
+      width: 200px;
+      height: 60px;
+      font-weight: bold;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 16px;
+    }
+
+    .game-footer-wish {
+      border-color: gold;
+    }
   }
 }
