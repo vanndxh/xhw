@@ -234,7 +234,8 @@ function PCGenshin() {
 
           {inputValue ? (
             <Button
-              type="primary"
+              variant="solid"
+              color="default"
               icon={<SendOutlined />}
               onClick={() => {
                 setLoading(true);
@@ -267,7 +268,7 @@ function PCGenshin() {
               }
               trigger="click"
             >
-              <Button style={{ height: 42 }} type="primary">
+              <Button style={{ height: 42 }} variant="solid" color="default">
                 如何获得？
               </Button>
             </Popover>

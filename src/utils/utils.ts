@@ -16,3 +16,8 @@ export const getRandomItemFromArray = (arr: any[]) => {
 export const openNewPage = (url: string) => {
   window.open(url, "_blank", "noopener noreferrer");
 };
+
+/** 引入本地图片方法 */
+export function localImg(file) {
+  return new URL(`../docs${file}`, import.meta.url).href;
+}
