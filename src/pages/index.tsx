@@ -35,15 +35,9 @@ export default function Index() {
       icon: PicUrl.genshin,
     },
     {
-      label: "ChatGPT国内镜像",
-      key: "/gpt",
-      icon: <OpenAIOutlined />,
-      disabled: true,
-    },
-    {
-      label: "Markdown在线解析",
-      key: "/markdown",
-      icon: <FileMarkdownOutlined />,
+      label: "抽卡模拟器",
+      key: "/game/home",
+      icon: <GiftOutlined />,
     },
     {
       label: "文章",
@@ -51,9 +45,15 @@ export default function Index() {
       icon: <FileTextOutlined />,
     },
     {
-      label: "抽卡模拟器",
-      key: "/game/home",
-      icon: <GiftOutlined />,
+      label: "Markdown在线解析",
+      key: "/markdown",
+      icon: <FileMarkdownOutlined />,
+    },
+    {
+      label: "ChatGPT国内镜像",
+      key: "/gpt",
+      icon: <OpenAIOutlined />,
+      disabled: true,
     },
   ];
 
