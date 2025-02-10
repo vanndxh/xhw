@@ -1,11 +1,12 @@
 /**
  * @file 原神抽卡记录导出
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Flex, Input, message, Popover, Space } from "antd";
 import { CopyOutlined, SendOutlined } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import axios from "axios";
+import { useDebounce } from "ahooks";
 
 import GoldTotal from "./components/GoldTotal";
 import { openNewPage } from "@/utils/utils";
@@ -14,105 +15,26 @@ import { GachaType, GachaTypeKey } from "./constants";
 import styles from "./index.module.less";
 
 function PCGenshin() {
-  message.config({ maxCount: 1 });
-
-  const mockData = [
-    {
-      name: "已垫",
-      count: 6,
-      gacha_type: "301",
-    },
-    {
-      name: "玛薇卡",
-      count: 75,
-      gacha_type: "400",
-    },
-    {
-      name: "茜特菈莉",
-      count: 68,
-      gacha_type: "301",
-    },
-    {
-      name: "恰斯卡",
-      count: 78,
-      gacha_type: "301",
-    },
-    {
-      name: "七七",
-      count: 78,
-      gacha_type: "301",
-    },
-    {
-      name: "希诺宁",
-      count: 64,
-      gacha_type: "301",
-    },
-    {
-      name: "基尼奇",
-      count: 78,
-      gacha_type: "301",
-    },
-    {
-      name: "玛拉妮",
-      count: 71,
-      gacha_type: "301",
-    },
-    {
-      name: "艾梅莉埃",
-      count: 80,
-      gacha_type: "301",
-    },
-    {
-      name: "莫娜",
-      count: 83,
-      gacha_type: "301",
-    },
-    {
-      name: "克洛琳德",
-      count: 77,
-      gacha_type: "400",
-    },
-    {
-      name: "提纳里",
-      count: 40,
-      gacha_type: "301",
-    },
-    {
-      name: "阿蕾奇诺",
-      count: 45,
-      gacha_type: "301",
-    },
-    {
-      name: "七七",
-      count: 77,
-      gacha_type: "301",
-    },
-    {
-      name: "千织",
-      count: 72,
-      gacha_type: "301",
-    },
-    {
-      name: "已垫",
-      count: 7,
-      gacha_type: "302",
-    },
-  ];
-
-  const [inputValue, setInputValue] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
-
-  /** 获取抽卡数据相关参数 */
-  let gachaParams = {
+  const initGachaParams = {
     endId: "0",
     currentPage: 1,
     gachaType: GachaTypeKey.ROLE,
   };
-  let tempData: ObjectType[] = [];
+  message.config({ maxCount: 1 });
+
+  const [gachaParams, setGachaParams] = useState<ObjectType | undefined>();
+  const [tempData, setTempData] = useState<ObjectType[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [allGoldData, setAllGoldData] = useState<ObjectType[]>([]);
 
   /** 接口请求操作 */
   const fetchData = async () => {
+    /** 0.判断是否执行：没有参数不执行 */
+    if (!gachaParams) {
+      return;
+    }
+
     message.loading(`获取${GachaType[gachaParams.gachaType].label}池第${gachaParams.currentPage}页中，耐心等待哟~`, 1);
 
     const token = inputValue?.split("?")?.[1].split("#")?.[0];
@@ -138,15 +60,13 @@ function PCGenshin() {
 
     /** 2.有数据，则处理数据 */
     if (res.data.data.list.length) {
-      gachaParams = {
+      setGachaParams({
         ...gachaParams,
         endId: res?.data?.data?.list[res.data.data.list.length - 1]?.id || "",
         currentPage: gachaParams.currentPage + 1,
-      };
-      tempData = [...[...tempData, ...res?.data?.data?.list]];
-      setTimeout(() => {
-        fetchData();
-      }, 800);
+      });
+      setTempData([...tempData, ...res?.data?.data?.list]);
+
       return;
     }
 
@@ -178,24 +98,24 @@ function PCGenshin() {
     };
 
     setAllGoldData((prev) => [...prev, ...handleRawData(tempData)]);
-    gachaParams = {
-      gachaType: nextGacha as GachaTypeKey,
-      endId: "0",
-      currentPage: 1,
-    };
-    setTimeout(() => {
-      tempData = [];
-    }, 100);
+    setTempData([]);
 
     if (curIndex === gachaList?.length - 1) {
       setLoading(false);
+      setGachaParams(undefined);
       message.success("获取成功！");
     } else {
-      setTimeout(() => {
-        fetchData();
-      }, 800);
+      setGachaParams({
+        gachaType: nextGacha as GachaTypeKey,
+        endId: "0",
+        currentPage: 1,
+      });
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [useDebounce(gachaParams, { wait: 500 })]);
 
   return (
     <div className={styles["genshin"]}>
@@ -240,7 +160,7 @@ function PCGenshin() {
               onClick={() => {
                 setLoading(true);
                 setAllGoldData([]);
-                fetchData();
+                setGachaParams(initGachaParams);
               }}
               loading={loading}
               style={{ height: 42 }}
