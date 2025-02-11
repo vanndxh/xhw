@@ -2,7 +2,7 @@ import Index from "@/pages/index";
 import Genshin from "@/pages/Genshin";
 import GPT from "@/pages/GPT";
 import MarkdownParse from "@/pages/MarkdownParse";
-import * as Game from "@/pages/Game";
+import Game from "@/pages/Game";
 import Docs from "@/pages/Docs";
 import { Navigate } from "react-router-dom";
 
@@ -16,13 +16,7 @@ export const routes = [
       { path: "gpt", element: <GPT /> },
       { path: "markdown", element: <MarkdownParse /> },
       { path: "docs", element: <Docs /> },
-      {
-        path: "/game",
-        children: [
-          { path: "home", element: <Game.Home /> },
-          { path: "role", element: <Game.Role /> },
-        ],
-      },
+      { path: "game", element: <Game /> },
     ],
   },
 ];

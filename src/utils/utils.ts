@@ -21,3 +21,8 @@ export const openNewPage = (url: string) => {
 export function localImg(file) {
   return new URL(`../docs${file}`, import.meta.url).href;
 }
+
+/** 获取原神角色图片 */
+export const getGenshinRoleImg = (name: string) => {
+  return `https://t1.xianx.com.cn/xstatic/img/c/s/${name}.jpg`;
+};

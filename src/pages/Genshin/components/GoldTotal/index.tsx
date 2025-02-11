@@ -5,6 +5,7 @@ import { ConfigProvider, Descriptions, Divider, Space, Tooltip } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 import GoldLine from "../GoldLine";
+import { getGenshinRoleImg } from "@/utils/utils";
 import { roleList } from "../../constants";
 
 import styles from "./index.module.less";
@@ -81,10 +82,13 @@ function GoldTotal(props: Props) {
     <div className={styles["gacha-show"]}>
       {data?.map((i, index) => {
         const targetObj = roleList.find((j) => i?.name === j?.name);
-        const picUrlFromOut = `https://t1.xianx.com.cn/xstatic/img/c/s/${targetObj?.englishName}.jpg`;
         return (
           <GoldLine
-            picUrl={i?.name === "已垫" ? "https://t1.xianx.com.cn/xstatic/img/rarity/5.png" : picUrlFromOut || ""}
+            picUrl={
+              i?.name === "已垫"
+                ? "https://t1.xianx.com.cn/xstatic/img/rarity/5.png"
+                : getGenshinRoleImg(targetObj?.englishName || "")
+            }
             name={i?.name}
             count={i?.count}
             key={index}

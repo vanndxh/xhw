@@ -9,8 +9,6 @@ import { proxy, subscribe } from "valtio";
 export type HistoryType = {
   /** 名称 */
   name?: string;
-  /** id */
-  id?: string;
   /** 抽卡时间 */
   time?: string;
   /** 多少抽出的 */
