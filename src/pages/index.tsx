@@ -6,6 +6,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Menu, Image, message, Layout, Button, Flex } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {
+  BilibiliOutlined,
   FileMarkdownOutlined,
   FileTextOutlined,
   GiftOutlined,
@@ -36,7 +37,7 @@ export default function Index() {
     },
     {
       label: "抽卡模拟器",
-      key: "/game/home",
+      key: "/game",
       icon: <GiftOutlined />,
     },
     {
@@ -48,6 +49,11 @@ export default function Index() {
       label: "Markdown在线解析",
       key: "/markdown",
       icon: <FileMarkdownOutlined />,
+    },
+    {
+      label: "BiliMusic",
+      key: "/BiliMusic",
+      icon: <BilibiliOutlined />,
     },
     {
       label: "ChatGPT国内镜像",
