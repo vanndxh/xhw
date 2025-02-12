@@ -79,8 +79,8 @@ export const roleList = [
   { name: "玛拉妮", englishName: "malani", version: "5.0" },
   { name: "基尼奇", englishName: "jiniqi", version: "5.0" },
   { name: "希诺宁", englishName: "xinuoning", version: "5.1" },
-  { name: "恰斯卡", englishName: "qiasika", version: "5.2" },
+  { name: "恰斯卡", englishName: "chasca", version: "5.2" },
   { name: "茜特菈莉", englishName: "citlali", version: "5.3" },
-  { name: "玛薇卡", englishName: "maweika", version: "5.3" },
-  { name: "梦见月瑞希", englishName: "ruixi", version: "5.4" },
+  { name: "玛薇卡", englishName: "mavuika", version: "5.3" },
+  { name: "梦见月瑞希", englishName: "mizuki", version: "5.4" },
 ];
