@@ -21,7 +21,7 @@ docker volume rm yuquey_pg-data
 
 在宝塔面板目录下，放入完整后端项目
 
-![image.png](../Docker部署Go后端/assets/1646977222966-8bd88f66-eabb-4d9d-bb24-b2ff94d4c4a6.webp)
+![image.png](assets/1646977222966-8bd88f66-eabb-4d9d-bb24-b2ff94d4c4a6.webp)
 
 # 3. 配置 docker 相关文件
 
@@ -107,7 +107,7 @@ docker-compose up
 
 这个过程比较长，如果正常运行完，会显示监听 0.0.0.0:8088（示例）。如果运行报错，会显示 exit code 2，并提示报错信息
 
-![img](../Docker部署Go后端/assets/1646979033487-e49bafd4-8342-4d9a-b9d2-71bcf69957e5.png)
+![img](assets/1646979033487-e49bafd4-8342-4d9a-b9d2-71bcf69957e5.png)
 
 # 5. nginx 反向代理
 

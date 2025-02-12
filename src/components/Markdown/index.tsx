@@ -27,9 +27,7 @@ export default function Markdown(props: Props) {
   const components = {
     img: ({ src }) => {
       const isAbsoluteUrl = src?.includes("http");
-      const urlFromGitHub = `https://raw.githubusercontent.com/vanndxh/xhw-pro/refs/heads/master/src/docs${src?.slice(
-        2
-      )}`;
+      const urlFromGitHub = `https://raw.githubusercontent.com/vanndxh/xhw-pro/refs/heads/master/src/docs/${src}`;
       return <Image src={isAbsoluteUrl ? src : urlFromGitHub} style={{ maxHeight: 1000, maxWidth: "100%" }} />;
     },
     code: ({ className, children, ...props }) => {

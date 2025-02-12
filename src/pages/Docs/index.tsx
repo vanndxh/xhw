@@ -8,7 +8,7 @@ import Markdown from "@/components/Markdown";
 import styles from "./index.module.less";
 
 export default function Docs() {
-  const docTitleList = ["xhw-pro开发笔记", "前端面试手册", "开发环境配置", "大模型对话技术", "Docker部署Go后端"];
+  const docTitleList = ["小黑屋开发笔记", "前端面试手册", "开发环境配置", "大模型对话技术", "Docker部署Go后端"];
   const [docList, setDocList] = useState<ObjectType[]>([]);
   const [currentDoc, setCurrentDoc] = useState(docTitleList[0]);
   const [searchText, setSearchText] = useState("");
@@ -49,10 +49,14 @@ export default function Docs() {
     }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:8088/doc/getMarkdownDocs").then((res) => {
-      setDocList(res?.data);
-    });
-  }, [searchText]);
+    axios
+      .get("http://localhost:8088/doc/getMarkdownDocs", {
+        params: { docTitleList },
+      })
+      .then((res) => {
+        setDocList(res?.data);
+      });
+  }, []);
 
   return (
     <div className={styles["docs"]}>
