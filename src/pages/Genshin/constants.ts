@@ -82,4 +82,5 @@ export const roleList = [
   { name: "恰斯卡", englishName: "qiasika", version: "5.2" },
   { name: "茜特菈莉", englishName: "citlali", version: "5.3" },
   { name: "玛薇卡", englishName: "maweika", version: "5.3" },
+  { name: "梦见月瑞希", englishName: "ruixi", version: "5.4" },
 ];
