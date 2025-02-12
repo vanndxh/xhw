@@ -4,8 +4,7 @@
 import { useState } from "react";
 import { Avatar, Button, Card, Empty, Input, message, Modal, Select, Spin } from "antd";
 import { Configuration, CreateChatCompletionRequest, OpenAIApi } from "openai";
-import { RestOutlined, SendOutlined, UserOutlined } from "@ant-design/icons";
-import { PicUrl } from "@/utils/constants";
+import { OpenAIOutlined, RestOutlined, SendOutlined, UserOutlined } from "@ant-design/icons";
 import styles from "./index.module.less";
 
 function GPT() {
@@ -64,11 +63,7 @@ function GPT() {
           <Spin tip="Loading..." spinning={loading}>
             {history?.map((i, index) => (
               <div key={index} className={styles["gpt-history-item"]}>
-                {i?.role === "user" ? (
-                  <Avatar shape="square" size="small" icon={<UserOutlined />} />
-                ) : (
-                  <Avatar shape="square" size="small" src={PicUrl.gpt} />
-                )}
+                <Avatar shape="square" size="small" icon={i?.role === "user" ? <UserOutlined /> : <OpenAIOutlined />} />
                 <span style={{ marginLeft: 10 }}>{i?.content}</span>
               </div>
             ))}

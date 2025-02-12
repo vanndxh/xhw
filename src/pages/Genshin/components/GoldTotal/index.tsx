@@ -5,7 +5,7 @@ import { ConfigProvider, Descriptions, Divider, Space, Tooltip } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 import GoldLine from "../GoldLine";
-import { getGenshinRoleImg } from "@/utils/utils";
+import { getGenshinRoleImg } from "@/utils";
 import { roleList } from "../../constants";
 
 import styles from "./index.module.less";

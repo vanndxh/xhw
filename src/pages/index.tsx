@@ -17,8 +17,7 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 
-import { PicUrl } from "@/utils/constants";
-import { openNewPage } from "@/utils/utils";
+import { openNewPage } from "@/utils";
 import xhw from "../assets/xhw.jpeg";
 
 import styles from "./index.module.less";
@@ -33,7 +32,7 @@ export default function Index() {
     {
       label: "原神抽卡导出",
       key: "/genshin",
-      icon: PicUrl.genshin,
+      icon: "https://th.bing.com/th?id=OSK.6c0cc1959345baf7c6e5ae5c1458cc25&w=46&h=46&c=11&rs=1&qlt=80&o=6&dpr=2&pid=SANGAM",
     },
     {
       label: "抽卡模拟器",

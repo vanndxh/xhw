@@ -14,7 +14,7 @@ import HistoryModal from "./components/HistoryModal";
 import RoleBook from "./components/RoleBook";
 import RoleCard, { RoleCardProps } from "./components/RoleCard";
 
-import { getGenshinRoleImg, getRandomItemFromArray } from "@/utils/utils";
+import { getGenshinRoleImg, getRandomItemFromArray } from "@/utils";
 import { userData } from "./state";
 import { roleList } from "@/pages/Genshin/constants";
 import { blueColor, goldColor, purpleColor } from "./constants";

@@ -2,7 +2,7 @@
  * @file 游戏数据全局state
  */
 
-import { safeParse } from "@/utils/utils";
+import { safeParse } from "@/utils";
 import { proxy, subscribe } from "valtio";
 
 /** 抽卡记录数据类型 */

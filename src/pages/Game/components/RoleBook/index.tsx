@@ -3,7 +3,7 @@ import { List, Modal, Image, Flex, Descriptions } from "antd";
 import { useSnapshot } from "valtio";
 
 import { roleList } from "@/pages/Genshin/constants";
-import { getGenshinRoleImg } from "@/utils/utils";
+import { getGenshinRoleImg } from "@/utils";
 import { userData } from "../../state";
 
 import styles from "./index.module.less";

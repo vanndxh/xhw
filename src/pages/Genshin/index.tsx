@@ -9,7 +9,7 @@ import axios from "axios";
 import { useDebounce } from "ahooks";
 
 import GoldTotal from "./components/GoldTotal";
-import { openNewPage } from "@/utils/utils";
+import { openNewPage } from "@/utils";
 import { GachaType, GachaTypeKey } from "./constants";
 
 import styles from "./index.module.less";
