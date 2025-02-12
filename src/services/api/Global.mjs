@@ -1,4 +1,4 @@
-import { db } from "../database/db.mjs";
+import { db } from "../database.mjs";
 import vsql from "../vsql.js";
 
 /**
@@ -8,9 +8,7 @@ import vsql from "../vsql.js";
  */
 export const postUv = (req, res) => {
   const page = req?.body?.page || "home";
-  const sql = new vsql("uv")
-    .values([page, new Date().toLocaleString()])
-    .insert();
+  const sql = new vsql("uv").values([page, new Date().toLocaleString()]).insert();
   // `insert into uv values ('${page}', '${new Date().toLocaleString()}')`
   db.query(sql, (error, results, fields) => {
     if (error) {
@@ -70,9 +68,7 @@ export const getUv = (req, res) => {
  * @path /global/like
  */
 export const getLikeAmount = (req, res) => {
-  const sql1 = new vsql("like_data")
-    .values([new Date().toLocaleString()])
-    .insert();
+  const sql1 = new vsql("like_data").values([new Date().toLocaleString()]).insert();
   //  `insert into like_data values ('${new Date().toLocaleString()}')`
   const sql2 = new vsql("like_data").select();
   // select * from like_data

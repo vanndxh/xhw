@@ -4,7 +4,7 @@
 import fs from "fs";
 // import https from "https";
 import express from "express";
-import { dbInit } from "./database/db.mjs";
+import { dbInit } from "./database.mjs";
 
 import * as Global from "./api/Global.mjs";
 import * as Doc from "./api/Doc.mjs";

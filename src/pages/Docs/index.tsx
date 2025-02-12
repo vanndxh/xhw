@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import Markdown from "@/components/Markdown";
-import { getMarkdownDocs } from "@/services/api/api";
 import { Anchor, Divider, Input, Menu } from "antd";
-import styles from "./index.module.less";
 import { SearchOutlined } from "@ant-design/icons";
+import axios from "axios";
+
+import Markdown from "@/components/Markdown";
+
+import styles from "./index.module.less";
 
 export default function Docs() {
   const docTitleList = ["xhw-pro开发笔记", "前端面试手册", "开发环境配置", "大模型对话技术", "Docker部署Go后端"];
@@ -47,10 +49,10 @@ export default function Docs() {
     }, []);
 
   useEffect(() => {
-    getMarkdownDocs().then((res) => {
-      setDocList(res);
+    axios.get("http://localhost:8088/doc/getMarkdownDocs").then((res) => {
+      setDocList(res?.data);
     });
-  }, []);
+  }, [searchText]);
 
   return (
     <div className={styles["docs"]}>
