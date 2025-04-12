@@ -17,6 +17,13 @@ export default defineConfig({
           "^/api/mihoyo": "https://public-operation-hk4e.mihoyo.com",
         },
       },
+      // "/api/deltaForce": {
+      //   target: "https://www.test.net",
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     "^/api/deltaForce": "",
+      //   },
+      // },
     },
   },
 });

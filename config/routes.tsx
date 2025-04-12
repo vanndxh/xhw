@@ -7,7 +7,7 @@ import GPT from "@/pages/GPT";
 import MarkdownParse from "@/pages/MarkdownParse";
 import Game from "@/pages/Game";
 import Docs from "@/pages/Docs";
-import BiliMusic from "@/pages/BiliMusic";
+import DeltaForce from "@/pages/DeltaForce";
 
 export const routes = [
   {
@@ -20,7 +20,7 @@ export const routes = [
       { path: "markdown", element: <MarkdownParse /> },
       { path: "docs", element: <Docs /> },
       { path: "game", element: <Game /> },
-      { path: "BiliMusic", element: <BiliMusic /> },
+      { path: "deltaForce", element: <DeltaForce /> },
     ],
   },
 ];
